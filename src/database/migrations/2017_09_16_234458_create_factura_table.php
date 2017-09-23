@@ -17,11 +17,11 @@ class CreateFacturaTable extends Migration
             $table->increments('id');
             $table->timestamps();
             $table->dateTime('fecha');
-            $table->integer('id_cliente');
+            $table->integer('id_cliente')->unsigned(); //->index();
             $table->integer('id_plan_pago')->unsigned();
             $table->integer('cuotas')->unsigned();
             $table->integer('valor_cuota')->unsigned();
-            $table->integer('id_vendedor');
+            $table->integer('id_vendedor')->unsigned(); //->index();
             $table->decimal('valor_total', 53, 2)->unsigned();
             $table->string('estado', 50);
 

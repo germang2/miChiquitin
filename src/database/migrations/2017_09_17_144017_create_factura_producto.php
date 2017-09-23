@@ -16,13 +16,13 @@ class CreateFacturaProducto extends Migration
         Schema::create('factura_producto', function (Blueprint $table) {
             $table->increments('id');
             $table->timestamps();
-            $table->integer('id_factura');
-            $table->string('id_articulo', 50);
+            $table->integer('id_factura')->unsigned(); //->index();
+            $table->string('id_articulo', 50); //->index();
             $table->integer('cantidad')->unsigned();
             $table->decimal('precio_venta', 53, 2)->unsigned();
 
-            // $table->foreign('id_factura')->references('id')->on('factura');
-            // $table->foreign('id_articulo')->references('id_articulo')->on('inventario');
+            $table->foreign('id_factura')->references('id')->on('factura');
+            // $table->foreign('id_articulo')->references('id_articulo')->on('articulo');
         });
     }
 
