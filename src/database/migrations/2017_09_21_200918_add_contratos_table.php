@@ -14,12 +14,11 @@ class AddContratosTable extends Migration
     public function up()
     {
         Schema::create('contratos', function (Blueprint $table) {
-            $table->increments('Id_contrato')->unique();
+            $table->increments('id_contrato')->unique();
             $table->string('tipo');
-            $table->int('salario');
-            $table->int('Id_empleado');
+            $table->decimal('salario', 8, 2);
             $table->date('fecha_inicial');
-            $table->date('fecha_final');
+            $table->date('fecha_fin');
             $table->timestamps();
         });
     }

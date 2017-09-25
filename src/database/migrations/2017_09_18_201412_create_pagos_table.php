@@ -15,11 +15,11 @@ class CreatePagosTable extends Migration
     {
         Schema::create('pagos', function (Blueprint $table) {
             $table->increments('id_pago');
-            $table->integer('id_factura_deuda')->unsigned();
+            //$table->integer('id_factura_deuda')->unsigned();
             $table->integer('id_deuda')->unsigned();
-            $table->float('valor');
+            $table->decimal('valor', 8, 2);
 
-            $table->foreign('id_factura_deuda')->references('id_factura_deuda')->on('factura_deudas');
+            //$table->foreign('id_factura_deuda')->references('id_factura_deuda')->on('factura_deudas');
             $table->foreign('id_deuda')->references('id_deuda')->on('deudas');
 
             $table->timestamps();

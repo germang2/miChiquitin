@@ -17,14 +17,14 @@ class CreateTableArticulo extends Migration
             $table->string('id');
 			$table->string('nombre');
 			$table->string('descripcion');
-			$table->float('precio_basico', 8,2);
+			$table->decimal('precio_basico', 8,2);
 			$table->integer('cantidad');
 			$table->integer('id_proveedor')->unsigned();
 			$table->date('fecha');
             $table->timestamps();
 			
 			$table->primary('id');
-			$table->foreign('id_proveedor')->references('id')->on('proveedores')->onDelete('cascade');
+			$table->foreign('id_proveedor')->references('id')->on('proveedores');
 			// id_proveedor es una llave foranea del id en la tabla proveedores
         });
     }

@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateTableArticulo extends Migration
+class CreateTablePedido extends Migration
 {
     /**
      * Run the migrations.
@@ -18,7 +18,7 @@ class CreateTableArticulo extends Migration
 			$table->string('id_articulo');
 			$table->integer('id_proveedor')->unsigned();
 			$table->integer('cantidad');
-			$table->string('costo_total');
+			$table->decimal('costo_total', 8, 2);
 			$table->date('fecha');
 			$table->string('estado');
             $table->timestamps();

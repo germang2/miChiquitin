@@ -15,10 +15,12 @@ class AddTelefonoTable extends Migration
     {
         Schema::create('telefono', function (Blueprint $table) {
           $table->increments('Id_Telefono');
-          $table->int('Id_UsuarioORempresa');
-          $table->int('telefono');
+          $table->int('Id_UsuarioOEmpresa')->unsigned();
+          $table->string('telefono');
           $table->timestamps();
         });
+
+        $table->foreign('Id_UsuarioOEmpresa')->references('id')->on('users');
     }
 
     /**

@@ -16,13 +16,13 @@ class CreateBalancesTable extends Migration
         Schema::create('balances', function (Blueprint $table) {
             $table->increments('id');
             $table->date('fecha');
-            $table->float('efectivo');
-            $table->float('cuentas_cobrar');
-            $table->float('cuentas_pagar');
-            $table->float('impuestos');
-            $table->float('activos');
-            $table->float('pasivos');
-            $table->float('total');
+            $table->decimal('efectivo', 15, 2);
+            $table->decimal('cuentas_cobrar', 15, 2);
+            $table->decimal('cuentas_pagar', 15, 2);
+            $table->decimal('impuestos', 15, 2);
+            $table->decimal('activos', 15, 2);
+            $table->decimal('pasivos', 15, 2);
+            $table->decimal('total', 15, 2);
             $table->timestamps();
         });
     }
