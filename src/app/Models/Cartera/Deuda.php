@@ -1,0 +1,27 @@
+<?php
+
+namespace App;
+
+use Illuminate\Database\Eloquent\Model;
+
+class Deuda extends Model
+{
+    protected $table = "deudas";
+
+    protected $fillable = ['id_usuario', 'id_plan', 'id_factura', 'valor_pagado', 'valor_a_pagar', 'plazo_credito', 'estado'];
+
+    public function pagos()
+    {
+    	return $this->hasmany('App\Models\Cartera\Pago');
+    }
+
+    public function plan_de_pago()
+    {
+    	return $this->hasOne('App\Models\Cartera\Plan_de_pago');
+    }
+
+    public function paz_y_salvo()
+    {
+    	return $this->hasOne('App\Models\Cartera\Paz_y_salvo');
+    }
+}
