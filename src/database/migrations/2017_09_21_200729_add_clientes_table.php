@@ -15,7 +15,7 @@ class AddClientesTable extends Migration
     {
         Schema::create('clientes', function (Blueprint $table) {
             $table->increments('id_cliente')->unique();
-            $table->int('id_usuario')->unsigned();
+            $table->integer('id_usuario')->unsigned();
             $table->string('genero');
             $table->string('ciudad');
             $table->timestamps();

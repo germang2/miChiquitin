@@ -25,7 +25,7 @@ class CreateDeudasTable extends Migration
 
             $table->foreign('id_usuario')->references('id')->on('users');
             $table->foreign('id_plan')->references('id_plan_de_pago')->on('plan_de_pagos');
-            $table->foreign('id_factura')->references('id')->on('factura');
+            $table->foreign('id_factura')->references('id')->on('facturas');
 
             $table->timestamps();
         });

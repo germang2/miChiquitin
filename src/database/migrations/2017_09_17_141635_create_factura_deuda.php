@@ -17,12 +17,12 @@ class CreateFacturaDeuda extends Migration
             $table->increments('id');
             $table->timestamps();
 
-            $table->integer('id_factura')->unsigned()->index();
-            $table->decimal('abono', 53, 2)->default(0.0);
-            $table->dateTime('fecha');
+            $table->integer('id_factura')->unsigned();
+            $table->decimal('abono', 15, 2);
+            $table->date('fecha');
             $table->time('hora');
 
-            $table->foreign('id_factura')->references('id')->on('factura');
+            $table->foreign('id_factura')->references('id')->on('facturas');
         });
     }
 

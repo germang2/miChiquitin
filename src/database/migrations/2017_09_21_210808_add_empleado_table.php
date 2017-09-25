@@ -15,9 +15,9 @@ class AddEmpleadoTable extends Migration
     {
         Schema::create('empleados', function (Blueprint $table) {
             $table->increments('id_empleado');
-            $table->int('id_usuario')->unsigned();
-            $table->int('id_empresa')->unsigned();
-            $table->int('id_contrato')->unsigned();
+            $table->integer('id_usuario')->unsigned();
+            $table->integer('id_empresa')->unsigned();
+            $table->integer('id_contrato')->unsigned();
             $table->string('estado');
             $table->string('cargo');
             $table->string('area');

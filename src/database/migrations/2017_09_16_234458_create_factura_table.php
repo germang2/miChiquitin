@@ -13,20 +13,20 @@ class CreateFacturaTable extends Migration
      */
     public function up()
     {
-        Schema::create('factura', function (Blueprint $table) {
+        Schema::create('facturas', function (Blueprint $table) {
             $table->increments('id');
             $table->timestamps();
             $table->dateTime('fecha');
             $table->integer('id_cliente')->unsigned(); //->index();
             $table->integer('id_plan_pago')->unsigned();
             $table->integer('cuotas')->unsigned();
-            $table->integer('valor_cuota')->unsigned();
+            $table->decimal('valor_cuota', 8, 2);
             $table->integer('id_vendedor')->unsigned(); //->index();
-            $table->decimal('valor_total', 53, 2)->unsigned();
+            $table->decimal('valor_total', 15, 2);
             $table->string('estado', 50);
 
-            // $table->foreign('id_cliente')->references('id')->on('clientes');
-            // $table->foreign('id_vendedor')->references('id')->on('vendedores');
+            $table->foreign('id_cliente')->references('id')->on('users');
+            $table->foreign('id_vendedor')->references('id')->on('users');
         });
     }
 
