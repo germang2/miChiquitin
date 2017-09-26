@@ -1,6 +1,6 @@
 <?php
 
-namespace App;
+namespace App\Models\Cartera;
 
 use Illuminate\Database\Eloquent\Model;
 
@@ -8,7 +8,7 @@ class Pago extends Model
 {
     protected $table = "pagos";
 
-    protected $fillable = ['id_factura_deuda', 'id_deuda', 'id_factura', 'valor'];
+    protected $fillable = ['id_deuda', 'valor'];
 
     public function deuda()
     {

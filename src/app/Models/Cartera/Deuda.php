@@ -1,6 +1,6 @@
 <?php
 
-namespace App;
+namespace App\Models\Cartera;
 
 use Illuminate\Database\Eloquent\Model;
 
@@ -17,11 +17,19 @@ class Deuda extends Model
 
     public function plan_de_pago()
     {
-    	return $this->hasOne('App\Models\Cartera\Plan_de_pago');
+    	return $this->belongsTo('App\Models\Cartera\Plan_de_pago');
     }
 
     public function paz_y_salvo()
     {
     	return $this->hasOne('App\Models\Cartera\Paz_y_salvo');
+    }
+
+    public function user(){
+        return $this->belongsTo('App\Models\Usuarios\User');
+    }
+
+    public function factura(){
+        return $this->belongsTo('App\Models\Facturacion\Factura');
     }
 }
