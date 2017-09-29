@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateFacturaDeuda extends Migration
+class CreatePazYSalvosTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,16 +13,16 @@ class CreateFacturaDeuda extends Migration
      */
     public function up()
     {
-        Schema::create('factura_deuda', function (Blueprint $table) {
-            $table->increments('id');
-            $table->timestamps();
-
-            $table->integer('id_factura')->unsigned();
-            $table->decimal('abono', 15, 2);
+        Schema::create('paz_y_salvos', function (Blueprint $table) {
+            $table->increments('id_paz_y_salvo');
+            $table->integer('id_deuda')->unsigned();
             $table->date('fecha');
             $table->time('hora');
+            $table->string('concepto');
 
-            $table->foreign('id_factura')->references('id')->on('facturas');
+            $table->foreign('id_deuda')->references('id_deuda')->on('deudas');
+
+            $table->timestamps();
         });
     }
 
@@ -33,6 +33,6 @@ class CreateFacturaDeuda extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('factura_deuda');
+        Schema::dropIfExists('paz_y_salvos');
     }
 }
