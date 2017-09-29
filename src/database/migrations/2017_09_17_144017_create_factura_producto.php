@@ -17,9 +17,9 @@ class CreateFacturaProducto extends Migration
             $table->increments('id');
             $table->timestamps();
             $table->integer('id_factura')->unsigned(); //->index();
-            $table->string('id_articulo', 50); //->index();
+            $table->string('id_articulo', 100); //->index();
             $table->integer('cantidad');
-            $table->decimal('precio_venta', 15, 2)->unsigned();
+            $table->decimal('precio_venta', 15, 2);
 
             $table->foreign('id_factura')->references('id')->on('facturas');
             $table->foreign('id_articulo')->references('id')->on('articulos');

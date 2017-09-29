@@ -14,7 +14,7 @@ class CreateTableArticulo extends Migration
     public function up()
     {
         Schema::create('articulos', function (Blueprint $table) {
-            $table->string('id');
+            $table->string('id', 100);
 			$table->string('nombre');
 			$table->string('descripcion');
 			$table->decimal('precio_basico', 8,2);

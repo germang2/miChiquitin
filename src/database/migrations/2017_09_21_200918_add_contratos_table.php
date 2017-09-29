@@ -14,7 +14,7 @@ class AddContratosTable extends Migration
     public function up()
     {
         Schema::create('contratos', function (Blueprint $table) {
-            $table->increments('id_contrato')->unique();
+            $table->increments('id_contrato');
             $table->string('tipo');
             $table->decimal('salario', 8, 2);
             $table->date('fecha_inicial');
