@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Facturacion;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\Usuarios\User;
+use App\Models\Facturacion\Factura;
 
 class FacturaController extends Controller
 {
@@ -25,11 +26,11 @@ class FacturaController extends Controller
     public function numeroCuotas($N, $valorTotalCompra, $idFactura) {
       $factura = Factura::find($idFactura);
       $valorTotalCompra = $valorTotalCompra + ($valorTotalCompra * 0.05);
-      $nuevoValorTotalCompra = $valorTotalCompra - ($valorTotalCompra * 0.10);
+      $valorPagar = $valorTotalCompra * 0.10;
       $factura->update(['cuotas' => $N]);
-      $factura->update(['valor_cuota' => ($valorTotalCompra - $nuevoValorTotalCompra) / $N]);
+      $factura->update(['valor_cuota' => ($valorTotalCompra - $valorPagar) / $N]);
 
-      return $nuevoValorTotalCompra;
+      return $valorPagar;
     }
 
     public function compraCredito($idCliente, $valorTotalPago, $N, $idFactura) {
@@ -39,7 +40,13 @@ class FacturaController extends Controller
       if ($valorTotalPago <= $credito_actual) {
         $totalPagar = self::numeroCuotas($N, $valorTotalPago,$idFactura);
         $factura->update(['valor_total' => $totalPagar]);
-        dd($totalPagar);
+        $cliente->update(['credito_actual' => $credito_actual - $valorTotalPago]);
+
+        //Revisar credito actual
+        // echo "Credito actual : ".$credito_actual;
+        // echo "Valor total a pagar : ".$valorTotalPago;
+        // echo "Nuevo credito actual : ".$credito_actual - number_format($valorTotalPago, 2,'.',',');
+        // dd($totalPagar);
       } else {
         dd("No tiene crédito");
       }
