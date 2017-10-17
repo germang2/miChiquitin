@@ -27,6 +27,10 @@ Route::group(['prefix' => 'Facturacion'], function(){
   Route::get('CancelarCompra/{idFactura}', [
     'uses' => 'Facturacion\ArticuloControlador@CancelarCompra'
   ]);
+
+  Route::get('compraCredito/{idCliente}/{valorTotalPago}/{NumeroCuotas}/{idFactura}', [
+    'uses' => 'Facturacion\FacturaController@compraCredito'
+  ]);
 });
 
 //Cartera::reoutes();
