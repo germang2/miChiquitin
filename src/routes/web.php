@@ -19,4 +19,7 @@ Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 
+
+Route::get('validacion/{id_cliente}/{id_vendedor}', 'Facturacion\ValidarCliente@validar');
+
 //Cartera::reoutes();
