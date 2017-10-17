@@ -31,6 +31,10 @@ Route::group(['prefix' => 'Facturacion'], function(){
   Route::get('compraCredito/{idCliente}/{valorTotalPago}/{NumeroCuotas}/{idFactura}', [
     'uses' => 'Facturacion\FacturaController@compraCredito'
   ]);
+
+  Route::get('metodoPago/{metodo}/{valorTotal}/{idCliente}/{NumeroCuotas}/{idFactura}', [
+    'uses' => 'Facturacion\MetodoDePago@metodoPago'
+    ]);
 });
 
 //Cartera::reoutes();
