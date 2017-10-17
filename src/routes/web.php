@@ -20,7 +20,7 @@ Auth::routes();
 Route::get('/home', 'HomeController@index')->name('home');
 
 Route::group(['prefix' => 'Facturacion'], function (){
-  Route::get('compraCredito/{idCliente}/{valorTotalPago}/{NumeroCuotas}', [
+  Route::get('compraCredito/{idCliente}/{valorTotalPago}/{NumeroCuotas}/{idFactura}', [
     'uses' => 'Facturacion\FacturaController@compraCredito'
   ]);
 });

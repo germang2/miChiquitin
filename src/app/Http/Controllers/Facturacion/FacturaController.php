@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Facturacion;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use App\Models\Usuarios\Cliente;
+use App\Models\Usuarios\User;
 
 class FacturaController extends Controller
 {
@@ -22,22 +22,24 @@ class FacturaController extends Controller
     //   // dd($idVendedor,$idCliente);
     // }
 
-    public function numeroCuotas($N, $valorTotalCompra) {
+    public function numeroCuotas($N, $valorTotalCompra, $idFactura) {
+      $factura = Factura::find($idFactura);
       $valorTotalCompra = $valorTotalCompra + ($valorTotalCompra * 0.05);
       $nuevoValorTotalCompra = $valorTotalCompra - ($valorTotalCompra * 0.10);
-      return $nuevoValorTotalCompra / $N;
+      $factura->update(['cuotas' => $N]);
+      $factura->update(['valor_cuota' => ($valorTotalCompra - $nuevoValorTotalCompra) / $N]);
+
+      return $nuevoValorTotalCompra;
     }
 
     public function compraCredito($idCliente, $valorTotalPago, $N, $idFactura) {
-      $cliente = Cliente::find($idCliente);
+      $cliente = User::find($idCliente);
       $factura = Factura::find($idFactura);
-      $credito_maximo = $cliente->credito_maximo;
-      if ($valorTotalPago < $credito_maximo) {
-        $totalPagarCuotas = self::numeroCuotas($N, $valorTotalPago);
-        $factura->update(['cuotas' => $N]);
-        $factura->update(['valor_cuota' => $totalPagarCuotas]);
-        // se modifica 'valor_total' ?
-        dd($totalPagarCuotas);
+      $credito_actual = $cliente->credito_actual;
+      if ($valorTotalPago <= $credito_actual) {
+        $totalPagar = self::numeroCuotas($N, $valorTotalPago,$idFactura);
+        $factura->update(['valor_total' => $totalPagar]);
+        dd($totalPagar);
       } else {
         dd("No tiene crédito");
       }
