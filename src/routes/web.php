@@ -19,9 +19,7 @@ Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 
-//Facturación 
-Route::get('/test/{id_producto}', 'Facturacion\ValorProducto@valor');
-Route::get('/test/{id_producto}/{cantidad}', 'Facturacion\CompraProducto@compra');
+Route::get('/Facturacion/{id_producto}/{cantidad}/{idFactura}', 'Facturacion\CompraProducto@registrarProductos');
 
 
 //Cartera::reoutes();
