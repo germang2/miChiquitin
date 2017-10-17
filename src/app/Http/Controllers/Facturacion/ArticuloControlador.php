@@ -6,10 +6,11 @@ use Illuminate\Http\Request;
 
 use App\Models\Inventario\Articulo;
 use App\Models\Facturacion\FacturaProducto;
+use App\Models\Facturacion\Factura;
 
 class ArticuloControlador extends Controller
 {
-  public function EliminarArticulo($id, $cantidadActual, $cantidadEliminar) {
+  public function EliminarArticulo($id, $cantidadActual, $cantidadEliminar, $idFactura) {
 
     if($cantidadEliminar < $cantidadActual) {
 
@@ -22,12 +23,9 @@ class ArticuloControlador extends Controller
       $articuloInventario = Articulo::where('id', $idArticulo)->get();
       $CantidadInventario = $articuloInventario[0]->cantidad + $cantidadEliminar;
       Articulo::where("id", $idArticulo)->update(['cantidad' => $CantidadInventario]);
-
-      echo "Producto eliminado!!!";
-
     }
 
-    if($cantidadEliminar >= $cantidadActual) {
+    if($cantidadEliminar == $cantidadActual) {
 
       $articuloFactura = FacturaProducto::where("id", $id)->get();
       $idArticulo = $articuloFactura[0]->id_articulo;
@@ -36,14 +34,11 @@ class ArticuloControlador extends Controller
       $articuloInventario = Articulo::where('id', $idArticulo)->get();
       $CantidadInventario = $articuloInventario[0]->cantidad + $cantidadEliminar;
       Articulo::where("id", $idArticulo)->update(['cantidad' => $CantidadInventario]);
-
-
-      echo "Factura modificada!!!";
     }
+    dd("Factura cancelada");
   }
 
   public function CancelarCompra($idFactura) {
-
     $articulosFactura = FacturaProducto::where("id_factura", $idFactura)->get();
     foreach ($articulosFactura as $articulo) {
       $idArticulo = $articulo->id_articulo;
@@ -53,8 +48,13 @@ class ArticuloControlador extends Controller
       $articuloInventario = Articulo::where('id', $idArticulo)->get();
       $CantidadInventario = $articuloInventario[0]->cantidad + $cantidadEliminar;
       Articulo::where("id", $idArticulo)->update(['cantidad' => $CantidadInventario]);
-
     }
-    echo "Compra cancelada!!!";
+
+    //Revisar si es necesario eliminar cada producto.
+    //  $Factura = Factura::where("id", $idFactura)->get();
+    //  $Factura[0]->delete();
+    //  dd("Factura cancelada");
+    //  dd($Factura);
   }
+
 }
