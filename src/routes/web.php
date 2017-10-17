@@ -19,6 +19,6 @@ Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 
-Route::get('metodoPago/{metodo}/{totalProductos}', 'Facturacion\MetodoDePago@metodoPago');
+Route::get('metodoPago/{metodo}/{valorTotal}', 'Facturacion\MetodoDePago@metodoPago');
 
 //Cartera::reoutes();
