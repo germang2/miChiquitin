@@ -8,8 +8,6 @@ use App\Models\Usuarios\Empleado;
 
 class ValidarCliente extends Controller
 {
-
-
 	public function validar($id_cliente, $id_vendedor){
 
 		$Empleado = Empleado::where("id_empleado", $id_cliente)->get();
@@ -20,20 +18,18 @@ class ValidarCliente extends Controller
 				if(sizeof($Vendedor) > 0){
 					if(strcmp($Vendedor[0]->cargo, "administrador") == 0){
 						echo "\n El vendedor es un administrador, se puede ralizar la venta.";
+						return true; //Llama caso de uso 003
 					}
 					else{
 						echo "No es un administrador, no se puede realizar la venta.";
+						return false;
 					}
 				}
 			}
 		}
 		else{
 			echo "No es un vendedor, se puede realizar la venta.";
+			return true; //Llama caso de uso 003
 		}
-		#dd();
-		#dd($Empleado[0]->cargo);
-
 	}
-
-
 }
