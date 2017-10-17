@@ -66,10 +66,9 @@
                 </a>
                 <ul class="sub-menu" style="display: none;">
                     <li class="nav-item">
-                        <a href="#" class="nav-link ">
-                            <i class="fa fa-cogs"></i>
-                            <span class="title">Opcion 1 </span>
-                        </a>
+                      <li><a href="{{ url('/cartera/consultar') }}">Consultar</a></li>
+                      <li><a href="{{ url('/cartera/nuevo') }}">Nuevo crédito</a></li>
+                      <li><a href="{{ url('/cartera/informe') }}">Informe</a></li>
                     </li>
 
                 </ul>
