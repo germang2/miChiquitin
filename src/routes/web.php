@@ -19,6 +19,10 @@ Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 
+Route::get('/cartera/index', function (){
+  return view('/cartera/index');
+});
+
 Route::get('/cartera/consultar', function (){
   return view('/cartera/consultar');
 });
