@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('titulo')
-    Cartera
+    <h4>Cartera</h4>
     @endsection
 
 @section('content')
@@ -15,8 +15,8 @@
       <div class="col-lg-8">
         <a href="{{ url('/cartera/nuevo') }}">{!! Form::button('Nuevo crédito', array('class' => 'btn btn-default')) !!}<br><br></a> 
         <a href="{{ url('/cartera/informe') }}">{!! Form::button('Ver historial crediticio', array('class' => 'btn btn-default')) !!}<br><br></a>
-        <a href="{{ url('/cartera/consultar') }}">{!! Form::button('Consultar pagos', array('class' => 'btn btn-default')) !!}<br><br></a>
-        <a href="{{ url('/cartera/consultar') }}">{!! Form::button('Consultar plan de pagos', array('class' => 'btn btn-default')) !!}<br><br></a>
+        <a href="{{ url('/cartera/consultarPagos') }}">{!! Form::button('Consultar pagos', array('class' => 'btn btn-default')) !!}<br><br></a>
+        <a href="{{ url('/cartera/consultarPagos') }}">{!! Form::button('Consultar plan de pagos', array('class' => 'btn btn-default')) !!}<br><br></a>
         {!! Form::button('Registrar pago de cuota', array('class' => 'btn btn-default')) !!}<br><br>
       </div>
     </div>

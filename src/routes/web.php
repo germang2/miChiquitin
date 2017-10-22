@@ -23,8 +23,8 @@ Route::get('/cartera/index', function (){
   return view('/cartera/index');
 });
 
-Route::get('/cartera/consultar', function (){
-  return view('/cartera/consultar');
+Route::get('/cartera/consultarPagos', function (){
+  return view('/cartera/consultarPagos');
 });
 
 Route::get('/cartera/nuevo', function (){

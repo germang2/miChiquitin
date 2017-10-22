@@ -65,9 +65,6 @@
                     <span class="arrow"></span>
                 </a>
                 <ul class="sub-menu" style="display: none;">
-                    <li class="nav-item">
-                    </li>
-
                 </ul>
             </li>
 
