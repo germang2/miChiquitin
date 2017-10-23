@@ -1,0 +1,132 @@
+<?php
+
+namespace App\Http\Controllers\Cartera;
+
+use App\Models\Cartera\Deuda;
+use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
+
+class DeudaController extends Controller
+{
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function index()
+    {
+        //
+        $deudas = Deuda::all();
+
+        return view('cartera/deuda.index', $deudas);
+        
+    }
+
+    /**
+     * Show the form for creating a new resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function create()
+    {
+        //
+        return view('cartera/deuda.create');
+        
+    }
+
+    /**
+     * Store a newly created resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function store(Request $request)
+    {
+        //
+        $rules = array(
+          'id_usuario' => 'required',
+          'id_plan' => 'required',
+          'id_factura' => 'required',
+          'valor_pagado' => 'required',
+          'valor_a_pagar' => 'required',
+          'plazo_credito' => 'required',
+          'estado' => 'required'
+        );
+        $validator = Validator::make($request->all(), $rules);
+        
+        if ($validator->fails()) {
+          return Redirect::to('cartera/deudas/create')
+              ->withErrors($validator)
+              ->withInput(Input::except('password'));
+        } else {
+            // store
+            $deuda = new deuda;
+            $deuda->id_usuario  = Input::get('id_usuario');
+            $deuda->id_plan = Input::get('id_plan');
+            $deuda->id_factura = Input::get('id_factura');
+            $deuda->valor_pagado = Input::get('valor_pagado');
+            $deuda->valor_a_pagar = Input::get('valor_a_pagar');
+            $deuda->plazo_credito = Input::get('plazo_credito');
+            $deuda->estado = Input::get('estado');
+            $deuda->save();
+
+            // redirect
+            Session::flash('message', 'Successfully created deuda!');
+            return Redirect::to('deudas');
+        }
+
+    }
+
+    /**
+     * Display the specified resource.
+     *
+     * @param  \App\Models\Cartera\Deuda  $deuda
+     * @return \Illuminate\Http\Response
+     */
+    public function show(Deuda $deuda)
+    {
+        //
+        $deuda = Deuda::find($id);
+
+        return view('cartera/deuda.show', $deuda);
+        
+    }
+
+    /**
+     * Show the form for editing the specified resource.
+     *
+     * @param  \App\Models\Cartera\Deuda  $deuda
+     * @return \Illuminate\Http\Response
+     */
+    public function edit(Deuda $deuda)
+    {
+        //
+        $deuda = Deuda::find($id);
+
+        return view('cartera/deuda.edit', $deuda);
+        
+    }
+
+    /**
+     * Update the specified resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  \App\Models\Cartera\Deuda  $deuda
+     * @return \Illuminate\Http\Response
+     */
+    public function update(Request $request, Deuda $deuda)
+    {
+        //
+    }
+
+    /**
+     * Remove the specified resource from storage.
+     *
+     * @param  \App\Models\Cartera\Deuda  $deuda
+     * @return \Illuminate\Http\Response
+     */
+    public function destroy(Deuda $deuda)
+    {
+        //
+    }
+}

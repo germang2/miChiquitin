@@ -34,3 +34,11 @@ Route::get('/cartera/nuevo', function (){
 Route::get('/cartera/informe', function (){
   return view('/cartera/informe');
 });
+
+Route::resource('deuda', 'DeudaController', ['only' => [
+  'index', 'show'
+]]);
+
+Route::resource('deuda', 'DeudaController', ['except' => [
+  'create', 'store', 'update', 'destroy'
+]]);
