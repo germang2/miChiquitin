@@ -59,12 +59,37 @@
             </li>
 
             <li class="nav-item">
-                <a href="{{ url('/cartera/index') }}">
+                <!--a href="{{ url('/cartera/index') }}"-->
+                <a href="javascript:;" class="nav-link nav-toggle">
                     <i class="fa fa-cogs"></i>
                     <span class="title">Cartera</span>
                     <span class="arrow"></span>
                 </a>
                 <ul class="sub-menu" style="display: none;">
+                  <li class="nav-item">
+                    <a href="{{ URL::to('/deuda/create') }}" class="nav-link ">
+                      <i class="fa fa-cogs"></i>
+                      <span class="title">Nuevo crédito</span>
+                    </a>
+                  </li>
+                  <li class="nav-item">
+                    <a href="{{ URL::to('/deuda') }}" class="nav-link ">
+                      <i class="fa fa-cogs"></i>
+                      <span class="title">Historial crediticio</span>
+                    </a>
+                  </li>
+                  <li class="nav-item">
+                    <a href="{{ URL::to('/deuda') }}" class="nav-link ">
+                      <i class="fa fa-cogs"></i>
+                      <span class="title">Consultar pagos</span>
+                    </a>
+                  </li>
+                  <li class="nav-item">
+                    <a href="{{ URL::to('/deuda') }}" class="nav-link ">
+                      <i class="fa fa-cogs"></i>
+                      <span class="title">Plan de pagos</span>
+                    </a>
+                  </li>
                 </ul>
             </li>
 

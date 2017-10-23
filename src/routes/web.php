@@ -35,10 +35,15 @@ Route::get('/cartera/informe', function (){
   return view('/cartera/informe');
 });
 
-Route::resource('deuda', 'DeudaController', ['only' => [
+Route::resource('deuda', 'cartera\DeudaController');
+Route::resource('plandepago', 'cartera\PlanDePagoController');
+
+/*
+Route::resource('deuda', 'cartera\DeudaController', ['only' => [
   'index', 'show'
 ]]);
 
-Route::resource('deuda', 'DeudaController', ['except' => [
+Route::resource('deuda', 'cartera\DeudaController', ['except' => [
   'create', 'store', 'update', 'destroy'
 ]]);
+*/

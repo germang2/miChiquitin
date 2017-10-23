@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('titulo')
-    Cartera
+    <h4>Cartera</h4>
     @endsection
 
 @section('content')

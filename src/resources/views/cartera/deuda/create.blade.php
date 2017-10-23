@@ -1,70 +1,68 @@
-<!-- app/views/deudas/create.blade.php -->
+@extends('layouts.app')
 
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Look! I'm CRUDding</title>
-    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css">
-</head>
-<body>
-<div class="container">
+@section('titulo')
+  <h4>Cartera</h4>
+  @endsection
 
-<nav class="navbar navbar-inverse">
-    <div class="navbar-header">
-        <a class="navbar-brand" href="{{ URL::to('deudas') }}">deuda Alert</a>
-    </div>
-    <ul class="nav navbar-nav">
-        <li><a href="{{ URL::to('deudas') }}">View All deudas</a></li>
-        <!--li><a href="{{ URL::to('deudas/create') }}">Create a deuda</a-->
-    </ul>
-</nav>
+@section('content')
 
-<h1>Create a deuda</h1>
+  <!--link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css"-->
 
-<!-- if there are creation errors, they will show here -->
-{{ HTML::ul($errors->all()) }}
+  <div class="container">
 
-{{ Form::open(array('url' => 'deudas')) }}
+    <nav class="navbar navbar-inverse">
+      <ul class="nav navbar-nav">
+          <li><a href="{{ URL::to('deuda') }}">Todos los créditos</a></li>
+          <li><a href="{{ URL::to('deuda/create') }}">Nuevo crédito</a>
+      </ul>
+    </nav>
 
-    <div class="form-group">
-        {{ Form::label('id_usuario', 'Usuario') }}
-        {{ Form::number('id_usuario', Input::old('id_usuario'), array('class' => 'form-control')) }}
-    </div>
+  <h1>Nuevo crédito</h1>
+  <div class="col-lg-6">
 
-    <div class="form-group">
-        {{ Form::label('id_plan', 'Plan') }}
-        {{ Form::number('id_plan', Input::old('id_plan'), array('class' => 'form-control')) }}
-    </div>
+    {{ Form::open(array('url' => 'deuda')) }}
 
-    <div class="form-group">
-        {{ Form::label('id_factura', 'Factura') }}
-        {{ Form::number('id_factura', Input::old('id_factura'), array('class' => 'form-control')) }}
-    </div>
+      <div class="form-group">
+          {{ Form::label('id_usuario', 'Usuario') }}
+          {{ Form::number('id_usuario', 'id_usuario', array('class' => 'form-control')) }}
+      </div>
 
-    <div class="form-group">
-        {{ Form::label('valor_pagado', 'Valor pagado') }}
-       {{ Form::number('valor_pagado', Input::old('valor_pagado'), array('class' => 'form-control')) }}
-    </div>
+      <div class="form-group">
+          {{ Form::label('id_plan', 'Plan') }}
+          {{ Form::select('id_plan', $planes, array('class' => 'form-control')) }}
+      </div>
 
-    <div class="form-group">
-        {{ Form::label('valor_a_pagar', 'Valor a pagar') }}
-       {{ Form::number('valor_a_pagar', Input::old('valor_a_pagar'), array('class' => 'form-control')) }}
-    </div>
+      <div class="form-group">
+          {{ Form::label('id_factura', 'Factura') }}
+          {{ Form::number('id_factura', 'id_factura', array('class' => 'form-control')) }}
+      </div>
 
-    <div class="form-group">
-        {{ Form::label('plazo_credito', 'Plazo crédito') }}
-       {{ Form::date('plazo_credito', Input::old('plazo_credito'), array('class' => 'form-control')) }}
-    </div>
+      <div class="form-group">
+          {{ Form::label('valor_pagado', 'Valor pagado') }}
+        {{ Form::number('valor_pagado', 'valor_pagado', array('class' => 'form-control')) }}
+      </div>
+  </div>
+  <div class="col-lg-6">
+      <div class="form-group">
+          {{ Form::label('valor_a_pagar', 'Valor a pagar') }}
+        {{ Form::number('valor_a_pagar', 'valor_a_pagar', array('class' => 'form-control')) }}
+      </div>
 
-    <div class="form-group">
-        {{ Form::label('estado', 'Estado') }}
-       {{ Form::text('estado', Input::old('estado'), array('class' => 'form-control')) }}
-    </div>
+      <div class="form-group">
+          {{ Form::label('plazo_credito', 'Plazo crédito') }}
+        {{ Form::date('plazo_credito', 'plazo_credito', array('class' => 'form-control')) }}
+      </div>
 
+      <div class="form-group">
+          {{ Form::label('estado', 'Estado') }}
+        {{ Form::text('estado', 'estado', array('class' => 'form-control')) }}
+      </div>
+  </div>
+  </div>
+
+   <div class="row" align="center"><br>
     {{ Form::submit('Create the deuda!', array('class' => 'btn btn-primary')) }}
+  </div>
 
-{{ Form::close() }}
-
-</div>
-</body>
-</html>
+   {{ Form::close() }}
+@endsection

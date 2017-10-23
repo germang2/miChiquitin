@@ -17,7 +17,7 @@ class Deuda extends Model
 
 	public function plan_de_pago()
 	{
-		return $this->belongsTo('App\Models\Cartera\Plan_de_pago');
+		return $this->belongsTo('App\Models\Cartera\PlanDePago');
 	}
 
 	public function paz_y_salvo()

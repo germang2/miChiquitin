@@ -4,6 +4,9 @@ namespace App\Http\Controllers\Cartera;
 
 use App\Models\Cartera\Deuda;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\Input;
+use Illuminate\Support\Facades\Redirect;
 use App\Http\Controllers\Controller;
 
 class DeudaController extends Controller
@@ -18,7 +21,7 @@ class DeudaController extends Controller
         //
         $deudas = Deuda::all();
 
-        return view('cartera/deuda.index', $deudas);
+        return view('cartera.deuda.index', compact('deudas'));
         
     }
 
@@ -29,8 +32,10 @@ class DeudaController extends Controller
      */
     public function create()
     {
-        //
-        return view('cartera/deuda.create');
+
+        $planes = PlanDePago::all();
+
+        return view('cartera.deuda.create', compact('planes'));
         
     }
 
@@ -55,7 +60,7 @@ class DeudaController extends Controller
         $validator = Validator::make($request->all(), $rules);
         
         if ($validator->fails()) {
-          return Redirect::to('cartera/deudas/create')
+          return Redirect::to('cartera.deuda.create')
               ->withErrors($validator)
               ->withInput(Input::except('password'));
         } else {
@@ -72,7 +77,7 @@ class DeudaController extends Controller
 
             // redirect
             Session::flash('message', 'Successfully created deuda!');
-            return Redirect::to('deudas');
+            return Redirect::to('cartera.deuda');
         }
 
     }
@@ -88,7 +93,7 @@ class DeudaController extends Controller
         //
         $deuda = Deuda::find($id);
 
-        return view('cartera/deuda.show', $deuda);
+        return view('cartera.deuda.show', $deuda);
         
     }
 
@@ -103,7 +108,7 @@ class DeudaController extends Controller
         //
         $deuda = Deuda::find($id);
 
-        return view('cartera/deuda.edit', $deuda);
+        return view('cartera.deuda.edit', $deuda);
         
     }
 
