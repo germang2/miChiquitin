@@ -90,6 +90,24 @@
                       <span class="title">Plan de pagos</span>
                     </a>
                   </li>
+                  <li class="nav-item">
+                    <a href="{{ URL::to('/deuda') }}" class="nav-link ">
+                      <i class="fa fa-cogs"></i>
+                      <span class="title">Registrar pago</span>
+                    </a>
+                  </li>
+                  <li class="nav-item">
+                    <a href="{{ URL::to('/deuda') }}" class="nav-link ">
+                      <i class="fa fa-cogs"></i>
+                      <span class="title">Generar reporte</span>
+                    </a>
+                  </li>
+                  <li class="nav-item">
+                    <a href="{{ URL::to('/deuda') }}" class="nav-link ">
+                      <i class="fa fa-cogs"></i>
+                      <span class="title">Paz y salvo</span>
+                    </a>
+                  </li>
                 </ul>
             </li>
 

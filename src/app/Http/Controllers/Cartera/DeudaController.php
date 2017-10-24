@@ -33,10 +33,9 @@ class DeudaController extends Controller
     public function create()
     {
 
-        $planes = PlanDePago::all();
-
-        return view('cartera.deuda.create', compact('planes'));
-        
+        //$planes = PlanDePago::all();
+        //return view('cartera.deuda.create', compact('planes'));
+        return view('cartera.deuda.create');
     }
 
     /**

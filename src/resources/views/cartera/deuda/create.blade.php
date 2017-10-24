@@ -29,7 +29,7 @@
 
       <div class="form-group">
           {{ Form::label('id_plan', 'Plan') }}
-          {{ Form::select('id_plan', $planes, array('class' => 'form-control')) }}
+          {{ Form::number('id_plan', 'idplan', array('class' => 'form-control')) }}
       </div>
 
       <div class="form-group">
