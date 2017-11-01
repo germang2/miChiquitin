@@ -9,6 +9,8 @@ use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\Redirect;
 use App\Http\Controllers\Controller;
 
+use App\Models\Cartera\Plan_de_pago;
+
 class DeudaController extends Controller
 {
     /**
@@ -33,9 +35,8 @@ class DeudaController extends Controller
     public function create()
     {
 
-        //$planes = PlanDePago::all();
-        //return view('cartera.deuda.create', compact('planes'));
-        return view('cartera.deuda.create');
+        $planes = Plan_de_pago::all();
+        return view('cartera.deuda.create', compact('planes'));
     }
 
     /**

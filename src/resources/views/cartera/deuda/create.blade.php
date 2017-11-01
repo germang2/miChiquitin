@@ -29,7 +29,7 @@
 
       <div class="form-group">
           {{ Form::label('id_plan', 'Plan') }}
-          {{ Form::number('id_plan', 'idplan', array('class' => 'form-control')) }}
+          {{ Form::select('id_plan', $planes, array('class' => 'form-control')) }}
       </div>
 
       <div class="form-group">
@@ -61,7 +61,7 @@
   </div>
 
    <div class="row" align="center"><br>
-    {{ Form::submit('Create the deuda!', array('class' => 'btn btn-primary')) }}
+    {{ Form::submit('Guardar', array('class' => 'btn btn-primary')) }}
   </div>
 
    {{ Form::close() }}

@@ -17,33 +17,7 @@ Route::get('/', function () {
 
 Auth::routes();
 
-Route::get('/home', 'HomeController@index')->name('home');
-
-Route::get('/cartera/index', function (){
-  return view('/cartera/index');
-});
-
-Route::get('/cartera/consultarPagos', function (){
-  return view('/cartera/consultarPagos');
-});
-
-Route::get('/cartera/nuevo', function (){
-  return view('/cartera/nuevo');
-});
-
-Route::get('/cartera/informe', function (){
-  return view('/cartera/informe');
-});
+Route::get('/home', 'HomeController@index')->name('home');  
 
 Route::resource('deuda', 'cartera\DeudaController');
-Route::resource('plandepago', 'cartera\PlanDePagoController');
-
-/*
-Route::resource('deuda', 'cartera\DeudaController', ['only' => [
-  'index', 'show'
-]]);
-
-Route::resource('deuda', 'cartera\DeudaController', ['except' => [
-  'create', 'store', 'update', 'destroy'
-]]);
-*/
+Route::resource('plan_de_pago', 'cartera\Plan_de_pagoController');

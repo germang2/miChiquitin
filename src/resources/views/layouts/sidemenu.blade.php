@@ -85,7 +85,7 @@
                     </a>
                   </li>
                   <li class="nav-item">
-                    <a href="{{ URL::to('/deuda') }}" class="nav-link ">
+                    <a href="{{ URL::to('/plan_de_pago/create') }}" class="nav-link ">
                       <i class="fa fa-cogs"></i>
                       <span class="title">Plan de pagos</span>
                     </a>

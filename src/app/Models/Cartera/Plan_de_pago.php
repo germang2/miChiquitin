@@ -4,7 +4,7 @@ namespace App\Models\Cartera;
 
 use Illuminate\Database\Eloquent\Model;
 
-class PlanDePago extends Model
+class Plan_de_pago extends Model
 {
   protected $table = "plan_de_pagos";
 
