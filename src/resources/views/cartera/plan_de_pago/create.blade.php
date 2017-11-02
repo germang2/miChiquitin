@@ -45,7 +45,7 @@
   <div class="col-lg-6">
       <div class="form-group">
           {{ Form::label('forma_pago', 'Forma de pago') }}<br>
-        {{ Form::select('forma_pago', ['Efectivo', 'Tarjeta de crédito', 'Bono']) }}
+        {{ Form::select('forma_pago', ['Efectivo' => 'Efectivo', 'Tarjeta de crédito' => 'Tarjeta de crédito', 'Bono' => 'Bono']) }}
       </div>
   </div>
   </div>

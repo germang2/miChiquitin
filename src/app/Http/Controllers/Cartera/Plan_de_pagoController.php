@@ -68,7 +68,7 @@ class Plan_de_pagoController extends Controller
 
             // redirect
             //Session::flash('message', 'Successfully created plan de pago!');
-            return Redirect::to('cartera.plan_de_pago');
+            return Redirect::to('cartera.plan_de_pago.index');
         }
 
     }
@@ -122,5 +122,12 @@ class Plan_de_pagoController extends Controller
     public function destroy(Plan_de_pago $plan_de_pago)
     {
         //
+        // delete
+        $plan_de_pago = Plan_de_pago::find($id);
+        $plan_de_pago->delete();
+
+        // redirect
+        //Session::flash('message', 'Successfully deleted the plan_de_pago!');
+        return Redirect::to('cartera.plan_de_pago.index');
     }
 }

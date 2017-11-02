@@ -24,12 +24,12 @@
 
       <div class="form-group">
           {{ Form::label('id_usuario', 'Usuario') }}
-          {{ Form::number('id_usuario', 'id_usuario', array('class' => 'form-control')) }}
+          {{ Form::select('id_usuario', $usuarios, null, array('class' => 'form-control')) }}
       </div>
 
       <div class="form-group">
           {{ Form::label('id_plan', 'Plan') }}
-          {{ Form::select('id_plan', $planes, array('class' => 'form-control')) }}
+          {{ Form::select('id_plan', $planes, null, array('class' => 'form-control')) }}
       </div>
 
       <div class="form-group">

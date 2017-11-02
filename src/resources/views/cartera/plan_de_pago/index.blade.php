@@ -9,8 +9,8 @@
 
   <nav class="navbar navbar-inverse">
       <ul class="nav navbar-nav">
-          <li><a href="{{ URL::to('plan') }}">Todos los planes</a></li>
-          <li><a href="{{ URL::to('plan/create') }}">Nuevo plan</a>
+          <li><a href="{{ URL::to('plan_de_pago') }}">Todos los planes</a></li>
+          <li><a href="{{ URL::to('plan_de_pago/create') }}">Nuevo plan</a>
       </ul>
   </nav>
   <h1>Todos los planes de pago</h1>
@@ -35,13 +35,11 @@
         <tbody>
         @foreach($planes as $plan)
             <tr>
-                <td>{{ $plan->id_usuario }}</td>
-                <td>{{ $plan->id_plan }}</td>
-                <td>{{ $plan->id_factura }}</td>
-                <td>{{ $plan->valor_pagado }}</td>
-                <td>{{ $plan->valor_a_pagar }}</td>
-                <td>{{ $plan->plazo_credito }}</td>
-                <td>{{ $plan->estado }}</td>
+                <td>{{ $plan->nombre_plan }}</td>
+                <td>{{ $plan->cuotas }}</td>
+                <td>{{ $plan->valor_cuota }}</td>
+                <td>{{ $plan->interes }}</td>
+                <td>{{ $plan->forma_pago }}</td>
 
                 <!-- we will also add show, edit, and delete buttons -->
                 <td>
@@ -50,10 +48,13 @@
                     <!-- we will add this later since its a little more complicated than the other two buttons -->
 
                     <!-- show the plan (uses the show method found at GET /plan_de_pago/{id} -->
-                    <a class="btn btn-small btn-success" href="{{ URL::to('plan_de_pago/' . $plan->id) }}">Ver</a>
+                    <a class="btn btn-small btn-success" href="{{ URL::to('plan_de_pago/' . $plan->id_plan_de_pago) }}">Ver</a>
 
                     <!-- edit this plan (uses the edit method found at GET /plan/{id}/edit -->
-                    <a class="btn btn-small btn-info" href="{{ URL::to('plan_de_pago/' . $plan->id . '/edit') }}">Editar</a>
+                    <a class="btn btn-small btn-info" href="{{ URL::to('plan_de_pago/' . $plan->id_plan_de_pago . '/edit') }}">Editar</a>
+
+                     <!-- delete the plan (uses the destroy method DESTROY /plan_de_pago/{id} -->
+                    <a class="btn btn-small btn-danger" href="{{ URL::to('plan_de_pago/' . $plan->id_plan_de_pago)}}">Eliminar</a>
 
                 </td>
             </tr>

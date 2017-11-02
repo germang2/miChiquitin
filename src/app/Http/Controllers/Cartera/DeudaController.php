@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\Redirect;
 use App\Http\Controllers\Controller;
 
 use App\Models\Cartera\Plan_de_pago;
+use App\Models\Usuarios\User;
 
 class DeudaController extends Controller
 {
@@ -35,8 +36,9 @@ class DeudaController extends Controller
     public function create()
     {
 
-        $planes = Plan_de_pago::all();
-        return view('cartera.deuda.create', compact('planes'));
+        $planes = Plan_de_pago::pluck('nombre_plan','id_plan_de_pago');
+        $usuarios = User::pluck('name','id');
+        return view('cartera.deuda.create', compact('planes','usuarios'));
     }
 
     /**
