@@ -13,7 +13,7 @@
           <li><a href="{{ URL::to('plan_de_pago/create') }}">Nuevo plan</a>
       </ul>
   </nav>
-  <h1>Todos los planes de pago</h1>
+  <h1>Planes de pago</h1>
   <div class="col-lg-12">
 
     <!-- will be used to show any messages -->
@@ -24,17 +24,19 @@
     <table class="table table-striped table-bordered">
         <thead>
             <tr>
+                <!--td>ID</td-->
                 <td>Descripción</td>
                 <td>Cuotas</td>
                 <td>Valor cuota</td>
                 <td>Interés</td>
                 <td>Forma de pago</td>
-                <td colspan="2"></td>
+                <td colspan="3"></td>
             </tr>
         </thead>
         <tbody>
         @foreach($planes as $plan)
             <tr>
+                <!--td>{{ $plan->id_plan_de_pago }}</td-->
                 <td>{{ $plan->nombre_plan }}</td>
                 <td>{{ $plan->cuotas }}</td>
                 <td>{{ $plan->valor_cuota }}</td>
@@ -43,19 +45,18 @@
 
                 <!-- we will also add show, edit, and delete buttons -->
                 <td>
-
+                   <!-- show the plan (uses the show method found at GET /plan_de_pago/{id} -->
+                  <a class="btn btn-small btn-success" href="{{ URL::to('plan_de_pago/' . $plan->id_plan_de_pago) }}">Ver</a>
+                <td/>
+                   <!-- edit this plan (uses the edit method found at GET /plan/{id}/edit -->
+                  <a class="btn btn-small btn-info" href="{{ URL::to('plan_de_pago/' . $plan->id_plan_de_pago . '/edit') }}">Editar</a>
+                <td/>
                     <!-- delete the plan (uses the destroy method DESTROY /plan_de_pago/{id} -->
-                    <!-- we will add this later since its a little more complicated than the other two buttons -->
-
-                    <!-- show the plan (uses the show method found at GET /plan_de_pago/{id} -->
-                    <a class="btn btn-small btn-success" href="{{ URL::to('plan_de_pago/' . $plan->id_plan_de_pago) }}">Ver</a>
-
-                    <!-- edit this plan (uses the edit method found at GET /plan/{id}/edit -->
-                    <a class="btn btn-small btn-info" href="{{ URL::to('plan_de_pago/' . $plan->id_plan_de_pago . '/edit') }}">Editar</a>
-
-                     <!-- delete the plan (uses the destroy method DESTROY /plan_de_pago/{id} -->
-                    <a class="btn btn-small btn-danger" href="{{ URL::to('plan_de_pago/' . $plan->id_plan_de_pago)}}">Eliminar</a>
-
+                    {{ Form::open([
+                      'method' => 'DELETE',
+                      'route' => ['plan_de_pago.destroy', $plan->id_plan_de_pago]]) }}
+                      {{ Form::submit('Eliminar', ['class' => 'btn btn-small btn-danger']) }}
+                    {{ Form::close() }}
                 </td>
             </tr>
         @endforeach

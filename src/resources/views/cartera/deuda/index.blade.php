@@ -25,7 +25,7 @@
         <thead>
             <tr>
                 <td>Usuario</td>
-                <td>Plan</td>
+                <td>deuda</td>
                 <td>Factura</td>
                 <td>Valor pagado</td>
                 <td>Valor a pagar</td>
@@ -38,7 +38,7 @@
         @foreach($deudas as $deuda)
             <tr>
                 <td>{{ $deuda->id_usuario }}</td>
-                <td>{{ $deuda->id_plan }}</td>
+                <td>{{ $deuda->id_deuda }}</td>
                 <td>{{ $deuda->id_factura }}</td>
                 <td>{{ $deuda->valor_pagado }}</td>
                 <td>{{ $deuda->valor_a_pagar }}</td>
@@ -47,16 +47,18 @@
 
                 <!-- we will also add show, edit, and delete buttons -->
                 <td>
-
+                   <!-- show the deuda (uses the show method found at GET /deuda/{id} -->
+                  <a class="btn btn-small btn-success" href="{{ URL::to('deuda/' . $deuda->id_deuda) }}">Ver</a>
+                <td/>
+                   <!-- edit this deuda (uses the edit method found at GET /deuda/{id}/edit -->
+                  <a class="btn btn-small btn-info" href="{{ URL::to('deuda/' . $deuda->id_deuda . '/edit') }}">Editar</a>
+                <td/>
                     <!-- delete the deuda (uses the destroy method DESTROY /deuda/{id} -->
-                    <!-- we will add this later since its a little more complicated than the other two buttons -->
-
-                    <!-- show the deuda (uses the show method found at GET /deuda/{id} -->
-                    <a class="btn btn-small btn-success" href="{{ URL::to('deuda/' . $deuda->id) }}">Ver</a>
-
-                    <!-- edit this deuda (uses the edit method found at GET /deuda/{id}/edit -->
-                    <a class="btn btn-small btn-info" href="{{ URL::to('deuda/' . $deuda->id . '/edit') }}">Editar</a>
-
+                    {{ Form::open([
+                      'method' => 'DELETE',
+                      'route' => ['deuda.destroy', $deuda->id_deuda]]) }}
+                      {{ Form::submit('Eliminar', ['class' => 'btn btn-small btn-danger']) }}
+                    {{ Form::close() }}
                 </td>
             </tr>
         @endforeach

@@ -8,6 +8,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\Redirect;
+use Session;
 
 class Plan_de_pagoController extends Controller
 {
@@ -53,7 +54,7 @@ class Plan_de_pagoController extends Controller
         $validator = Validator::make($request->all(), $rules);
         
         if ($validator->fails()) {
-          return Redirect::to('cartera.plan_de_pago.create')
+          return Redirect::to('plan_de_pago/create')
               ->withErrors($validator)
               ->withInput(Input::except('password'));
         } else {
@@ -67,8 +68,8 @@ class Plan_de_pagoController extends Controller
             $plan_de_pago->save();
 
             // redirect
-            //Session::flash('message', 'Successfully created plan de pago!');
-            return Redirect::to('cartera.plan_de_pago.index');
+            Session::flash('message', 'Plan de pago creado!');
+            return Redirect::to('plan_de_pago');
         }
 
     }
@@ -82,9 +83,9 @@ class Plan_de_pagoController extends Controller
     public function show(Plan_de_pago $plan_de_pago)
     {
         //
-        $plan_de_pago = Plan_de_pago::find($id);
+        $plan = Plan_de_pago::find($plan_de_pago->id_plan_de_pago);
         
-        return view('cartera.plan_de_pago.show', $plan_de_pago);
+        return view('cartera.plan_de_pago.show', compact('plan'));
     }
 
     /**
@@ -96,9 +97,9 @@ class Plan_de_pagoController extends Controller
     public function edit(Plan_de_pago $plan_de_pago)
     {
         //
-        $plan_de_pago = Plan_de_pago::find($id);
+        $plan = Plan_de_pago::find($plan_de_pago->id_plan_de_pago);
         
-        return view('cartera.plan_de_pago.edit', $plan_de_pago);
+        return view('cartera.plan_de_pago.edit', compact('plan'));
     }
 
     /**
@@ -110,7 +111,37 @@ class Plan_de_pagoController extends Controller
      */
     public function update(Request $request, Plan_de_pago $plan_de_pago)
     {
-        //
+        // validate
+        // read more on validation at http://laravel.com/docs/validation
+        $rules = array(
+          'nombre_plan' => 'required',
+          'cuotas' => 'required',
+          'valor_cuota' => 'required',
+          'interes' => 'required',
+          'forma_pago' => 'required',
+        );
+          $validator = Validator::make(Input::all(), $rules);
+
+          // process the login
+          if ($validator->fails()) {
+              return Redirect::to('plan_de_pago/' . $plan_de_pago->id_plan_de_pago . '/edit')
+                  ->withErrors($validator)
+                  ->withInput(Input::except('password'));
+          } else {
+              // store
+              $plan_de_pago = Plan_de_pago::find($plan_de_pago->id_plan_de_pago);
+              $plan_de_pago->nombre_plan  = Input::get('nombre_plan');
+              $plan_de_pago->cuotas = Input::get('cuotas');
+              $plan_de_pago->valor_cuota = Input::get('valor_cuota');
+              $plan_de_pago->interes = Input::get('interes');
+              $plan_de_pago->forma_pago = Input::get('forma_pago');
+              $plan_de_pago->save();
+
+              // redirect
+              Session::flash('message', 'Plan de pago actualizado!');
+              return Redirect::to('plan_de_pago');
+          }
+      
     }
 
     /**
@@ -123,11 +154,11 @@ class Plan_de_pagoController extends Controller
     {
         //
         // delete
-        $plan_de_pago = Plan_de_pago::find($id);
-        $plan_de_pago->delete();
+        $plan = Plan_de_pago::find($plan_de_pago->id_plan_de_pago);
+        $plan->delete();
 
         // redirect
-        //Session::flash('message', 'Successfully deleted the plan_de_pago!');
-        return Redirect::to('cartera.plan_de_pago.index');
+        Session::flash('message', 'Plan de pago eliminado!');
+        return Redirect::to('plan_de_pago');
     }
 }

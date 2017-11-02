@@ -28,7 +28,7 @@
   <h1>Nuevo plan de pago</h1>
   <div class="col-lg-6">
 
-    {{ Form::open(array('url' => 'plan_de_pago')) }}
+    {{ Form::model($plan, array('route' => array('plan_de_pago.update', $plan->id_plan_de_pago), 'method' => 'PUT')) }}
 
       <div class="form-group">
           {{ Form::label('nombre_plan', 'Descripción') }}

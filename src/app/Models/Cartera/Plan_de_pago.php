@@ -6,6 +6,8 @@ use Illuminate\Database\Eloquent\Model;
 
 class Plan_de_pago extends Model
 {
+  protected $primaryKey = 'id_plan_de_pago';
+
   protected $table = "plan_de_pagos";
 
   protected $fillable = ['nombre_plan', 'cuotas', 'valor_cuota', 'interes', 'forma_pago'];

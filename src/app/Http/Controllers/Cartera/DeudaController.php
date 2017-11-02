@@ -11,6 +11,9 @@ use App\Http\Controllers\Controller;
 
 use App\Models\Cartera\Plan_de_pago;
 use App\Models\Usuarios\User;
+use App\Models\Facturacion\Factura;
+
+use Session;
 
 class DeudaController extends Controller
 {
@@ -35,10 +38,10 @@ class DeudaController extends Controller
      */
     public function create()
     {
-
-        $planes = Plan_de_pago::pluck('nombre_plan','id_plan_de_pago');
-        $usuarios = User::pluck('name','id');
-        return view('cartera.deuda.create', compact('planes','usuarios'));
+      $planes = Plan_de_pago::pluck('nombre_plan','id_plan_de_pago');
+      $usuarios = User::pluck('name','id');
+      $facturas = Factura::pluck('id');
+      return view('cartera.deuda.create', compact('planes','usuarios','facturas'));
     }
 
     /**
@@ -62,7 +65,7 @@ class DeudaController extends Controller
         $validator = Validator::make($request->all(), $rules);
         
         if ($validator->fails()) {
-          return Redirect::to('cartera.deuda.create')
+          return Redirect::to('deuda/create')
               ->withErrors($validator)
               ->withInput(Input::except('password'));
         } else {
@@ -79,7 +82,7 @@ class DeudaController extends Controller
 
             // redirect
             Session::flash('message', 'Successfully created deuda!');
-            return Redirect::to('cartera.deuda');
+            return Redirect::to('deuda');
         }
 
     }
@@ -93,9 +96,9 @@ class DeudaController extends Controller
     public function show(Deuda $deuda)
     {
         //
-        $deuda = Deuda::find($id);
+        $deuda = Deuda::find($deuda->id_deuda);
 
-        return view('cartera.deuda.show', $deuda);
+        return view('cartera.deuda.show', compact('deuda'));
         
     }
 
@@ -108,9 +111,9 @@ class DeudaController extends Controller
     public function edit(Deuda $deuda)
     {
         //
-        $deuda = Deuda::find($id);
+        $deuda = Deuda::find($deuda->id_deuda);
 
-        return view('cartera.deuda.edit', $deuda);
+        return view('cartera.deuda.edit', compact('deuda'));
         
     }
 
@@ -134,6 +137,12 @@ class DeudaController extends Controller
      */
     public function destroy(Deuda $deuda)
     {
-        //
+        // delete
+        $deuda = Deuda::find($deuda->id_deuda);
+        $deuda->delete();
+
+        // redirect
+        Session::flash('message', 'Successfully deleted the plan_de_pago!');
+        return Redirect::to('deuda');
     }
 }

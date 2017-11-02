@@ -16,10 +16,17 @@
           <li><a href="{{ URL::to('deuda/create') }}">Nuevo crédito</a>
       </ul>
     </nav>
-
+  @if ($errors->any())
+    <div class="alert alert-danger">
+        <ul>
+            @foreach ($errors->all() as $error)
+                <li>{{ $error }}</li>
+            @endforeach
+        </ul>
+    </div>
+  @endif
   <h1>Nuevo crédito</h1>
   <div class="col-lg-6">
-
     {{ Form::open(array('url' => 'deuda')) }}
 
       <div class="form-group">
@@ -34,28 +41,28 @@
 
       <div class="form-group">
           {{ Form::label('id_factura', 'Factura') }}
-          {{ Form::number('id_factura', 'id_factura', array('class' => 'form-control')) }}
+          {{ Form::select('id_factura', $facturas, null, array('class' => 'form-control')) }}
       </div>
 
       <div class="form-group">
           {{ Form::label('valor_pagado', 'Valor pagado') }}
-        {{ Form::number('valor_pagado', 'valor_pagado', array('class' => 'form-control')) }}
+        {{ Form::number('valor_pagado', null, array('class' => 'form-control')) }}
       </div>
   </div>
   <div class="col-lg-6">
       <div class="form-group">
           {{ Form::label('valor_a_pagar', 'Valor a pagar') }}
-        {{ Form::number('valor_a_pagar', 'valor_a_pagar', array('class' => 'form-control')) }}
+        {{ Form::number('valor_a_pagar', null, array('class' => 'form-control')) }}
       </div>
 
       <div class="form-group">
           {{ Form::label('plazo_credito', 'Plazo crédito') }}
-        {{ Form::date('plazo_credito', 'plazo_credito', array('class' => 'form-control')) }}
+        {{ Form::date('plazo_credito', null, array('class' => 'form-control')) }}
       </div>
 
       <div class="form-group">
           {{ Form::label('estado', 'Estado') }}
-        {{ Form::text('estado', 'estado', array('class' => 'form-control')) }}
+        {{ Form::select('estado', ['Activo' => 'Activo', 'Pendiente' => 'Pendiente', 'Cancelado' => 'Cancelado']) }}
       </div>
   </div>
   </div>
