@@ -13,6 +13,7 @@
           <li><a href="{{ URL::to('deuda/create') }}">Nuevo crédito</a>
       </ul>
   </nav>
+  
   <h1>Todos los créditos</h1>
   <div class="col-lg-12">
 

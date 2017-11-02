@@ -12,6 +12,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Cartera\Plan_de_pago;
 use App\Models\Usuarios\User;
 use App\Models\Facturacion\Factura;
+use App\Models\Usuarios\Cliente;
 
 use Session;
 
@@ -19,7 +20,7 @@ class DeudaController extends Controller
 {
     /**
      * Display a listing of the resource.
-     *
+     * 
      * @return \Illuminate\Http\Response
      */
     public function index()
@@ -33,11 +34,12 @@ class DeudaController extends Controller
 
     /**
      * Show the form for creating a new resource.
-     *
+     * 
      * @return \Illuminate\Http\Response
      */
     public function create()
     {
+      //$cliente = Cliente::find($cliente->id_cliente);
       $planes = Plan_de_pago::pluck('nombre_plan','id_plan_de_pago');
       $usuarios = User::pluck('name','id');
       $facturas = Factura::pluck('id');
@@ -144,5 +146,10 @@ class DeudaController extends Controller
         // redirect
         Session::flash('message', 'Successfully deleted the plan_de_pago!');
         return Redirect::to('deuda');
+    }
+
+    public function setCliente()
+    {
+      return view('cartera.deuda.setCliente');
     }
 }

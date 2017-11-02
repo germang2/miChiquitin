@@ -25,6 +25,7 @@
         </ul>
     </div>
   @endif
+
   <h1>Nuevo crédito</h1>
   <div class="col-lg-6">
     {{ Form::open(array('url' => 'deuda')) }}

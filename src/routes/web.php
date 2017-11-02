@@ -19,5 +19,6 @@ Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');  
 
+Route::get('deuda/setCliente', 'cartera\DeudaController@setCliente');
 Route::resource('deuda', 'cartera\DeudaController');
 Route::resource('plan_de_pago', 'cartera\Plan_de_pagoController');

@@ -67,7 +67,7 @@
                 </a>
                 <ul class="sub-menu" style="display: none;">
                   <li class="nav-item">
-                    <a href="{{ URL::to('/deuda/create') }}" class="nav-link ">
+                    <a href="{{ URL::to('/deuda/setCliente') }}" class="nav-link ">
                       <i class="fa fa-cogs"></i>
                       <span class="title">Nuevo crédito</span>
                     </a>
