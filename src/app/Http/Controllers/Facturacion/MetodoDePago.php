@@ -34,20 +34,35 @@ class MetodoDePago extends Controller
 
   public function compraCredito($idCliente, $valorTotalPago, $N, $idFactura) {
     $cliente = User::find($idCliente);
-    $factura = Factura::find($idFactura);
-    $credito_actual = $cliente->credito_actual;
-    if ($valorTotalPago <= $credito_actual) {
-      $totalPagar = self::numeroCuotas($N, $valorTotalPago,$idFactura);
-      $factura->update(['valor_total' => $totalPagar]);
-      $cliente->update(['credito_actual' => $credito_actual - $valorTotalPago]);
+		$factura = Factura::find($idFactura);
+		$valorTotalPago = (int)$valorTotalPago;
+		$N = (int)$N;
+		if ($cliente == null) {
+			dd("Ingrese un cliente válido");
+		} else if ($factura == null){
+			dd("Ingrese una factura válida");
+		} else {
+			$credito_actual = $cliente->credito_actual;
+			echo "Credito actual : ".$credito_actual;
+			echo "Valor total pago : ".$valorTotalPago;
+	    if ($valorTotalPago <= $credito_actual) {
+	      $totalPagar = self::numeroCuotas($N, $valorTotalPago, $idFactura);
+				echo "Valor total a pagar : ".$totalPagar;
+	      $factura->update(['valor_total' => $totalPagar]);
+				$nuevo_credito_actual = $credito_actual - $valorTotalPago;
+				try {
+					$cliente->update(['credito_actual' => $nuevo_credito_actual]); // NO ESTÁ ACTUALIZANDO!!!!!!!!!!!
+				} catch (\Exception $e) {
+					dd("Error al actualizar credito_actual");
+				}
 
-      //Revisar credito actual
-      // echo "Credito actual : ".$credito_actual;
-      // echo "Valor total a pagar : ".$valorTotalPago;
-      // echo "Nuevo credito actual : ".$credito_actual - number_format($valorTotalPago, 2,'.',',');
-      // dd($totalPagar);
-    } else {
-      dd("No tiene crédito");
-    }
+	      //Revisar credito actual
+				echo "nuevo_credito_actual ".$nuevo_credito_actual;
+	      echo "Nuevo credito actual : ".$cliente->credito_actual;
+				dd("compraCredito realizada");
+	    } else {
+	      dd("No tiene crédito");
+	    }
+		}
   }
 }
