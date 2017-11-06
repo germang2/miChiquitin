@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class Contrato extends Model
 {
     protected $table = 'contratos';
-
+protected $primaryKey = 'id_contrato';
     protected $fillable = [
         'tipo', 'salario', 'fecha_inicial', 'fecha_fin',
     ];

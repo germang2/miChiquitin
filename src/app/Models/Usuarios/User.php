@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 namespace App\Models\Usuarios;
 
@@ -15,7 +15,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password', 'id_tipo', 'tipo_rol', 'apellidos', 'direccion', 'edad',
+        'name', 'email', 'password', 'id_tipo', 'tipo_rol', 'apellidos', 'direccion', 'edad', 'credito_maximo','credito_actual',
     ];
 
     /**
@@ -36,7 +36,7 @@ class User extends Authenticatable
     }
 
     public function telefonos(){
-        return $this->hasMany('App\Models\Usuarios\Telefono');   
+        return $this->hasMany('App\Models\Usuarios\Telefono');
     }
 
     public function facturas(){
