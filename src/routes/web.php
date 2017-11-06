@@ -39,6 +39,10 @@ Route::group(['prefix' => 'Facturacion'], function(){
   Route::get('validacion/{id_cliente}/{id_vendedor}', [
     'uses' => 'Facturacion\ValidarCliente@validar'
   ]);
+
+  Route::get('pagoDeuda/{id_factura}/{cuota}', [
+    'uses' => 'Facturacion\pagoDeuda@pagar'
+  ]);
 });
 
 //Cartera::reoutes();
