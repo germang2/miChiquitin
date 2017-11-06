@@ -2,13 +2,13 @@
 
 use Illuminate\Database\Seeder;
 
-class Root extends Seeder
+/**class Root extends Seeder
 {
     /**
      * Run the database seeds.
      *
      * @return void
-     */
+     *
     public function run()
     {
         //
@@ -18,4 +18,4 @@ class Root extends Seeder
         		]
         	);
     }
-}
+}*/
