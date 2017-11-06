@@ -82,13 +82,30 @@
                     <span class="arrow"></span>
                 </a>
                 <ul class="sub-menu" style="display: none;">
+                  <li class="nav-item">
+                      <a href="{{route('Cliente.create')}}" class="nav-link ">
+                          <i class="fa fa-cogs"></i>
+                         <span class="title">Agregar Cliente</span>
+                      </a>
+                  </li>
+                  <li class="nav-item">
+                      <a href="{{route('Empleado.create')}}" class="nav-link ">
+                          <i class="fa fa-cogs"></i>
+                         <span class="title">Agregar Empleado</span>
+                      </a>
+                  </li>
                     <li class="nav-item">
-                        <a href="#" class="nav-link ">
+                        <a href="{{route('Usuario.index')}}" class="nav-link ">
                             <i class="fa fa-cogs"></i>
-                            <span class="title"> Opcion 1</span>
+                           <span class="title">Listar Usuarios</span>
                         </a>
                     </li>
-
+                    <li class="nav-item">
+                        <a href="{{route('Empresa.index')}}" class="nav-link ">
+                            <i class="fa fa-cogs"></i>
+                           <span class="title">Informacion Empresa</span>
+                        </a>
+                    </li>
                 </ul>
             </li>
 
