@@ -18,7 +18,7 @@ class AlterUsersTable extends Migration
             $table->string('tipo_rol');
             $table->string('apellidos');
             $table->string('direccion');
-            $table->integer('edad');
+            $table->integer('edad')->unsigned();
             $table->decimal('credito_maximo', 8, 2);
             $table->decimal('credito_actual', 8, 2);
         });
