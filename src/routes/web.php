@@ -28,7 +28,7 @@ Route::group(['prefix' => 'Facturacion'], function(){
     'uses' => 'Facturacion\ArticuloControlador@CancelarCompra'
   ]);
 
-  Route::get('metodoPago/{metodo}/{valorTotal}/{idCliente}/{NumeroCuotas}/{idFactura}', [
+  Route::get('metodoPago/{metodo}/{valorTotal}/{idCliente}/{idVendedor}/{NumeroCuotas}', [
     'uses' => 'Facturacion\MetodoDePago@metodoPago'
   ]);
 
