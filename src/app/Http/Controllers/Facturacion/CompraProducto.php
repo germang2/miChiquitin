@@ -9,6 +9,9 @@ use App\Models\Facturacion\FacturaProducto;
 
 class CompraProducto extends Controller
 {
+	public function index(){
+		return view('Facturacion.compra')->with('id_cliente',$id_cliente);
+	}
 
 	public function insertFacturaProducto(Request $req) {
 		// if req is not null

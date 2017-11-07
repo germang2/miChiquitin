@@ -10,17 +10,22 @@ use App\Models\Facturacion\Factura;
 class MetodoDePago extends Controller
 {
 	public function metodoPago($metodo, $valorTotal, $idCliente, $N, $idFactura ){
-		if ($metodo == "efectivo"){
-			$totalFactura = $valorTotal - ($valorTotal*0.05);
-
-			return $totalFactura;
+		if ($metodo == 1){
+      self::compraEfectivo($valorTotal);
 		}
 
-		if ($metodo == "credito") { // Llama a lo que hizo Caro
+		if ($metodo == 2 or $metodo == 3 or $metodo == 4) {
 			self::compraCredito($idCliente, $valorTotal, $N, $idFactura);
 		}
 	}
 
+  public function compraEfectivo( $valorTotal) {
+    $totalPagar = $valorTotal - ($valorTotal*0.05);
+    $factura->update(['cuotas' => 0]);
+    $factura->update(['valor_cuota' => 0]);
+    $factura->update(['valor_total' => $totalPagar]);
+    $factura->update(['estado' => "cancelado"]);
+  }
 
   public function numeroCuotas($N, $valorTotalCompra, $idFactura) {
     $factura = Factura::find($idFactura);
