@@ -22,4 +22,10 @@ Route::get('/home', 'HomeController@index')->name('home');
 
 Route::get('validacion/{id_cliente}/{id_vendedor}', 'Facturacion\ValidarCliente@validar');
 
+Route::get('Reporte', 'Facturacion\Reporte@index');
+
+Route::get('ReporteFiltro','Facturacion\Reporte@reporte')->name('ReporteFiltro');
+
+Route::get('ReporteDetalle','Facturacion\Reporte@reporte_detalle')->name('ReporteDetalle');
+
 //Cartera::reoutes();
