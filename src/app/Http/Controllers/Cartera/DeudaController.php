@@ -95,10 +95,10 @@ class DeudaController extends Controller
      * @param  \App\Models\Cartera\Deuda  $deuda
      * @return \Illuminate\Http\Response
      */
-    public function show(Deuda $deuda)
+    public function show($id)
     {
         //
-        $deuda = Deuda::find($deuda->id_deuda);
+        $deuda = Deuda::find($id);
 
         return view('cartera.deuda.show', compact('deuda'));
         
@@ -110,10 +110,10 @@ class DeudaController extends Controller
      * @param  \App\Models\Cartera\Deuda  $deuda
      * @return \Illuminate\Http\Response
      */
-    public function edit(Deuda $deuda)
+    public function edit($id)
     {
         //
-        $deuda = Deuda::find($deuda->id_deuda);
+        $deuda = Deuda::find($id);
 
         return view('cartera.deuda.edit', compact('deuda'));
         
@@ -137,10 +137,10 @@ class DeudaController extends Controller
      * @param  \App\Models\Cartera\Deuda  $deuda
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Deuda $deuda)
+    public function destroy($id)
     {
         // delete
-        $deuda = Deuda::find($deuda->id_deuda);
+        $deuda = Deuda::find($id);
         $deuda->delete();
 
         // redirect
