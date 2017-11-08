@@ -17,7 +17,7 @@
   <div class="col-lg-12">
     <div class="row">
       <div class="col-sm-6 jumbotron">
-      {{ Form::open(array('url'=>array('deuda'))) }}
+      {{ Form::open(['route' => ['deuda/create']]) }}
         {{ Form::label('id_cliente', 'Documento') }}
         {{ Form::number('id_cliente', null, array('class' => 'form-control')) }}<br>
         {{ Form::submit('Enviar', array('class' => 'btn btn-primary')) }}
