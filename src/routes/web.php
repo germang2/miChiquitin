@@ -39,6 +39,16 @@ Route::group(['prefix' => 'Facturacion'], function(){
   Route::get('validacion/{id_cliente}/{id_vendedor}', [
     'uses' => 'Facturacion\ValidarCliente@validar'
   ]);
-});
 
-//Cartera::reoutes();
+  Route::get('reporte', [
+    'uses' => 'Facturacion\Reporte@index'
+  ]);
+
+  Route::get('reporteFiltro', [
+    'uses' => 'Facturacion\Reporte@reporte'
+  ])->name('ReporteFiltro');
+
+  Route::get('reporteDetalle', [
+    'uses' => 'Facturacion\Reporte@reporte_detalle'
+  ])->name('ReporteDetalle');
+});
