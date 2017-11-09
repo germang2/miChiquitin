@@ -51,8 +51,4 @@
   </table>
 </div>
 
-<div class="container-fluid productos">
-
-</div>
-
 @endsection

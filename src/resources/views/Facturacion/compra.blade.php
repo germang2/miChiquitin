@@ -33,7 +33,11 @@
     <label> Plan de pago: Credito</label><br>
   @endif
   
-  <label> Cuotas: {{ $cuotas }}</label>
+  @if($metodo == '1')
+    <label> Cuotas: 0</label>
+  @else
+    <label> Cuotas: {{ $cuotas }}</label>
+  @endif
 </div>
 
 <div class="container-fluid 1">
@@ -51,7 +55,7 @@
       <div class="col-sm-2 ">
         <div class="form-group">
           {!! Form::label('cantidad', 'Cantidad') !!}
-          {!! Form::text('cantidad',null,['class' => 'form-control', 'placeholder'=> 'Cantidad'])!!}
+          {!! Form::number('cantidad',null,['class' => 'form-control', 'placeholder'=> 'Cantidad','min'=>0])!!}
         </div>
       </div>
 

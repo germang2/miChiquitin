@@ -13,21 +13,21 @@
   <div class="col-md-7">
     <div class="form-group">
       {!! Form::label('id_cliente', 'Identificación del cliente') !!}
-      {!! Form::text('id_cliente',null,['class' => 'form-control', 'placeholder'=> 'Identificación del cliente'])!!}
+      {!! Form::number('id_cliente',null,['class' => 'form-control', 'placeholder'=> 'Identificación del cliente','min'=> 11])!!}
     </div>
   </div>
 
   <div class="col-md-7">
     <div class="form-group" id="metodo">
       {!! Form::label('metodo', 'Plan de pago') !!}
-      {!! Form::select('metodo',['1' => 'Efectivo', '2' => 'Credito'], null, ['class' => 'form-control'] ,array('onclick' => 'cuotas()'))!!}
+      {!! Form::select('metodo',['1' => 'Efectivo', '2' => 'Credito'], null, ['class' => 'form-control','onClick' => 'parent.cuotas()'])!!}
     </div>
   </div>
 
   <div class="col-md-7">
-    <div class="form-group">
-      {!! Form::label('cuotas', 'Numero de cuotas') !!}
-      {!! Form::select('cuotas',['0' => '0','1' => '1 mes', '3' => '3 meses', '6' => '6 meses'], null, ['class' => 'form-control'])!!}
+    <div class="form-group" id="Cuotas" hidden="">
+      {!! Form::label('cuotas', 'Numero de cuotas por mes') !!}
+      {!! Form::select('cuotas',['1' => '1 cuota', '3' => '3 cuotas', '6' => '6 cuotas'], null, ['class' => 'form-control'])!!}
     </div>
   </div>
 
@@ -52,16 +52,16 @@
 
 @endsection
 
-@section('script')
+<script type="text/javascript">
+  
   function cuotas() {
     var type= $("[name=metodo]").val();
     console.log(type);
-    console.log("vida");
-    if (type == "1") {
+    if (type == "2") {
       $("#Cuotas").show();
     }
-    if (type == "2") {
+    if (type == "1") {
       $("#Cuotas").hide();
     }
   } 
-@endsection
+</script>
