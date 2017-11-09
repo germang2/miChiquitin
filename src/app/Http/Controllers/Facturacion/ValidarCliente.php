@@ -25,7 +25,9 @@ class ValidarCliente extends Controller
 				if(sizeof($Vendedor) > 0){
 					if(strcmp($Vendedor[0]->cargo, "administrador") == 0){
 						if(!is_null($id_cliente)) {
-							return view('Facturacion.compra')->with('id_cliente',$id_cliente);
+							return view('Facturacion.compra')->with('id_cliente',$id_cliente)
+															 ->with('metodo',$request->metodo)
+															 ->with('cuotas',$request->cuotas);
 						} else {
 							return view('Facturacion.index')->with('status','2');
 						}
@@ -38,7 +40,9 @@ class ValidarCliente extends Controller
 		}
 		else{
 			if(!is_null($id_cliente)) {
-				return view('Facturacion.compra')->with('id_cliente',$id_cliente);
+				return view('Facturacion.compra')->with('id_cliente',$id_cliente)
+												 ->with('metodo',$request->metodo)
+												 ->with('cuotas',$request->cuotas);
 			} else {
 				return view('Facturacion.index')->with('status','2');
 			}

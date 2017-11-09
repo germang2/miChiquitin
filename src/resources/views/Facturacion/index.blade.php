@@ -1,37 +1,38 @@
 @extends('layouts.app')
 
 @section('titulo')
+<div class="container-fluid">
   Factura de Venta 
+</div>
 @endsection
 
 @section('content')
 
   {!! Form::open(['route' => 'factura.validacion.validar', 'method' => 'GET','id_vendedor' => Auth::user()->id_tipo]) !!}
 
-  <div class="container-fluid">
-
-    <div class="col-sm-4">
-      <div class="form-group">
-        {!! Form::label('id_cliente', 'Identificación del cliente') !!}
-        {!! Form::text('id_cliente',null,['class' => 'form-control', 'placeholder'=> 'Identificación del cliente'])!!}
-      </div>
+  <div class="col-md-7">
+    <div class="form-group">
+      {!! Form::label('id_cliente', 'Identificación del cliente') !!}
+      {!! Form::text('id_cliente',null,['class' => 'form-control', 'placeholder'=> 'Identificación del cliente'])!!}
     </div>
+  </div>
 
-    <div class="col-sm-4">
-      <div class="form-group">
-        {!! Form::label('id_plan_pago', 'Plan de pago') !!}
-        {!! Form::select('type',['vacio' => '', '1' => 'Efectivo', '2' => 'Credito'], null, ['class' => 'form-control'], ['onclick' => 'cuotas()'])!!}
-      </div>
+  <div class="col-md-7">
+    <div class="form-group" id="metodo">
+      {!! Form::label('metodo', 'Plan de pago') !!}
+      {!! Form::select('metodo',['1' => 'Efectivo', '2' => 'Credito'], null, ['class' => 'form-control'] ,array('onclick' => 'cuotas()'))!!}
     </div>
+  </div>
 
-    <div class="col-sm-4">
-    <div class="form-group" id = "Cuotas" hidden="" >
-        {!! Form::label('cuotas', 'Cuotas') !!}
-        {!! Form::select('typeC',['vacio' => '','1' => '1 mes', '2' => '3 meses', '3' => '6 meses',], null, ['class' => 'form-control'])!!}
-      </div>
+  <div class="col-md-7">
+    <div class="form-group">
+      {!! Form::label('cuotas', 'Numero de cuotas') !!}
+      {!! Form::select('cuotas',['0' => '0','1' => '1 mes', '3' => '3 meses', '6' => '6 meses'], null, ['class' => 'form-control'])!!}
     </div>
+  </div>
 
-    <div class="form-group" align="center">
+  <div class="col-md-7">
+    <div class="form-group">
       {!! Form::submit('Iniciar', ['class' => 'btn btn-primary']) !!}
     </div>
   </div>
@@ -51,9 +52,11 @@
 
 @endsection
 
-<script>
+@section('script')
   function cuotas() {
-    var type= $("[name=type]").val();
+    var type= $("[name=metodo]").val();
+    console.log(type);
+    console.log("vida");
     if (type == "1") {
       $("#Cuotas").show();
     }
@@ -61,4 +64,4 @@
       $("#Cuotas").hide();
     }
   } 
-</script>
+@endsection

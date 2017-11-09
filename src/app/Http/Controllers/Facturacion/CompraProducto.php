@@ -13,6 +13,10 @@ class CompraProducto extends Controller
 		return view('Facturacion.compra')->with('id_cliente',$id_cliente);
 	}
 
+	public function imprimirFactura(){
+		return view('Facturacion.factura');	
+	}
+
 	public function insertFacturaProducto(Request $req) {
 		// if req is not null
 		$new = new FacturaProducto;

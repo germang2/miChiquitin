@@ -7,14 +7,14 @@
 </div>
 
 <div class="col-sm-2">
-  {!! Form::open(['route' => 'factura.validacion.validar', 'method' => 'GET','id_vendedor' => Auth::user()->id_tipo]) !!}
+  {!! Form::open(['route' => 'factura.compra.impresion', 'method' => 'GET','id_vendedor' => Auth::user()->id_tipo]) !!}
     {!! Form::submit('Generar Factura', ['class' => 'btn btn-primary']) !!}
   {!! Form::close()!!}
   <br>
 </div>
 
 <div class="col-sm-1">
-  {!! Form::open(['route' => 'factura.validacion.validar', 'method' => 'GET','id_vendedor' => Auth::user()->id_tipo]) !!}
+  {!! Form::open(['route' => 'home', 'method' => 'GET','id_vendedor' => Auth::user()->id_tipo]) !!}
     {!! Form::submit('Cancelar Compra', ['class' => 'btn btn-primary']) !!}
   {!! Form::close()!!}
   <br>
@@ -25,10 +25,20 @@
 @section('content')
 
 <div class="container-fluid 1">
+  <label> Identificación del Cliente: {{ $id_cliente }}</label><br>
 
-  <label> Cliente: {{ $id_cliente }}</label>
+  @if($metodo == '1')
+    <label> Plan de pago: Efectivo</label><br>
+  @else
+    <label> Plan de pago: Credito</label><br>
+  @endif
+  
+  <label> Cuotas: {{ $cuotas }}</label>
+</div>
 
-  {!! Form::open(['route' => 'factura.validacion.validar', 'method' => 'GET','id_vendedor' => Auth::user()->id_tipo]) !!}
+<div class="container-fluid 1">
+
+  {!! Form::open(['route' => 'home', 'method' => 'GET','id_vendedor' => Auth::user()->id_tipo]) !!}
 
     <div class="row">
       <div class="col-sm-4">

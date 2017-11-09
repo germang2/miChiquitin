@@ -51,6 +51,12 @@ Route::group(['prefix' => 'Facturacion'], function(){
     'as' => 'factura.compra.index',
   ]);
 
+  Route::get('FacturaImpresion', [
+    'uses' => 'Facturacion\CompraProducto@imprimirFactura',
+    'as' => 'factura.compra.impresion',
+  ]);
+
+
 });
 
 //Cartera::reoutes();
