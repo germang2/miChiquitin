@@ -13,10 +13,10 @@ class ValidarCliente extends Controller
 		return view('Facturacion.index')->with('status','0')
 										->with('id_cliente','0');
 	}
-	
+
 	public function validar(Request $request){
 
-		$id_cliente = $request->id_cliente;	
+		$id_cliente = $request->id_cliente;
 		$id_vendedor =$request->id_vendedor;
 		$Empleado = Empleado::where("id_empleado", $id_cliente)->get();
 		if(sizeof($Empleado) > 0){
