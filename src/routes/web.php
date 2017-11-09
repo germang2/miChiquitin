@@ -46,25 +46,23 @@ Route::group(['prefix' => 'Facturacion'], function(){
     'as' => 'factura.validacion.index',
   ]);
 
-  // Route::get('Factura', [
-  //   'uses' => 'Facturacion\CompraProducto@index',
-  //   'as' => 'factura.compra.index',
-  // ]);
-
   Route::get('FacturaImpresion', [
     'uses' => 'Facturacion\CompraProducto@imprimirFactura',
     'as' => 'factura.compra.impresion',
   ]);
 
   Route::get('reporte', [
-    'uses' => 'Facturacion\Reporte@index'
+    'uses' => 'Facturacion\Reporte@index',
+    'as' => 'factura.reporte'
   ]);
 
   Route::get('reporteFiltro', [
-    'uses' => 'Facturacion\Reporte@reporte'
-  ])->name('ReporteFiltro');
+    'uses' => 'Facturacion\Reporte@reporte',
+    'as' => 'ReporteFiltro'
+  ]);
 
   Route::get('reporteDetalle', [
-    'uses' => 'Facturacion\Reporte@reporte_detalle'
-  ])->name('ReporteDetalle');
+    'uses' => 'Facturacion\Reporte@reporte_detalle',
+    'as' => 'ReporteDetalle'
+  ]);
 });
