@@ -22,14 +22,13 @@ class ValidarCliente extends Controller
 					}
 					else{
 						echo "No es un administrador, no se puede realizar la venta.";
-						return false;
 					}
 				}
 			}
 		}
 		else{
 			echo "No es un vendedor, se puede realizar la venta.";
-			return true; //Llama caso de uso 003
+			//Llama caso de uso 003
 		}
 	}
 }

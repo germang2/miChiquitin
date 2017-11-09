@@ -19,7 +19,7 @@ Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 
-/*Route::group(['prefix' => 'Facturacion'], function(){
+Route::group(['prefix' => 'Facturacion'], function(){
   Route::get('EliminarArticulo/{id}/{cantidadActual}/{cantidadEliminar}/{idFactura}', [
     'uses' => 'Facturacion\ArticuloControlador@EliminarArticulo'
   ]);
@@ -39,13 +39,16 @@ Route::get('/home', 'HomeController@index')->name('home');
   Route::get('validacion/{id_cliente}/{id_vendedor}', [
     'uses' => 'Facturacion\ValidarCliente@validar'
   ]);
+
+  Route::get('reporte', [
+    'uses' => 'Facturacion\Reporte@index'
+  ]);
+
+  Route::get('reporteFiltro', [
+    'uses' => 'Facturacion\Reporte@reporte'
+  ])->name('ReporteFiltro');
+
+  Route::get('reporteDetalle', [
+    'uses' => 'Facturacion\Reporte@reporte_detalle'
+  ])->name('ReporteDetalle');
 });
-
-Route::get('Reporte', 'Facturacion\Reporte@index');
-
-Route::get('ReporteFiltro','Facturacion\Reporte@reporte')->name('ReporteFiltro');
-
-Route::get('ReporteDetalle','Facturacion\Reporte@reporte_detalle')->name('ReporteDetalle');
-
-//Cartera::reoutes();
-*/
