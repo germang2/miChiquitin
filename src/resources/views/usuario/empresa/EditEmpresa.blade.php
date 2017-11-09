@@ -13,6 +13,7 @@
     @endsection
 
 @section('content')
+
   @if( $empresa->exists )
     {!!Form::open(['route' => ['Empresa.update','empresa' => $empresa->id_empresa], 'method'=>'POST'])!!}
     {{ method_field('PUT') }}
@@ -35,4 +36,5 @@
       {!!form::submit('Registrar',['class'=>'btn btn-primary'])!!}
       {!!form::reset('Cancelar',['class'=>'btn btn-boton'])!!}
       {!!form::close()!!}
+      <input type="hidden" name="_token" value="{{ csrf_token() }}">
 @endsection

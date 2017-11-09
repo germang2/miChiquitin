@@ -13,6 +13,7 @@
       @endsection
 
   @section('content')
+
   {!!Form::open(['route' => ['Empleado.update','empleado' => $empleado->id_empleado], 'method'=>'POST'])!!}
     {{ method_field('PUT') }}
     {{csrf_field()}}
@@ -91,4 +92,5 @@
       {!!form::submit('Registrar',['class'=>'btn btn-primary'])!!}
       {!!form::reset('Cancelar',['class'=>'btn btn-boton'])!!}
       {!!form::close()!!}
+      <input type="hidden" name="_token" value="{{ csrf_token() }}">
 @endsection

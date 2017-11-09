@@ -1,17 +1,18 @@
-<!--<!DOCTYPE html>
+<!DOCTYPE html>
 <html>
 <head>
 <meta charset="utf-8" />
 <title>Formulario Cliente</title>
-<link href="{ asset('css/app.css') }" rel="stylesheet">
+<link href="{{ asset('css/app.css') }}" rel="stylesheet">
 </head>
-<body>-->
-@extends('layouts.app')
+<body><!--
+extends('layouts.app')
 
-@section('titulo')
+section('titulo')
       Modulo Cliente Editar Cliente
-@endsection
-  @section('content')
+endsection
+  section('content')-->
+
     {!!Form::open(['route' => ['Cliente.update', 'cliente' => $cliente->id_cliente], 'method'=>'POST'])!!}
     {{ method_field('PUT') }}
     {{csrf_field()}}
@@ -52,13 +53,16 @@
       </div>
       <div class="form-group">
       {!!form::label('credito_maximo: ')!!}
-      {!!form::selectRange('credito_maximo',0,500)!!}
+      {!!form::selectRange('credito_maximo',0,500,$usuario->credito_maximo)!!}
       </div>
       <div class="form-group">
       {!!form::label('credito_actual: ')!!}
-      {!!form::selectRange('credito_actual', 0, 200)!!}
+      {!!form::selectRange('credito_actual', 0, 200,$usuario->credito_actual)!!}
       </div>
       {!!form::submit('Registrar',['class'=>'btn btn-primary'])!!}
       {!!form::reset('Cancelar',['class'=>'btn btn-boton'])!!}
       {!!form::close()!!}
-@endsection
+      <input type="hidden" name="_token" value="{{ csrf_token() }}">
+<!--endsection-->
+</body>
+</head>
