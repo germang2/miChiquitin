@@ -41,4 +41,10 @@ Route::group(['prefix' => 'Facturacion'], function(){
   ]);
 });
 
+Route::get('Reporte', 'Facturacion\Reporte@index');
+
+Route::get('ReporteFiltro','Facturacion\Reporte@reporte')->name('ReporteFiltro');
+
+Route::get('ReporteDetalle','Facturacion\Reporte@reporte_detalle')->name('ReporteDetalle');
+
 //Cartera::reoutes();
