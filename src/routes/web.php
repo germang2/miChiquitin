@@ -28,7 +28,7 @@ Route::group(['prefix' => 'Facturacion'], function(){
     'uses' => 'Facturacion\ArticuloControlador@CancelarCompra'
   ]);
 
-  Route::get('metodoPago/{metodo}/{valorTotal}/{idCliente}/{NumeroCuotas}/{idFactura}', [
+  Route::get('metodoPago/{metodo}/{valorTotal}/{idCliente}/{idVendedor}/{NumeroCuotas}', [
     'uses' => 'Facturacion\MetodoDePago@metodoPago'
   ]);
 
@@ -44,6 +44,10 @@ Route::group(['prefix' => 'Facturacion'], function(){
   Route::get('index', [
     'uses' => 'Facturacion\ValidarCliente@index',
     'as' => 'factura.validacion.index',
+  ]);
+
+  Route::get('pagoDeuda/{id_factura}/{cuota}', [
+    'uses' => 'Facturacion\pagoDeuda@pagar'
   ]);
 
   Route::get('FacturaImpresion', [

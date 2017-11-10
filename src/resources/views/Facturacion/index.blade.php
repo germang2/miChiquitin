@@ -2,7 +2,7 @@
 
 @section('titulo')
 <div class="container-fluid">
-  Factura de Venta 
+  Factura de Venta
 </div>
 @endsection
 
@@ -27,7 +27,7 @@
   <div class="col-md-7">
     <div class="form-group" id="Cuotas" hidden="">
       {!! Form::label('cuotas', 'Numero de cuotas por mes') !!}
-      {!! Form::select('cuotas',['1' => '1 cuota', '3' => '3 cuotas', '6' => '6 cuotas'], null, ['class' => 'form-control'])!!}
+      {!! Form::select('cuotas',['2' => '1 cuota', '3' => '3 cuotas', '4' => '6 cuotas'], null, ['class' => 'form-control'])!!}
     </div>
   </div>
 
@@ -38,22 +38,10 @@
   </div>
   {!! Form::close()!!}
 
-  @if ($status == '1')
-    <div class="alert alert-danger" role="alert">
-    No es posible realizar esta venta, por favor contacte con su administrador
-    </div>
-  @endif
-
-  @if ($status == '2')
-    <div class="alert alert-danger" role="alert">
-      Aun no ha digitado la identificación del cliente
-    </div>
-  @endif
-
 @endsection
 
 <script type="text/javascript">
-  
+
   function cuotas() {
     var type= $("[name=metodo]").val();
     console.log(type);
@@ -63,5 +51,5 @@
     if (type == "1") {
       $("#Cuotas").hide();
     }
-  } 
+  }
 </script>
