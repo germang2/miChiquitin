@@ -12,9 +12,6 @@
 */
 
 Route::get('/', function () {
-//return view('usuario.submenu');
-    //return view('usuario.index');
-    //return view('layouts.sidemenu');
     return view('welcome');
 });
 
@@ -23,6 +20,11 @@ Auth::routes();
 Route::get('/home', 'HomeController@index')->name('home');
 
 Route::get('/homeCliente', function(){return view('usuario.index');})->name('homeCliente');
+Route::get('/Ciudades', function(){return view('usuario.filtros.IndexFiltros');})->name('filtros');
+Route::get('/Ciudad{Ciudad}', 'Usuarios\ClienteController@ciudad')->name('ciudad');
+Route::get('/indexCiudades', 'Usuarios\ClienteController@ciudades')->name('ciudades');
+Route::get('/Genero{Ciudad}', 'Usuarios\ClienteController@genero')->name('genero');
+Route::get('/Acceso', 'Usuarios\UsuarioController@acceso')->name('acceso');
 Route::resource('Usuario','Usuarios\UsuarioController');
 Route::resource('Cliente','Usuarios\ClienteController');//, ['middleware' => ['auth' ,'adminMiddleware']]);
 Route::resource('Empleado','Usuarios\EmpleadoController');

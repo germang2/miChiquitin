@@ -16,7 +16,6 @@ class rootSeeder extends Seeder
         	'name' 		=> 	'root',
         	'email'		=>	'root@gmail.com',
         	'password'	=>	bcrypt('321654'),
-        	'id_tipo'	=>	13442456,
         	'tipo_rol'	=>	'root',
         	'apellidos'	=>	'root',
         	'direccion'	=>	'Pereira',

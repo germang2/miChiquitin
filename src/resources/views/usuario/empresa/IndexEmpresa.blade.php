@@ -14,9 +14,6 @@
     @endsection
 
 @section('content')
-<div class="jumbotron">
-        <h1 class="display-3">EMPRESA Mi Chiquitin</h1>
-    </div>
     <table class="table">
         <thead>
           <th>Nombre</th>

@@ -9,6 +9,7 @@ use App\Models\Usuarios\Empresa;
 use App\Models\Usuarios\Telefono;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Hash;
 
 class EmpleadoController extends Controller
 {
@@ -28,9 +29,8 @@ class EmpleadoController extends Controller
     {
       $data = $request->all();
       $data['tipo_rol'] = 'empleado';
-      $data['id_tipo'] = 2;
-      $data['password'] = bcrypt($request->password);
-      $data['confirmation_password'] = bcrypt($request->confirmation_password);
+      $data['password'] = Hash::make($request->password);
+      $data['confirmation_password'] = Hash::make($request->confirmation_password);
       $Usuario= User::create($data);
       $contrato = Contrato::create($data);
       $data['id_usuario'] = $Usuario->id;

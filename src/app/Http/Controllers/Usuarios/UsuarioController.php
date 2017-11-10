@@ -16,6 +16,14 @@ class UsuarioController extends Controller
       return view('usuario.user.IndexUsers')->with(['users'=>$users]);
     }
 
+    public function credito(){
+      $users = User::where('credido_actual', 'pattern'); ///mirar this
+    }
+
+    public function acceso(){   //acceso users
+      var_dump($request->session()->all());
+    }
+
     public function create()
     {
         //
@@ -48,6 +56,7 @@ class UsuarioController extends Controller
     {
         //
     }
+
     public function destroy(User $user)
     {
       $user->delete();

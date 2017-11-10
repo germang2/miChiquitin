@@ -7,6 +7,7 @@ use App\Models\Usuarios\Telefono;
 use App\Models\Usuarios\User;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Hash;
 
 class ClienteController extends Controller
 {
@@ -14,6 +15,25 @@ class ClienteController extends Controller
     {
        $clientes = Cliente::orderBy('id_cliente', 'desc')->paginate(10);
        return view('usuario.clientes.IndexClientes', ['clientes'=>$clientes]);
+    }
+
+    public function ciudades()
+    {
+       $clientes = Cliente::orderBy('ciudad')->paginate(10);
+       //var_dump($clientes);
+       return view('usuario.filtros.IndexCiudades', ['clientes'=>$clientes]);
+    }
+
+    public function ciudad($ciudad){
+      $clientes = Cliente::where('ciudad',$ciudad);
+      var_dump($clientes);
+      //return view('usuario.filtros.IndexCiudad',['clientes'=>$clientes]);
+    }
+
+    public function genero($genero){
+      $clientes = Cliente::orderBy('genero', $genero)->paginate(10);
+      var_dump($clientes);
+    //  return view('usuario.filtros.IndexGenero',['clientes'=>$clientes]);
     }
 
     public function create()
@@ -25,9 +45,8 @@ class ClienteController extends Controller
     {
       $data = $request->all();
       $data['tipo_rol'] = 'cliente';
-      $data['id_tipo'] = 3;
-      $data['password'] = bcrypt('password123');
-      $data['confirmation_password'] = bcrypt('password123');
+      $data['password'] = Hash::make('password123');
+      $data['confirmation_password'] = Hash::make('password123');
       $Usuario= User::create($data);
       $data['id_usuario'] = $Usuario->id;
       $Cliente= Cliente::create($data);
@@ -61,7 +80,7 @@ class ClienteController extends Controller
     public function destroy($id)
     {
         $cliente = Cliente::findOrFail($id);
-        $cliente->delete();
+        $cliente->delete(); //agregar sofdelete
         return redirect()->route('Cliente.index');
     }
 }

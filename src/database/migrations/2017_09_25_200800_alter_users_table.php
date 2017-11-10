@@ -14,7 +14,6 @@ class AlterUsersTable extends Migration
     public function up()
     {
         Schema::table('users', function (Blueprint $table) {
-            $table->integer('id_tipo');
             $table->string('tipo_rol');
             $table->string('apellidos');
             $table->string('direccion');

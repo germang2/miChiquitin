@@ -106,6 +106,12 @@
                            <span class="title">Informacion Empresa</span>
                         </a>
                     </li>
+                    <li class="nav-item">
+                        <a href="{{route('filtros')}}" class="nav-link ">
+                            <i class="fa fa-cogs"></i>
+                           <span class="title">Filtros</span>
+                        </a>
+                    </li>
                 </ul>
             </li>
 
