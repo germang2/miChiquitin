@@ -1,15 +1,16 @@
 <?php
 
 namespace App\Http\Controllers\Usuarios;
-
-use App\Models\Usuarios\Empleado;
 use App\Models\Usuarios\User;
 use App\Models\Usuarios\Contrato;
 use App\Models\Usuarios\Empresa;
 use App\Models\Usuarios\Telefono;
+use App\Models\Usuarios\Empleado;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Hash;
+use App\Mail\enviar;
+use Mail;
 
 class EmpleadoController extends Controller
 {
@@ -37,8 +38,10 @@ class EmpleadoController extends Controller
       $Telefono= Telefono::create($data);
       $data['id_empresa'] = 1; //id de la unica empresa registrada en el seed
       $data['id_contrato'] = $contrato->id_contrato; //hay algo mal en el modelo o tabla, solucionado  --rename pk en el modelo
-      $Empleado= Empleado::create($data);
-      
+      $Empleado = Empleado::create($data);
+      Mail::raw('$Usuario->email', function ($message) {
+          echo 'welcome tu contraseña es $data[password]';
+      });
       return redirect()->route('Empleado.index');
     }
 
