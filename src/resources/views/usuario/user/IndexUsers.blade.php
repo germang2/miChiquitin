@@ -49,4 +49,5 @@
           </tbody>
           @endif
     @endforeach
+    {{$users->render()}}
 @endsection

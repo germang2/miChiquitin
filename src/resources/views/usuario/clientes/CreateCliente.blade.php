@@ -1,11 +1,3 @@
-<!--<!DOCTYPE html>
-<html>
-<head>
-<meta charset="utf-8" />
-<title>Formulario Cliente</title>
-<link href="{ asset('css/app.css') }" rel="stylesheet">
-</head>
-<body>-->
   @extends('layouts.app')
 
   @section('titulo')
@@ -13,7 +5,7 @@
   @endsection
 
   @section('content')
-  {!!Form::open(['route'=>['Cliente.store'], 'method'=>'POST'])!!}
+  {!!Form::open(['route'=>['Cliente.store'], 'data-toggle'=>'validator', 'role'=>'form', 'method'=>'POST'])!!}
     {{csrf_field()}}
       <div class="form-group">
       {!!form::label('Nombre: ')!!}

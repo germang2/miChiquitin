@@ -50,4 +50,5 @@
             </small></td>
           </tbody>
     @endforeach
+    {{$contratos->render()}}
 @endsection

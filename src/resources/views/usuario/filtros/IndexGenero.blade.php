@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('titulo')
-    
+
     @endsection
 
 @section('content')
@@ -29,4 +29,5 @@
             </small></td>
           </tbody>
     @endforeach
+    {{$clientes->render()}}
 @endsection

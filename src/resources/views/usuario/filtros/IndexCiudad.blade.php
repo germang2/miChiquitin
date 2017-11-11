@@ -42,4 +42,5 @@
           </tbody>
         @endif
     @endforeach
+    {{$clientes->render()}}
 @endsection

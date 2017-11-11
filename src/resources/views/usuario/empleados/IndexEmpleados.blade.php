@@ -54,4 +54,5 @@
             </small></td>
           </tbody>
     @endforeach
+    {{$Empleados->render()}}
 @endsection
