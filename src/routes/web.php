@@ -70,3 +70,6 @@ Route::group(['prefix' => 'Facturacion'], function(){
     'as' => 'ReporteDetalle'
   ]);
 });
+
+//Cartera::reoutes();
+
