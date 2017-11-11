@@ -1,15 +1,7 @@
-<!--<!DOCTYPE html>
-<html>
-<head>
-<meta charset="utf-8" />
-<title>un cliente</title>
-<link href="{ asset('css/app.css') }}" rel="stylesheet">
-</head>
-<body>-->
 @extends('layouts.app')
 
 @section('titulo')
-    Usuario {{$usuario->name}} {{$usuario->apellidos}}
+    Viendo al {{$usuario->tipo_rol}} {{$usuario->name}} {{$usuario->apellidos}}
     @endsection
 
 @section('content')

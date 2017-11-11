@@ -4,7 +4,7 @@ namespace App\Http\Middleware;
 
 use Closure;
 
-class adminMiddleware
+class empleadoMiddleware
 {
     /**
      * Handle an incoming request.
@@ -15,12 +15,10 @@ class adminMiddleware
      */
     public function handle($request, Closure $next)
     {
-      if($request->user()->tipo_rol == "admin"){
+      if($request->user()->tipo_rol == "empleado" || $request->user()->tipo_rol == "root"){
          return $next($request);
        }else{
          return redirect()->route('home');
        }
-
     }
-
 }

@@ -1,17 +1,9 @@
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="utf-8" />
-<title>Formulario Cliente</title>
-<link href="{{ asset('css/app.css') }}" rel="stylesheet">
-</head>
-<body><!--
-extends('layouts.app')
+@extends('layouts.app')
 
-section('titulo')
+@section('titulo')
       Modulo Cliente Editar Cliente
-endsection
-  section('content')-->
+@endsection
+  @section('content')
 
     {!!Form::open(['route' => ['Cliente.update', 'cliente' => $cliente->id_cliente], 'method'=>'POST'])!!}
     {{ method_field('PUT') }}
@@ -63,6 +55,4 @@ endsection
       {!!form::reset('Cancelar',['class'=>'btn btn-boton'])!!}
       {!!form::close()!!}
       <input type="hidden" name="_token" value="{{ csrf_token() }}">
-<!--endsection-->
-</body>
-</head>
+@endsection
