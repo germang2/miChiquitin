@@ -29,7 +29,7 @@ class UsuarioController extends Controller
     public function acceso(Request $request){   //acceso users
       $user =  User::all()->where('last_login','!=',null );
      //var_dump($user);
-      return view('usuario.filtros.IndexAcceso',['users'=>$user]);
+     return view('usuario.filtros.IndexAcceso',['users'=>$user]);
     }
 
     public function create()

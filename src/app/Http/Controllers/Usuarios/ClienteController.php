@@ -19,7 +19,7 @@ class ClienteController extends Controller
 
     public function ciudades()
     {
-       $clientes = Cliente::orderBy('ciudad','desc')->paginate(10); 
+       $clientes = Cliente::orderBy('ciudad','desc')->paginate(10);
        return view('usuario.filtros.IndexCiudades', ['clientes'=>$clientes]);
     }
 
@@ -42,7 +42,7 @@ class ClienteController extends Controller
     {
       $data = $request->all();
       $data['tipo_rol'] = 'cliente';
-      $data['password'] = Hash::make(random(0,10));
+      $data['password'] = Hash::make(rand(0,10));
       $data['confirmation_password'] = Hash::make($data['password']);
       $Usuario= User::create($data);
       $data['id_usuario'] = $Usuario->id;
