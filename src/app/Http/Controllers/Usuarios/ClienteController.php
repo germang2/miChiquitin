@@ -19,7 +19,7 @@ class ClienteController extends Controller
 
     public function ciudades()
     {
-       $clientes = Cliente::orderBy('ciudad','desc')->paginate(10); //porque no funciona???
+       $clientes = Cliente::orderBy('ciudad','desc')->paginate(10); 
        return view('usuario.filtros.IndexCiudades', ['clientes'=>$clientes]);
     }
 

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Usuarios;
 
 use App\Models\Usuarios\User;
+use App\Models\Usuarios\Session;
 use App\Models\Usuarios\Cliente;
 use App\Models\Usuarios\Empleado;
 use Illuminate\Http\Request;
@@ -26,9 +27,9 @@ class UsuarioController extends Controller
     }
 
     public function acceso(Request $request){   //acceso users
-
-      var_dump($request->session()->all()); //esto no funciona
-      //var_dump($request->session()->last_activity); si existiera una bd de ssesion php artisan session:table
+      $user =  User::all()->where('last_login','!=',null );
+     //var_dump($user);
+      return view('usuario.filtros.IndexAcceso',['users'=>$user]);
     }
 
     public function create()
