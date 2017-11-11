@@ -18,7 +18,7 @@ class AddTelefonoTable extends Migration
           $table->integer('id_usuario')->unsigned();
           $table->string('telefono');
           $table->timestamps();
-
+          $table->softDeletes();
           $table->foreign('id_usuario')->references('id')->on('users');
         });
     }

@@ -19,6 +19,7 @@ class AddClientesTable extends Migration
             $table->string('genero');
             $table->string('ciudad');
             $table->integer('numberphone')->nullable();
+            $table->softDeletes();
             $table->timestamps();
             $table->foreign('id_usuario')->references('id')->on('users');
         });
