@@ -29,11 +29,11 @@ class ValidarCliente extends Controller
 															 ->with('metodo',$request->metodo)
 															 ->with('cuotas',$request->cuotas);
 						} else {
-							return view('Facturacion.index')->with('status','2');
+							return view('Facturacion.error')->with('error','Aún no se ha digitado la identificación del cliente');
 						}
 					}
 					else{
-						return view('Facturacion.index')->with('status','1');
+						return view('Facturacion.error')->with('error','No es un administrador, no se puede realizar la venta');
 					}
 				}
 			}
@@ -44,7 +44,7 @@ class ValidarCliente extends Controller
 												 ->with('metodo',$request->metodo)
 												 ->with('cuotas',$request->cuotas);
 			} else {
-				return view('Facturacion.index')->with('status','2');
+				return view('Facturacion.error')->with('error','Aún no se ha digitado la identificación del cliente');
 			}
 		}
 	}

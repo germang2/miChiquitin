@@ -2,13 +2,12 @@
 
 @section('titulo')
 <div class="container-fluid">
-  Error
+	Error
 </div>
 @endsection
 
 @section('content')
   <div class="alert alert-danger" role="alert">
-    @error
-  No es posible realizar esta venta, por favor contacte con su administrador
+  	{{$error}}
   </div>
 @endsection
