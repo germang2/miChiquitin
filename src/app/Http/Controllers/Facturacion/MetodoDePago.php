@@ -22,13 +22,14 @@ class MetodoDePago extends Controller
 
   public function compraEfectivo($valorTotal, $idFactura) {
     $totalPagar = $valorTotal - ($valorTotal*0.05);
-    $factura = Factura::find($idFactura);
-    if (count($factura)) {
-      $factura->update(['cuotas' => 0]);
-      $factura->update(['valor_cuota' => 0]);
-      $factura->update(['valor_total' => $totalPagar]);
-      $factura->update(['estado' => "cancelado"]);
-    }
+    return $totalPagar;
+    // $factura = Factura::find($idFactura);
+    // if (count($factura)) {
+    //   $factura->update(['cuotas' => 0]);
+    //   $factura->update(['valor_cuota' => 0]);
+    //   $factura->update(['valor_total' => $totalPagar]);
+    //   $factura->update(['estado' => "cancelado"]);
+    // }
   }
 
   public function numeroCuotas($N, $valorTotalCompra) {
@@ -77,7 +78,7 @@ class MetodoDePago extends Controller
       echo "<br>Nuevo credito actual(cliente): ".$cliente->credito_actual;
 			dd("compraCredito realizada");
     } else {
-      dd("No tiene crédito");
+      return false;
     }
 	}
 }

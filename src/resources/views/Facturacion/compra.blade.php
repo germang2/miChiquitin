@@ -3,7 +3,7 @@
 @section('titulo')
 
 <div class="col-sm-8">
-  Nueva Venta 
+  Nueva Venta
 </div>
 
 <div class="col-sm-2">
@@ -27,13 +27,13 @@
 <div class="container-fluid 1">
   <label> Identificación del Cliente: {{ $id_cliente }}</label><br>
 
-  @if($metodo == '1')
+  @if($metodo == 'Efectivo')
     <label> Plan de pago: Efectivo</label><br>
   @else
     <label> Plan de pago: Credito</label><br>
   @endif
-  
-  @if($metodo == '1')
+
+  @if($metodo == 'Efectivo')
     <label> Cuotas: 0</label>
   @else
     <label> Cuotas: {{ $cuotas }}</label>
