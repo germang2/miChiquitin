@@ -36,17 +36,15 @@ class ContratoController extends Controller
 
     public function edit($id)
     {
-    $Contrato=Contrato::findOrFail($id);$empleado = Empleado::where('id_contrato',$Contrato->id_contrato)->firstOrFail();
-    $usuario = User::findOrFail($empleado->id_usuario);
-    return view('usuario.contratos.EditContrato',['contrato'=>$Contrato,'usuario'=>$usuario]);
-    }
+            $Contrato=Contrato::findOrFail($id);$empleado = Empleado::where('id_contrato',$Contrato->id_contrato)->firstOrFail();
+            $usuario = User::findOrFail($empleado->id_usuario);
+            return view('usuario.contratos.EditContrato',['contrato'=>$Contrato,'usuario'=>$usuario]);
+      }
 
     public function update(Request $request, $id)
     {
-        $Contrato=Contrato::findOrFail($id);
-        $Contrato->update(){
-            $request->all()
-        };
+        $contrato=Contrato::findOrFail($id);        
+        $contrato->update($request->all());
         return redirect()->route('Contrato.index');
     }
 

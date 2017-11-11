@@ -39,9 +39,7 @@ class EmpresaController extends Controller
     public function update(Request $request, $id)
     {
       $empresa = Empresa::findOrFail($id);
-        $empresa->update(){
-          $request->all()
-        };
+        $empresa->update($request->all());
         return redirect()->route('Empresa.index');
     }
 

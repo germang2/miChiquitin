@@ -1,13 +1,3 @@
-<!--<!DOCTYPE html>
-<html>
-<head>
-<meta charset="utf-8" />
-<title> Usuarios </title>
-
-<!- Styles -
-    <link href="{ asset('css/app.css') }}" rel="stylesheet">
-</head>
-<body>-->
 @extends('layouts.app')
 
 @section('titulo')
@@ -30,7 +20,6 @@
         $user = App\Models\Usuarios\User::findOrFail($cliente->id_cliente);
         @endphp
         @if ($user->tipo_rol!='root')@php
-          echo 'aqui estoy';
           $Telefono = App\Models\Usuarios\Telefono::findOrFail($user->id);
         @endphp
             <td><a href="{{route('Usuario.show',['usuario' => $user->id])}}">{{$user->name}}</a></td>

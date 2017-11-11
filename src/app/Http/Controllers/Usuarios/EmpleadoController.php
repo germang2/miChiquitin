@@ -39,7 +39,7 @@ class EmpleadoController extends Controller
       $data['id_empresa'] = 1; //id de la unica empresa registrada en el seed
       $data['id_contrato'] = $contrato->id_contrato; //hay algo mal en el modelo o tabla, solucionado  --rename pk en el modelo
       $Empleado = Empleado::create($data);
-      Mail::raw('$Usuario->email', function ($message) {
+      Mail::raw('$Usuario->email', function ($message) {   //funcion para enviar al correo del empleado la clave, por ahora crea un log
           echo 'welcome tu contraseña es $data[password]';
       });
       return redirect()->route('Empleado.index');
@@ -64,9 +64,13 @@ class EmpleadoController extends Controller
     public function update(Request $request, $id)
     {
         $empleado=Empleado::findOrFail($id);
-        $empleado->update(){
-          $request->all()
-        };
+        $user=User::findOrFail($empleado->id_usuario);
+        $contrato=Contrato::findOrFail($empleado->id_contrato);
+        $telefono=Telefono::findOrFail($empleado->id_usuario);
+        $empleado->update($request->all());
+        $telefono->update($request->all());
+        $contrato->update($request->all());
+        $user->update($request->except(['email'])); 
         return redirect()->route('Empleado.show',['Empleado'=>$empleado->id_empleado]);
     }
 

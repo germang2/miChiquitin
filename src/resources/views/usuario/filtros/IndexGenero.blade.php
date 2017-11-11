@@ -29,5 +29,4 @@
             </small></td>
           </tbody>
     @endforeach
-    {{$clientes->render()}}
 @endsection

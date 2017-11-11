@@ -1,13 +1,4 @@
-<!--<!DOCTYPE html>
-<html>
-<head>
-<meta charset="utf-8" />
-<title> Usuarios </title>
 
-<!- Styles -
-    <link href="{ asset('css/app.css') }}" rel="stylesheet">
-</head>
-<body>-->
 @extends('layouts.app')
 
 @section('titulo')
@@ -42,5 +33,4 @@
           </tbody>
         @endif
     @endforeach
-    {{$clientes->render()}}
 @endsection

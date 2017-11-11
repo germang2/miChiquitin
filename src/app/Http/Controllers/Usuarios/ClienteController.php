@@ -42,8 +42,8 @@ class ClienteController extends Controller
     {
       $data = $request->all();
       $data['tipo_rol'] = 'cliente';
-      $data['password'] = Hash::make('password123');
-      $data['confirmation_password'] = Hash::make('password123');
+      $data['password'] = Hash::make(random(0,10));
+      $data['confirmation_password'] = Hash::make($data['password']);
       $Usuario= User::create($data);
       $data['id_usuario'] = $Usuario->id;
       $Cliente= Cliente::create($data);
@@ -68,10 +68,12 @@ class ClienteController extends Controller
     public function update (Request $request, $id) //incompleto
     {
         $cliente = Cliente::findOrFail($id);
-        $cliente->update(){
-          $request->all()
-      };
-      return redirect()->route('Cliente.show',['cliente'=>$cliente->id_cliente]);
+        $user = User::findOrFail($cliente->id_usuario);
+        $telefono= Telefono::findOrFail($user->id);
+        $cliente->update($request->all());
+        $user->update($request->except(['email']));
+        $telefono->update($request->all());
+        return redirect()->route('Cliente.show',['cliente'=>$cliente->id_cliente]);
     }
 
     public function destroy($id)

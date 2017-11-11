@@ -1,12 +1,4 @@
-<!--<!DOCTYPE html>
-<html>
-<head>
-<meta charset="utf-8" />
-<title>Modulo CLientes</title>
 
-    <link href="{ asset('css/app.css') }}" rel="stylesheet">
-</head>
-<body>-->
 @extends('layouts.app')
 
 @section('titulo')
