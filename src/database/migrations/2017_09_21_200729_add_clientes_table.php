@@ -18,8 +18,8 @@ class AddClientesTable extends Migration
             $table->integer('id_usuario')->unsigned();
             $table->string('genero');
             $table->string('ciudad');
+            $table->integer('numberphone')->nullable();
             $table->timestamps();
-
             $table->foreign('id_usuario')->references('id')->on('users');
         });
     }

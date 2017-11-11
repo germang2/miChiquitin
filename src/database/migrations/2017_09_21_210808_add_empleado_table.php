@@ -21,6 +21,7 @@ class AddEmpleadoTable extends Migration
             $table->string('estado');
             $table->string('cargo');
             $table->string('area');
+            $table->integer('numberphone')->nullable();
             $table->timestamps();
 
             $table->foreign('id_usuario')->references('id')->on('users');
