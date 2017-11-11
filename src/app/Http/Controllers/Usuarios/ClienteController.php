@@ -76,10 +76,14 @@ class ClienteController extends Controller
         return redirect()->route('Cliente.show',['cliente'=>$cliente->id_cliente]);
     }
 
-    public function destroy($id)
+    public function destroy($id) //recibe id_cliente
     {
-        $cliente = Cliente::findOrFail($id);
-        $cliente->delete(); //agregar sofdelete
+          $cliente = Cliente::findOrFail($id);
+          $user=User::findOrFail($cliente->id_usuario);
+          $telefono= Telefono::findOrFail($user->id);
+          $cliente->delete(); //agregar sofdelete
+          $user->delete();
+          $telefono->delete();
         return redirect()->route('Cliente.index');
     }
 }

@@ -70,14 +70,20 @@ class EmpleadoController extends Controller
         $empleado->update($request->all());
         $telefono->update($request->all());
         $contrato->update($request->all());
-        $user->update($request->except(['email'])); 
+        $user->update($request->except(['email']));
         return redirect()->route('Empleado.show',['Empleado'=>$empleado->id_empleado]);
     }
 
-    public function destroy($id)
+    public function destroy($id) //recibe id_empleado
     {
-      $empleado=Empleado::findOrFail($id);
+        $empleado=Empleado::findOrFail($id);
+        $user=User::findOrFail($empleado->id_usuario);
+        $contrato=Contrato::findOrFail($empleado->id_contrato);
+        $telefono= Telefono::findOrFail($user->id);
         $empleado->delete();
+        $contrato->delete();
+        $user->delete();
+        $telefono->delete();
         return redirect()->route('Empleado.index');
     }
 }

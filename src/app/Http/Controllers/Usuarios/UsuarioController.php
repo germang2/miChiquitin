@@ -6,6 +6,8 @@ use App\Models\Usuarios\User;
 use App\Models\Usuarios\Session;
 use App\Models\Usuarios\Cliente;
 use App\Models\Usuarios\Empleado;
+use App\Models\Usuarios\Contrato;
+use App\Models\Usuarios\Telefono;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
@@ -42,6 +44,33 @@ class UsuarioController extends Controller
         //
     }
 
+    public function indextrash(){
+        $user = User::onlyTrashed()->paginate(10);
+        return view('usuario.user.Indextrash')->with(['users'=>$user]);
+    }
+
+    public function restore($id)
+    {
+          $user = User::withTrashed()->where('id', '=', $id)->first();
+          if($user->tipo_rol == 'cliente'){
+            $cliente = Cliente::withTrashed()->where('id_usuario',$id)->firstOrFail();
+            $telefono= Telefono::withTrashed()->findOrFail($user->id);
+            $user->restore();
+            $cliente->restore(); //agregar sofdelete
+            $telefono->restore();
+          }
+          if($user->tipo_rol=='empleado'){
+            $empleado=Empleado::withTrashed()->where('id_usuario',$user->id)->firstOrFail();
+            $contrato=Contrato::withTrashed()->findOrFail($empleado->id_contrato);
+            $telefono= Telefono::withTrashed()->findOrFail($user->id);
+            $user->restore();
+            $contrato->restore();
+            $telefono->restore();
+            $empleado->restore();
+          }
+          return redirect()->route('Usuario.index');
+    }
+
     public function show($id)
     {
           $usuario=User::findOrFail($id);
@@ -65,9 +94,25 @@ class UsuarioController extends Controller
         //
     }
 
-    public function destroy(User $user)
+    public function destroy($id)
     {
-      $user->delete();
+      $user = User::findOrFail($id);
+      if($user->tipo_rol == 'cliente'){
+        $cliente = Cliente::where('id_usuario',$id)->firstOrFail();
+        $telefono= Telefono::findOrFail($user->id);
+        $cliente->delete(); //agregar sofdelete
+        $user->delete();
+        $telefono->delete();
+      }
+      if($user->tipo_rol=='empleado'){
+        $empleado=Empleado::where('id_usuario',$user->id)->firstOrFail();
+        $contrato=Contrato::findOrFail($empleado->id_contrato);
+        $telefono= Telefono::findOrFail($user->id);
+        $empleado->delete();
+        $contrato->delete();
+        $user->delete();
+        $telefono->delete();
+      }
       return redirect()->route('Usuario.index');
     }
 }
