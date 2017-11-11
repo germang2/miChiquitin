@@ -36,9 +36,9 @@ Route::group(['prefix' => 'Facturacion'], function(){
     'uses' => 'Facturacion\CompraProducto@registrarProductos'
   ]);
 
-  Route::get('validacion', [
-    'uses' => 'Facturacion\ValidarCliente@validar',
-    'as' => 'factura.validacion.validar',
+  Route::post('validacion', [
+    'uses' => 'Facturacion\ValidarCliente@intermediar',
+    'as' => 'factura.validacion.intermediar',
   ]);
 
   Route::get('index', [

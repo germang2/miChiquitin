@@ -8,26 +8,33 @@
 
 @section('content')
 
-  {!! Form::open(['route' => 'factura.validacion.validar', 'method' => 'GET','id_vendedor' => Auth::user()->id_tipo]) !!}
+  {!! Form::open(['route' => 'factura.validacion.intermediar', 'method' => 'POST', 'id_vendedor' => Auth::user()->id_tipo]) !!}
 
   <div class="col-md-7">
     <div class="form-group">
       {!! Form::label('id_cliente', 'Identificación del cliente') !!}
-      {!! Form::number('id_cliente',null,['class' => 'form-control', 'placeholder'=> 'Identificación del cliente','min'=> 11])!!}
+      {!! Form::number('id_cliente', null,['class' => 'form-control', 'placeholder'=> 'Identificación del cliente','min'=> 1])!!}
+    </div>
+  </div>
+
+  <div class="col-md-7">
+    <div class="form-group">
+      {!! Form::label('id_vendedor', 'Identificación del vendedor') !!}
+      {!! Form::number('id_vendedor', null,['class' => 'form-control', 'placeholder'=> 'Identificación del vendedor','min'=> 1])!!}
     </div>
   </div>
 
   <div class="col-md-7">
     <div class="form-group" id="metodo">
       {!! Form::label('metodo', 'Plan de pago') !!}
-      {!! Form::select('metodo',['1' => 'Efectivo', '2' => 'Credito'], null, ['class' => 'form-control','onClick' => 'parent.cuotas()'])!!}
+      {!! Form::select('metodo',['Efectivo' => 'Efectivo', 'Credito' => 'Credito'], null, ['class' => 'form-control','onClick' => 'parent.cuotas()'])!!}
     </div>
   </div>
 
   <div class="col-md-7">
     <div class="form-group" id="Cuotas" hidden="">
       {!! Form::label('cuotas', 'Numero de cuotas por mes') !!}
-      {!! Form::select('cuotas',['2' => '1 cuota', '3' => '3 cuotas', '4' => '6 cuotas'], null, ['class' => 'form-control'])!!}
+      {!! Form::select('cuotas',['1' => '1 cuota', '3' => '3 cuotas', '6' => '6 cuotas'], null, ['class' => 'form-control'])!!}
     </div>
   </div>
 
@@ -45,10 +52,10 @@
   function cuotas() {
     var type= $("[name=metodo]").val();
     console.log(type);
-    if (type == "2") {
+    if (type == "Credito") {
       $("#Cuotas").show();
     }
-    if (type == "1") {
+    if (type == "Efectivo") {
       $("#Cuotas").hide();
     }
   }

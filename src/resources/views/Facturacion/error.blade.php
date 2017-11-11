@@ -8,6 +8,10 @@
 
 @section('content')
   <div class="alert alert-danger" role="alert">
+<<<<<<< HEAD
   	{{$error}}
+=======
+    {{ $error }}
+>>>>>>> upstream/master
   </div>
 @endsection
