@@ -13,6 +13,8 @@ class DatabaseSeeder extends Seeder
     {
         $this->call(rootSeeder::class);
         $this->call(empresaSeeder::class);
-
-        }
+        factory(App\Models\Usuarios\Cliente::class,10)->create();
+        factory(App\Models\Usuarios\Empleado::class,5)->create();
+    //    factory(App\Models\Usuarios\Telefono::class,15)->create();  //este factory no generra la foreign key para id_usuario
     }
+  }
