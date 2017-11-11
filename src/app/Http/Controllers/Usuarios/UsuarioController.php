@@ -27,7 +27,7 @@ class UsuarioController extends Controller
 
     public function acceso(Request $request){   //acceso users
 
-      var_dump($request->session()->all());
+      var_dump($request->session()->all()); //esto no funciona
       //var_dump($request->session()->last_activity); si existiera una bd de ssesion php artisan session:table
     }
 
