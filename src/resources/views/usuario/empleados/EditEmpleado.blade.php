@@ -1,11 +1,3 @@
-<!--<!DOCTYPE html>
-<html>
-<head>
-<meta charset="utf-8" />
-<title>Formulario Empleado</title>
-<link href="{ asset('css/app.css') }}" rel="stylesheet">
-</head>
-<body>-->
   @extends('layouts.app')
 
   @section('titulo')
@@ -32,15 +24,7 @@
       <div class="form-group">
       {!!form::label('Email: ')!!}
       {!!form::email('email',$usuario->email,['class'=>'form','placeholder'=>'nombre@mozilla.com','autofocus required'])!!}
-      </div>
-  <!--    <div class="form-group">
-      !!form::label('Contraseña: ')!!}
-      !!form::password('password',['class'=>'form','autofocus required'])!!}
-      </div>
-      <div class="form-group">
-      !!form::label('Confirmar contraseña: ')!!}
-      !!form::password('confirmation_password',['class'=>'form','autofocus required'])!!}
-    </div>-->
+    </div>
       <div class="form-group">
       {!!form::label('Telefono: ')!!}
       {!!form::tel('telefono',$telefono->telefono,['class'=>'form','placeholder'=>'your numberphone','autofocus required'])!!}
@@ -51,7 +35,7 @@
       </div>
       <div class="form-group">
       {!!form::label('Tipo Rol: ')!!}
-      {!!form::select('tipo_rol',['cliente', 'empleado'])!!}
+      {!!form::select('tipo_rol',['cliente'=>'Cliente', 'empleado'=>'Empleado'],null)!!}
       </div>
       <div class="form-group">
       {!!form::label('Estado: ')!!}
@@ -87,7 +71,7 @@
       </div>
       <div class="form-group">
       {!!form::label('credito_actual: ')!!}
-      {!!form::selectRange('credito_actual', 0, 200,$usuario->credito_maximo)!!}
+      {!!form::selectRange('credito_actual', 0, 200,$usuario->credito_actual)!!}
       </div>
       {!!form::submit('Registrar',['class'=>'btn btn-primary'])!!}
       {!!form::reset('Cancelar',['class'=>'btn btn-boton'])!!}

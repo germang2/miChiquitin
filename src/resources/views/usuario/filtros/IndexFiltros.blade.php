@@ -17,21 +17,21 @@
   <div class="col-md-12 col-lx-12 col-lg-12 col-sm-12">
 
 
-    <form class="col-md-6 col-lx-6 col-lg-6 col-sm-6" action="{{route('Usuario.show',['id' => "id"])}}" method="get">
-        <label for="exampleInputEmail1">Buscar cedula</label>
-        <input type="text" class="form-control" id="id" name="id" aria-describedby="emailHelp" placeholder="65" autofocus required/>
+    <form class="col-md-6 col-lx-6 col-lg-6 col-sm-6" action="{{route('name',['name' => "name"])}}" method="get">
+        <label for="exampleInputEmail1">Buscar Nombre</label>
+        <input type="text" class="form-control" name="name" aria-describedby="emailHelp" placeholder="name" autofocus required/>
       <button type="submit" class="btn btn-primary">Buscar</button>
     </form>
 
     <form class="col-md-6 col-lx-6 col-lg-6 col-sm-6" action="{{route('genero',['genero' => "genero"])}}" method="get">
         <label for="exampleInputEmail1">Genero</label>
-        <input type="text" class="form-control" id="genero" name="genero"  placeholder="#" autofocus required/>
+        <input type="text" class="form-control" name="genero"  placeholder="#" autofocus required/>
       <button type="submit" class="btn btn-primary">Buscar</button>
     </form>
 
     <form class="col-md-6 col-lx-6 col-lg-6 col-sm-6" action="{{route('ciudad',['ciudad' => "ciudad"])}}" method="get">
         <label for="exampleInputEmail1">Filtro Ciudad</label>
-        <input type="text" class="form-control" id="ciudad" aria-describedby="emailHelp" placeholder="Pereira" autofocus required/>
+        <input type="text" class="form-control" name="ciudad" aria-describedby="emailHelp" placeholder="Pereira" autofocus required/>
       <button type="submit" class="btn btn-primary">Buscar</button>
     </form>
 

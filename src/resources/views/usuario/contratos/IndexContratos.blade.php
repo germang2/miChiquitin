@@ -14,10 +14,10 @@
     @endsection
 
 @section('content')
-        <a href="{{route('Usuario.index')}}" class="btn btn-info">All</a></h2>
-        <a href="{{route('Cliente.index')}}" class="btn btn-info">Only Clientes</a></h2>
-        <a href="{{route('Empleado.index')}}" class="btn btn-info">Only Empleados</a></h2>
-        <a href="{{route('Contrato.index')}}" class="btn btn-info">All Contratos</a></h2>
+  <a href="{{route('Usuario.index')}}" class="btn btn-info">Todos los Usuarios</a>
+  <a href="{{route('Cliente.index')}}" class="btn btn-info">Todos los Clientes</a>
+   <a href="{{route('Empleado.index')}}" class="btn btn-info">Todos los Empleados</a>
+   <a href="{{route('Contrato.index')}}" class="btn btn-info">Todos los  Contratos</a>
     <table class="table">
         <thead>
           <th>Nombre</th>

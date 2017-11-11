@@ -24,6 +24,7 @@ Route::get('/Ciudades', function(){return view('usuario.filtros.IndexFiltros');}
 Route::get('/Ciudad{Ciudad}', 'Usuarios\ClienteController@ciudad')->name('ciudad');
 Route::get('/indexCiudades', 'Usuarios\ClienteController@ciudades')->name('ciudades');
 Route::get('/Genero{Ciudad}', 'Usuarios\ClienteController@genero')->name('genero');
+Route::get('/Nombre', 'Usuarios\UsuarioController@name')->name('name');
 Route::get('/Acceso', 'Usuarios\UsuarioController@acceso')->name('acceso');
 Route::resource('Usuario','Usuarios\UsuarioController');
 Route::resource('Cliente','Usuarios\ClienteController');//, ['middleware' => ['auth' ,'adminMiddleware']]);

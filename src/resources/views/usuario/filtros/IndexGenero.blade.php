@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('titulo')
-    Lista de Clientes por {{$cliente->genero}}
+    
     @endsection
 
 @section('content')

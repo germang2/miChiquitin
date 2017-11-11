@@ -41,11 +41,11 @@ endsection
       </div>
       <div class="form-group">
       {!!form::label('Tipo Rol: ')!!}
-      {!!form::select('tipo_rol',['cliente', 'empleado'])!!}
+      {!!form::select('tipo_rol',['cliente' => 'Cliente', 'empleado'=>'empleado'],null)!!}
       </div>
       <div class="form-group">
       {!!form::label('Genero: ')!!}
-      {!!form::select('genero',['Masculino', 'Femenino'], null)!!}
+      {!! Form::select('genero',['Masculino' => 'Masculino', 'Femenino' => 'Femenino'], null)!!}
       </div>
       <div class="form-group">
       {!!form::label('Ciudad: ')!!}

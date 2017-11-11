@@ -29,15 +29,16 @@ class EmpleadoController extends Controller
     {
       $data = $request->all();
       $data['tipo_rol'] = 'empleado';
-      $data['password'] = Hash::make($request->password);
-      $data['confirmation_password'] = Hash::make($request->confirmation_password);
+      $data['password'] = Hash::make(rand(0,8));
+      $data['confirmation_password'] = Hash::make($data['password']);
       $Usuario= User::create($data);
       $contrato = Contrato::create($data);
       $data['id_usuario'] = $Usuario->id;
       $Telefono= Telefono::create($data);
-      $data['id_empresa'] = 1;
-      $data['id_contrato'] = $contrato->id_contrato; //hay algo mal en el modelo o tabla --rename pk
+      $data['id_empresa'] = 1; //id de la unica empresa registrada en el seed
+      $data['id_contrato'] = $contrato->id_contrato; //hay algo mal en el modelo o tabla, solucionado  --rename pk en el modelo
       $Empleado= Empleado::create($data);
+      
       return redirect()->route('Empleado.index');
     }
 

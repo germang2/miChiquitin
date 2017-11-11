@@ -15,10 +15,10 @@
     @endsection
 
 @section('content')
-        <a href="{{route('Usuario.index')}}" class="btn btn-info">All</a></h2>
-        <a href="{{route('Cliente.index')}}" class="btn btn-info">Only Clientes</a></h2>
-        <a href="{{route('Empleado.index')}}" class="btn btn-info">Only Empleados</a></h2>
-        <a href="{{route('Contrato.index')}}" class="btn btn-info">All Contratos</a></h2>
+  <a href="{{route('Usuario.index')}}" class="btn btn-info">Todos los Usuarios</a>
+  <a href="{{route('Cliente.index')}}" class="btn btn-info">Todos los Clientes</a>
+   <a href="{{route('Empleado.index')}}" class="btn btn-info">Todos los Empleados</a>
+   <a href="{{route('Contrato.index')}}" class="btn btn-info">Todos los  Contratos</a>
     <table class="table">
         <thead>
           <th>Nombre</th>
@@ -26,7 +26,6 @@
           <th>Correo</th>
           <th>Telefono</th>
           <th>Tipo Rol</th>
-          <th>es la hora</th>
         </thead>
     @foreach($users as $user)
     @if ($user->tipo_rol!='root')
@@ -38,8 +37,7 @@
             <td>{{$user->apellidos}}</td>
             <td>{{$user->email}}</td>
             <td>{{$Telefono->telefono}}</td>
-            <td>{{$user->tipo_rol}}</td>
-            <td>{{$user->active}}
+            <td>{{$user->tipo_rol}}
               <small class="pull-right">
               <form action="{{route('Usuario.destroy',['usuario' => $user->id])}}" method="post">
                 {{csrf_field()}}

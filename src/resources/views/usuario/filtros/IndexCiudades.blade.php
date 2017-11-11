@@ -11,7 +11,7 @@
 @extends('layouts.app')
 
 @section('titulo')
-    
+
     @endsection
 
 @section('content')
@@ -30,7 +30,8 @@
         $user = App\Models\Usuarios\User::findOrFail($cliente->id_cliente);
         @endphp
         @if ($user->tipo_rol!='root')@php
-        $Telefono = App\Models\Usuarios\Telefono::findOrFail($user->id);
+          echo 'aqui estoy';
+          $Telefono = App\Models\Usuarios\Telefono::findOrFail($user->id);
         @endphp
             <td><a href="{{route('Usuario.show',['usuario' => $user->id])}}">{{$user->name}}</a></td>
             <td>{{$user->apellidos}}</td>

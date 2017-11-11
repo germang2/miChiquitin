@@ -19,21 +19,18 @@ class ClienteController extends Controller
 
     public function ciudades()
     {
-       $clientes = Cliente::orderBy('ciudad')->paginate(10);
-       //var_dump($clientes);
+       $clientes = Cliente::orderBy('ciudad','desc')->paginate(10); //porque no funciona???
        return view('usuario.filtros.IndexCiudades', ['clientes'=>$clientes]);
     }
 
-    public function ciudad($ciudad){
-      $clientes = Cliente::where('ciudad',$ciudad);
-      var_dump($clientes);
-      //return view('usuario.filtros.IndexCiudad',['clientes'=>$clientes]);
+    public function ciudad(Request $request){
+      $clientes =  Cliente::all()->where('ciudad', $request->ciudad);
+      return view('usuario.filtros.IndexCiudad',['clientes'=>$clientes]);
     }
 
-    public function genero($genero){
-      $clientes = Cliente::orderBy('genero', $genero)->paginate(10);
-      var_dump($clientes);
-    //  return view('usuario.filtros.IndexGenero',['clientes'=>$clientes]);
+    public function genero(Request $request){
+      $clientes = Cliente::all()->where('genero', $request->genero);
+      return view('usuario.filtros.IndexGenero',['clientes'=>$clientes]);
     }
 
     public function create()

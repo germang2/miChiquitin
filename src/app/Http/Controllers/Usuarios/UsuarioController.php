@@ -20,8 +20,15 @@ class UsuarioController extends Controller
       $users = User::where('credido_actual', 'pattern'); ///mirar this
     }
 
-    public function acceso(){   //acceso users
+    public function name(Request $request){
+      $user = User::where('name',$request->name)->first();
+      return redirect()->route('Usuario.show',['usuario'=>$user->id]);
+    }
+
+    public function acceso(Request $request){   //acceso users
+
       var_dump($request->session()->all());
+      //var_dump($request->session()->last_activity); si existiera una bd de ssesion php artisan session:table
     }
 
     public function create()

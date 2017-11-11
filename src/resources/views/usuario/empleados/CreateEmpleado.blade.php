@@ -32,15 +32,6 @@
       {!!form::email('email',old('email'),['class'=>'form','placeholder'=>'nombre@mozilla.com','autofocus required'])!!}
       </div>
       <div class="form-group">
-      {!!form::label('Contraseña: ')!!}
-      {!!form::password('password',['class'=>'form','autofocus required'])!!}
-      </div>
-      <div class="form-group">
-      {!!form::label('Confirmar contraseña: ')!!}
-      {!!form::password('confirmation_password',['class'=>'form','autofocus required'])!!}
-      </div>
-
-      <div class="form-group">
       {!!form::label('Direccion: ')!!}
       {!!form::text('direccion',null,['class'=>'form', 'placeholder'=>'your address','autofocus required'])!!}
       </div>
