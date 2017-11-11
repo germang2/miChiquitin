@@ -3,7 +3,6 @@ namespace App\Http\Controllers\Facturacion;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\Usuarios\Empleado;
-
 class ValidarCliente extends Controller
 {
 	public function validar($id_cliente, $id_vendedor) {
@@ -14,48 +13,24 @@ class ValidarCliente extends Controller
 				$Vendedor = Empleado::where("id_empleado", $id_vendedor)->get();
 				if(sizeof($Vendedor) > 0){
 					if(strcmp($Vendedor[0]->cargo, "administrador") == 0){
-<<<<<<< HEAD
-						if(!is_null($id_cliente)) {
-							return view('Facturacion.compra')->with('id_cliente',$id_cliente)
-															 ->with('metodo',$request->metodo)
-															 ->with('cuotas',$request->cuotas);
-						} else {
-							return view('Facturacion.error')->with('error','Aún no se ha digitado la identificación del cliente');
-						}
-					}
-					else{
-						return view('Facturacion.error')->with('error','No es un administrador, no se puede realizar la venta');
-=======
 						// echo "\n El vendedor es un administrador, se puede ralizar la venta.";
 						return true;
 					}
 					else{
 						// dd("No es un administrador, no se puede realizar la venta.");
 						return false;
->>>>>>> upstream/master
 					}
 				}
 			}
 		}
 		else{
-<<<<<<< HEAD
-			if(!is_null($id_cliente)) {
-				return view('Facturacion.compra')->with('id_cliente',$id_cliente)
-												 ->with('metodo',$request->metodo)
-												 ->with('cuotas',$request->cuotas);
-			} else {
-				return view('Facturacion.error')->with('error','Aún no se ha digitado la identificación del cliente');
-			}
-=======
 			// dd("No es un vendedor, se puede realizar la venta.");
 			return false;
 		}
 	}
-
 	public function index() {
 		return view('Facturacion.index');
 	}
-
 	public function intermediar(Request $request) {
 		$id_cliente = $request->id_cliente;
 		// echo "<br> id_cliente ".$id_cliente;
@@ -70,7 +45,6 @@ class ValidarCliente extends Controller
 															 ->with('id_vendedor',$id_vendedor);
 		} else {
 			return view('Facturacion.error')->with('error', "Error en la identificación del cliente");
->>>>>>> upstream/master
 		}
 	}
 }
