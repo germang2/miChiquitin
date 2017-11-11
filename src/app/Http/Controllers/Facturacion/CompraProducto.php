@@ -9,6 +9,40 @@ use App\Models\Facturacion\FacturaProducto;
 
 class CompraProducto extends Controller
 {
+	public function index(){
+		return view('Facturacion.compra')->with('id_cliente',$id_cliente);
+	}
+
+	public function imprimirFactura(Request $request) {
+
+		/*
+			TODO: Este controlador inicia cuando se oprime el botón "Generar Factua"
+			desde la vista. Este controlador tiene que hacer:
+				* traerse el id_cliente, id_vendedor, valor_total_pagar
+				* preguntar si el plan de pago es Efectivo o Crédito
+					* Si es Efectivo:
+						* Deberá llamar al método compraEfectivo del controlador MetodoDePago
+							y generar la factura con TODOS los datos pertinentes.
+						* Una vez generada la factura, deberá retornar view('Facturacion.factura')
+						  con TODOS los valores informativos
+					* Si es Crédito:
+					* Deberá llamar al método compraCredito del controlador MetodoDePago
+						y generar la factura con TODOS los datos pertinentes.
+					* Una vez generada la factura, deberá retornar view('Facturacion.factura')
+						con TODOS los valores informativos.
+				* Retornar la vista de error si en alguno de los casos anteriores se necesita
+		*/
+
+		// $id_cliente = $request->id_cliente;
+		// echo "<br> id_cliente ".$id_cliente;
+		// $id_vendedor = $request->id_vendedor;
+		// echo "<br> id_vendedor ".$id_vendedor;
+		// $plan_pago = $request->metodo;
+		// echo "<br>plan_pago ".$plan_pago;
+		// $cuotas = $request->cuotas;
+		// echo "<br>cuotas ".$cuotas;
+		// return view('Facturacion.factura');
+	}
 
 	public function insertFacturaProducto(Request $req) {
 		// if req is not null
