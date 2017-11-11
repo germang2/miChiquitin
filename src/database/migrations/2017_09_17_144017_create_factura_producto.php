@@ -14,7 +14,7 @@ class CreateFacturaProducto extends Migration
     public function up()
     {
         Schema::create('factura_productos', function (Blueprint $table) {
-            $table->increments('id');
+            $table->increments('id')->unique();
             $table->timestamps();
             $table->integer('id_factura')->unsigned(); //->index();
             $table->string('id_articulo', 100); //->index();
