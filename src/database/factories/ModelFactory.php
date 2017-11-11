@@ -20,7 +20,6 @@ $factory->define(App\Models\Usuarios\User::class, function (Faker\Generator $fak
         'password' => $password ?: $password = bcrypt('secret'),
         'apellidos' => $faker->lastname,
         'direccion'=> $faker->address,
-        'tipo_rol' => 'cliente',
         'credito_maximo' => $faker->numberBetween($min = 1000, $max = 6000),
         'credito_actual' => $faker->numberBetween($min = 1000, $max = 4000),
         'edad'=> $faker->randomNumber(2),
@@ -33,7 +32,7 @@ $factory->define(App\Models\Usuarios\Cliente::class, function (Faker\Generator $
         'genero' => 'masculino',
         'ciudad' => $faker->city,
         'id_usuario'=> function () {
-            return factory(App\Models\Usuarios\User::class)->create()->id;
+            return factory(App\Models\Usuarios\User::class)->create(['tipo_rol' => 'cliente'])->id;
         },
         'numberphone' => function(array $cliente){return factory(App\Models\Usuarios\Telefono::class)->create(['id_usuario'=>$cliente['id_usuario']])->Id_Telefono;}
     ];
@@ -59,7 +58,7 @@ $factory->define(App\Models\Usuarios\Empleado::class, function (Faker\Generator 
           return factory(App\Models\Usuarios\Contrato::class)->create()->id_contrato;
         },
         'id_usuario'=>  function () {
-          return factory(App\Models\Usuarios\User::class)->create()->id;
+          return factory(App\Models\Usuarios\User::class)->create(['tipo_rol' => 'empleado'])->id;
         },
         'numberphone' => function(array $cliente){return factory(App\Models\Usuarios\Telefono::class)->create(['id_usuario'=>$cliente['id_usuario']])->Id_Telefono;}
     ];
