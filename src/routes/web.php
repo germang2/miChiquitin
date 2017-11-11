@@ -25,9 +25,11 @@ Route::middleware(['auth', 'rootMiddleware'])->group(function () {
   Route::resource('Empleado','Usuarios\EmpleadoController');
   Route::resource('Empresa','Usuarios\EmpresaController',['except' => ['create','store','show','destroy']]);
   Route::resource('Contrato','Usuarios\ContratoController',['except' => ['create','store','destroy']]);
+  Route::get('/Restore/{id}', 'Usuarios\UsuarioController@restore')->name('restore');
+  Route::get('/indextrash', 'Usuarios\UsuarioController@indextrash')->name('indextrash');
     });
 
-Route::get('/homeCliente', function(){return view('usuario.index');})->name('homeCliente');
+Route::get('/homeCliente', function(){return view('usuario.index');})->name('homeCliente'); //esta ruta no esta en uso por ahora
 Route::get('/Ciudades', function(){return view('usuario.filtros.IndexFiltros');})->name('filtros');
 Route::get('/Ciudad{Ciudad}', 'Usuarios\ClienteController@ciudad')->name('ciudad');
 Route::get('/indexCiudades', 'Usuarios\ClienteController@ciudades')->name('ciudades');
