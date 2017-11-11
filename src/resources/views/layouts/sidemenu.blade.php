@@ -112,6 +112,12 @@
                            <span class="title">Filtros</span>
                         </a>
                     </li>
+                    <li class="nav-item">
+                        <a href="{{route('indextrash')}}" class="nav-link ">
+                            <i class="fa fa-cogs"></i>
+                           <span class="title">Restaurar datos</span>
+                        </a>
+                    </li>
                 </ul>
             </li>
 

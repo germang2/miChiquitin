@@ -29,11 +29,12 @@
             <td>{{$Telefono->telefono}}</td>
             <td>{{$user->tipo_rol}}
               <small class="pull-right">
-              <form action="{{route('Usuario.destroy',['usuario' => $user->id])}}" method="post">
-                {{csrf_field()}}
-                {{method_field('DELETE')}}
-                <button type="submit" class="btn btn-danger">Delete</button>
-              </form></small><small class="pull-right">
+                  <form action="{{route('Usuario.destroy',['usuario' => $user->id])}}" method="post">
+                    {{csrf_field()}}
+                    {{method_field('DELETE')}}
+                    <button type="submit" class="btn btn-danger">Delete</button>
+                  </form>
+            </small><small class="pull-right">
                   <a href="{{route ('Usuario.edit',['user' => $user->id])}}" class="btn btn-info">Edit</a>
             </small></td>
           </tbody>
