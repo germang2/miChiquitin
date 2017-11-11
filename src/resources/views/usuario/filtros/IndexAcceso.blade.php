@@ -10,20 +10,15 @@
           <th>Nombre</th>
           <th>Apellidos</th>
           <th>Correo</th>
-          <th>Telefono</th>
-          <th>Genero</th>
+          <th>Rol</th>
+          <th>Ultimo Acceso</th>
         </thead>
-    @foreach($Users as $user)
-    <tbody>
-        @php
-        $Telefono = App\Models\Usuarios\Telefono::findOrFail($user->id);
-      @endphp
-            <td><a href="{{route('Usuario.show',['usuario' => $user->id])}}">{{$user->name}}</a></td>
+    @foreach($users as $user)
+    <tbody><td>{{$user->name}}</td>
             <td>{{$user->apellidos}}</td>
             <td>{{$user->email}}</td>
-              <small class="pull-right">
-                  <a href="{{route ('Usuario.edit',['user' => $user->id])}}" class="btn btn-info">Edit</a>
-            </small></td>
+            <td>{{$user->tipo_rol}}</td>
+            <td>{{$user->last_login}}</td>
           </tbody>
     @endforeach
 @endsection
