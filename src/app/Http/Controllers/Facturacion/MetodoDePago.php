@@ -41,7 +41,7 @@ class MetodoDePago extends Controller
 		];
   }
 
-  public function tieneCredito($idVendedor, $idCliente, $valorTotalPago, $N, $metodo) {
+  public function compraCredito($idVendedor, $idCliente, $valorTotalPago, $N, $metodo) {
     $cliente = User::find($idCliente);
 		$valorTotalPago = (int)$valorTotalPago;
 		$N = (int)$N;

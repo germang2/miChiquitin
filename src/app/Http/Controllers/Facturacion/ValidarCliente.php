@@ -39,12 +39,9 @@ class ValidarCliente extends Controller
 		// echo "<br> id_cliente ".$id_cliente;
 		$id_vendedor = $request->id_vendedor;
 		// echo "<br> id_vendedor ".$id_vendedor;
-		$plan_pago = $request->metodo;
-		// echo "<br>plan_pago ".$plan_pago;
-		$cuotas = $request->cuotas;
-		// echo "<br>cuotas ".$cuotas;
-		if (self::validar($id_cliente, $id_vendedor)) {
-		// if (true) {
+		
+		// if (self::validar($id_cliente, $id_vendedor)) {
+		if (true) {
 			return view('Facturacion.compra')->with('id_cliente',$id_cliente)
 															 ->with('metodo',$request->metodo)
 															 ->with('cuotas',$request->cuotas)
