@@ -1,16 +1,15 @@
 <?php
 
 namespace App\Http\Controllers\Usuarios;
-
 use App\Models\Usuarios\User;
-use App\Models\Usuarios\Session;
+//use App\Models\Usuarios\Session;
 use App\Models\Usuarios\Cliente;
 use App\Models\Usuarios\Empleado;
 use App\Models\Usuarios\Contrato;
 use App\Models\Usuarios\Telefono;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-
+use Session;
 class UsuarioController extends Controller
 {
     public function index()
@@ -68,6 +67,7 @@ class UsuarioController extends Controller
             $telefono->restore();
             $empleado->restore();
           }
+          Session::flash('flash_message', 'Usuario Restaurado');
           return redirect()->route('Usuario.index');
     }
 
@@ -113,6 +113,7 @@ class UsuarioController extends Controller
         $user->delete();
         $telefono->delete();
       }
+      Session::flash('flash_message', 'Usuario Eliminado');
       return redirect()->route('Usuario.index');
     }
 }

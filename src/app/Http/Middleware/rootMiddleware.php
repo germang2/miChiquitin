@@ -18,6 +18,7 @@ class rootMiddleware
       if($request->user()->tipo_rol == "root"){
          return $next($request);
        }else{
+         //Session::flash('flash_message', 'Acceso denegado');
          return redirect()->route('home');
        }
     }

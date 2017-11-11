@@ -2,6 +2,9 @@
 
 @section('titulo')
     Modulo Cliente, Lista de Usuarios
+    @if(Session::has('flash_message'))
+      {{Session::get('flash_message')}}
+    @endif
     @endsection
 
 @section('content')

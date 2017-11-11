@@ -8,7 +8,7 @@ use App\Models\Usuarios\User;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Hash;
-
+use Session;
 class ClienteController extends Controller
 {
     public function index()
@@ -48,6 +48,7 @@ class ClienteController extends Controller
       $data['id_usuario'] = $Usuario->id;
       $Cliente= Cliente::create($data);
       $Telefono= Telefono::create($data);
+      Session::flash('flash_message', 'Registro Exitoso');
       return redirect()->route('Cliente.index');
     }
 
@@ -84,6 +85,7 @@ class ClienteController extends Controller
           $cliente->delete(); //agregar sofdelete
           $user->delete();
           $telefono->delete();
-        return redirect()->route('Cliente.index');
+          Session::flash('flash_message', 'Usuario Eliminado');
+          return redirect()->route('Cliente.index');
     }
 }

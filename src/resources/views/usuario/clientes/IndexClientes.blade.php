@@ -3,7 +3,11 @@
 
 @section('titulo')
         Modulo Cliente, Todos los clientes
+        @if(Session::has('flash_message'))
+          {{Session::get('flash_message')}}
+        @endif
 @endsection
+
   @section('content')
     <a href="{{route('Usuario.index')}}" class="btn btn-info">Todos los Usuarios</a>
     <a href="{{route('Cliente.index')}}" class="btn btn-info">Todos los Clientes</a>

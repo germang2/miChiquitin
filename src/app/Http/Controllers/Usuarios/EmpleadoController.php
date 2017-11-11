@@ -11,7 +11,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Hash;
 use App\Mail\enviar;
 use Mail;
-
+use Session;
 class EmpleadoController extends Controller
 {
 
@@ -42,6 +42,7 @@ class EmpleadoController extends Controller
       Mail::raw('$Usuario->email', function ($message) {   //funcion para enviar al correo del empleado la clave, por ahora crea un log
           echo 'welcome tu contraseña es $data[password]';
       });
+      Session::flash('flash_message', 'Registro Exitoso');
       return redirect()->route('Empleado.index');
     }
 
@@ -84,6 +85,7 @@ class EmpleadoController extends Controller
         $contrato->delete();
         $user->delete();
         $telefono->delete();
+        Session::flash('flash_message', 'Usuario Eliminado');
         return redirect()->route('Empleado.index');
     }
 }
