@@ -3,11 +3,13 @@
 namespace App\Models\Usuarios;
 
 use Illuminate\Database\Eloquent\Model;
-
+use Illuminate\Database\Eloquent\SoftDeletes;
 class Empleado extends Model
 {
+  use softDeletes;
     protected $table = 'empleados';
     protected $primaryKey = 'id_empleado';
+    protected $dates = ['deleted_at'];
     protected $fillable = ['id_usuario', 'id_empresa', 'id_contrato', 'estado', 'cargo', 'area'
     ];
 
