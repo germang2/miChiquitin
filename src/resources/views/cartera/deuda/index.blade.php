@@ -38,9 +38,9 @@
         <tbody>
         @foreach($deudas as $deuda)
             <tr>
-                <td>{{ $deuda->id_usuario }}</td>
+                <td>{{ $deuda->user->name }}</td><!--td>{{ $deuda->id_usuario }}</td-->
                 <td>{{ $deuda->id_deuda }}</td>
-                <td>{{ $deuda->id_factura }}</td>
+                <td>{{ $deuda->factura->fecha }}</td>
                 <td>{{ $deuda->valor_pagado }}</td>
                 <td>{{ $deuda->valor_a_pagar }}</td>
                 <td>{{ $deuda->plazo_credito }}</td>

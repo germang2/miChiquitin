@@ -27,7 +27,7 @@
                 <!--td>ID</td-->
                 <td>Descripción</td>
                 <td>Cuotas</td>
-                <td>Valor cuota ($)</td>
+                <!--td>Valor cuota ($)</td-->
                 <td>Interés</td>
                 <td>Forma de pago</td>
                 <td colspan="3"></td>
@@ -39,7 +39,7 @@
                 <!--td>{{ $plan->id_plan_de_pago }}</td-->
                 <td>{{ $plan->nombre_plan }}</td>
                 <td>{{ $plan->cuotas }}</td>
-                <td>{{ number_format($plan->valor_cuota) }}</td>
+                <!--td>{{ number_format($plan->valor_cuota) }}</td-->
                 <td>{{ number_format($plan->interes) }}</td>
                 <td>{{ $plan->forma_pago }}</td>
 

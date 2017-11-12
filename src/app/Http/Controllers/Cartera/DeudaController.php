@@ -42,7 +42,7 @@ class DeudaController extends Controller
       //$cliente = Cliente::find($cliente->id_cliente);
       $planes = Plan_de_pago::pluck('nombre_plan','id_plan_de_pago');
       $usuarios = User::pluck('name','id');
-      $facturas = Factura::pluck('id');
+      $facturas = Factura::pluck('fecha','id');
       return view('cartera.deuda.create', compact('planes','usuarios','facturas'));
     }
 

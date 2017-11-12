@@ -19,7 +19,7 @@ class Factura extends Model
     }
 
     public function deuda(){
-        return $this->hasOne('App\Models\Cartera\Deuda');
+        return $this->hasOne('App\Models\Cartera\Deuda','id_factura');
     }
 
     public function clientes() {

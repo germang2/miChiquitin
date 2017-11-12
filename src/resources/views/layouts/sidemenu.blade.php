@@ -91,9 +91,9 @@
 										</a>
 									</li>
 									<li class="nav-item">
-										<a href="{{ URL::to('/deuda') }}" class="nav-link ">
+										<a href="{{ URL::to('/reportes') }}" class="nav-link ">
 											<i class="fa fa-cogs"></i>
-											<span class="title">Generar reporte</span>
+											<span class="title">Reportes</span>
 										</a>
 									</li>
 									<li class="nav-item">
