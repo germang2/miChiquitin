@@ -12,6 +12,7 @@
   {!! Form::open(['route' => 'factura.compra.impresion', 'method' => 'GET','id' => 'generarFactura','id_vendedor' => Auth::user()->id_tipo]) !!}
     <input type="button" name="generar" id='generar' value= "Generar Factura" class="btn btn-primary">
     {!! Form::hidden('lista[]', 'hola') !!}
+    {!! Form::hidden('total', 'hola') !!}
     {!! Form::hidden('id_cliente', $id_cliente) !!}
     {!! Form::hidden('id_vendedor', $id_vendedor) !!}
     {!! Form::hidden('metodo', $metodo) !!}
@@ -68,13 +69,25 @@
         <br>
         <div class="form-group">
           <input type="button" name="agregar" id='agregar' value= "Agregar" class="btn btn-primary">
+        </div>
       </div>
 
-      <div class="col-sm-4 ">
+      <div class="col-sm-2 ">
         <h2>Total:</h1>
       </div>
-    </div>
+
+      <div class="col-sm-2 ">
+        <h2 id="numero" name= "numero" value= "0"></h2>
+      </div>
 </div> 
+
+
+
+
+
+
+
+
 
 <div class="container-fluid 2">
   <table class='table table-striped'>

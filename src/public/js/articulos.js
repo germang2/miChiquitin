@@ -1,5 +1,5 @@
 var lista = []
-var lista_2 = [1,1,2,3,4,2]
+var precio = 0.0
 $('#agregar').click(function(){
 	var cantidad = $('[name="cantidad"]').val()
 	var producto = $('[name="id_producto"]').val()
@@ -30,7 +30,10 @@ $('#agregar').click(function(){
 					idTotal = idTotal.concat("total");
 					var idPendiente = result.id_producto.toString();
 					idPendiente = idPendiente.concat("pendiente");
-					$('#body').append('<tr id = '+ result.id_producto +'><td>'+result.id_producto+'</td><td>' + result.descripcion + '</td><td id= '+ idCantidad +'>' + result.cantidad + '</td><td>' + result.unitario + '</td><td id = '+ idTotal +'>' + result.total + '</td><td id = '+ idPendiente +'>' + result.pendiente + '</td><td><input type="button" class= "btn btn-primary" onclick="eliminarFila('+ result.id_producto +');" value="Quitar"></td></tr>')
+					$('#body').append('<tr id = '+ result.id_producto +'><td>'+result.id_producto+'</td><td>' + result.descripcion + '</td><td id= '+ idCantidad +'>' + result.cantidad + '</td><td>' + result.unitario + '</td><td id = '+ idTotal +'>' + result.total + '</td><td id = '+ idPendiente +'>' + result.pendiente + '</td><td><input type="button" class= "btn btn-primary" onclick="eliminarFila('+ result.id_producto +');" value="-"></td></tr>')
+					precio = precio + parseFloat(result.total)
+					$('[name="numero"]').val(precio)
+					document.getElementById("numero").innerHTML = precio.toString();
 				}
 			})
 		}
@@ -46,8 +49,11 @@ $('#agregar').click(function(){
 			document.getElementById(idCantidad).innerHTML = cantidad;
 			var idTotal = lista[i][0].toString();
 			idTotal = idTotal.concat("total");
+			precio = precio - lista[i][4]
 			lista[i][4] = cantidad * lista[i][3]
+			precio = precio + lista[i][4]
 			document.getElementById(idTotal).innerHTML = lista[i][4];
+			document.getElementById("numero").innerHTML = precio.toString();
 			pendiente = lista[i][6] - cantidad;
 			if (pendiente > 0) {
 				pendiente = 0;
@@ -62,6 +68,7 @@ $('#agregar').click(function(){
 
 $('#generar').click(function(){
 	$('[name="lista[]"]').val(lista)
+	$('[name="total"]').val(precio)
 	$('#generarFactura').submit()
 })
 
@@ -70,9 +77,9 @@ function eliminarFila(index) {
 	var i = 0
 		while (i < lista.length){
 			if(lista[i][0] == index){
-				alert("hola")
+				precio = precio - lista[i][4]
+				document.getElementById("numero").innerHTML = precio.toString();
 				lista.splice(i, 1);
-				console.log(lista);
 				break
 			}
 	 		i = i+1
