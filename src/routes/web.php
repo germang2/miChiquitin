@@ -36,7 +36,7 @@ Route::group(['prefix' => 'Facturacion'], function(){
     'uses' => 'Facturacion\CompraProducto@registrarProductos'
   ]);
 
-  Route::post('validacion', [
+  Route::get('validacion', [
     'uses' => 'Facturacion\ValidarCliente@intermediar',
     'as' => 'factura.validacion.intermediar',
   ]);
@@ -64,6 +64,17 @@ Route::group(['prefix' => 'Facturacion'], function(){
     'uses' => 'Facturacion\Reporte@reporte',
     'as' => 'ReporteFiltro'
   ]);
+
+
+
+  Route::get('compra/{cantidad}/{id_producto}', [
+    'as' => 'compra',
+    'uses' => 'Facturacion\CompraProducto@compra'
+
+  ]);
+
+
+
 
   Route::get('reporteDetalle', [
     'uses' => 'Facturacion\Reporte@reporte_detalle',

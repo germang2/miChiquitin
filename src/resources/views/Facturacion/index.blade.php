@@ -8,7 +8,7 @@
 
 @section('content')
 
-  {!! Form::open(['route' => 'factura.validacion.intermediar', 'method' => 'POST', 'id_vendedor' => Auth::user()->id_tipo]) !!}
+  {!! Form::open(['route' => 'factura.validacion.intermediar', 'method' => 'GET', 'id_vendedor' => Auth::user()->id_tipo]) !!}
 
   <div class="col-md-7">
     <div class="form-group">

@@ -34,6 +34,7 @@ class ValidarCliente extends Controller
 		return view('Facturacion.index');
 	}
 
+
 	public function intermediar(Request $request) {
 		$id_cliente = $request->id_cliente;
 		// echo "<br> id_cliente ".$id_cliente;
@@ -42,10 +43,7 @@ class ValidarCliente extends Controller
 		
 		// if (self::validar($id_cliente, $id_vendedor)) {
 		if (true) {
-			return view('Facturacion.compra')->with('id_cliente',$id_cliente)
-															 ->with('metodo',$request->metodo)
-															 ->with('cuotas',$request->cuotas)
-															 ->with('id_vendedor',$id_vendedor);
+			return view('Facturacion.compra')->with('id_cliente',$id_cliente)->with('metodo',$request->metodo)->with('cuotas',$request->cuotas)->with('id_vendedor',$id_vendedor);
 		} else {
 			return view('Facturacion.error')->with('error', "Error en la identificación del cliente");
 		}

@@ -10,10 +10,13 @@ use App\Models\Facturacion\FacturaProducto;
 class CompraProducto extends Controller
 {
 	public function index(){
-		return view('Facturacion.compra')->with('id_cliente',$id_cliente);
+		$articulos = "hola mundo";
+		return view('Facturacion.compra')->with('id_cliente',$id_cliente)->with('articulos', $articulos);
 	}
 
 	public function imprimirFactura(Request $request) {
+
+		dd($request);
 
 		/*
 			TODO: Este controlador inicia cuando se oprime el botón "Generar Factua"
@@ -55,19 +58,10 @@ class CompraProducto extends Controller
 		$new->save();
 	}
 
-	public function precioVenta($id_producto){
-
-		$Producto = Articulo::where("id", $id_producto)->get();
-		if ($Producto[0]->cantidad > 0) {
-			$PrecioBase = $Producto[0]->precio_basico;
-			$PrecioProducto = $PrecioBase + ($PrecioBase*0.25);
-			echo "El precio de base del producto es: ".$PrecioBase;
-			echo "\n El precio real del producto es: ".$PrecioProducto;
+	public function precioVenta($id_producto, $precioBase){
+			$porcentaje = ($precioBase*0.25);
+			$PrecioProducto = $precioBase + $porcentaje;
 			return $PrecioProducto;
-		} else {
-			echo "No hay disponibilidad del producto";
-			return -1;
-		}
 	}
 
 	public function registrarProductos($id_producto, $cantidad, $idFactura){
@@ -104,4 +98,35 @@ class CompraProducto extends Controller
 			//return false;
 		}
 	}
+
+
+	public function compra($cantidad, $id_producto){
+		$Producto = Articulo::where("id", $id_producto)->get();
+		if (count($Producto) >0){
+			$pendiente = $Producto[0]->cantidad - $cantidad;
+			$descripcion = $Producto[0]->descripcion;
+			$valorVenta = self::precioVenta($id_producto, $Producto[0]->precio_basico);
+			$unitario = $valorVenta;
+			$total = $valorVenta * $cantidad;
+			if ($pendiente > 0) {
+				$pendiente = 0;
+			}
+			return response()->json([
+				'id_producto' => $id_producto,
+				'descripcion' => $descripcion,
+				'cantidad' => $cantidad,
+				'unitario' => $valorVenta,
+				'total' => $total,
+				'pendiente' => $pendiente,
+				'cantidadInventario' => $Producto[0]->cantidad,
+			]);
+		}
+		return "false";
+
+		
+	}
+
+
+
+
 }
