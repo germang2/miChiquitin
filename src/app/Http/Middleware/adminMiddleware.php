@@ -15,7 +15,7 @@ class adminMiddleware
      */
     public function handle($request, Closure $next)
     {
-      if($request->user()->tipo_rol == "admin" || $request->user()->tipo_rol == "root")){
+      if($request->user()->tipo_rol == "admin" || $request->user()->tipo_rol == "root"){
          return $next($request);
        }else{
          return redirect()->route('home');
