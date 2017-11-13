@@ -3,6 +3,7 @@
 namespace App\Models\Cartera;
 
 use Illuminate\Database\Eloquent\Model;
+use Carbon\Carbon;
 
 class Deuda extends Model
 {
@@ -33,5 +34,12 @@ class Deuda extends Model
 
 	public function factura(){
 			return $this->belongsTo('App\Models\Facturacion\Factura','id_factura');
-	}
+  }
+  
+  public function scopeSearch($q)
+  {
+    return empty(request()->search) ? $q : $q->where('id_usuario', request()->search);
+    //return empty(request()->search) ? $q : $q->where('id_usuario', request()->search);
+  }
+
 }

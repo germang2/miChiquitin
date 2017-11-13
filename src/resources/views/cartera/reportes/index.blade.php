@@ -12,7 +12,7 @@
 
     <nav class="navbar navbar-inverse">
       <ul class="nav navbar-nav">
-          <li><a href="{{ URL::to('reportes/reporte_deudas') }}">Deudas</a></li>
+          <li><a href="{{ URL::to('reportes/reporte_deudas') }}">Reporte deudas</a></li>
           <li><a href="{{ URL::to('reportes/pagos_ultima_semana') }}">Pagos última semana</a>
           <li><a href="{{ URL::to('reportes/pagos_ultimo_mes') }}">Pagos último mes</a>
       </ul>
@@ -27,5 +27,5 @@
     </div>
   @endif
   <h1>Reportes</h1>
-  
+  Some information
 @endsection

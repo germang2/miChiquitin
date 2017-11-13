@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('titulo')
-  <h4>Cartera</h4>
+  <h4>Cartera / <a href="{{ URL::to('reportes') }}">Reportes</a></h4>
   @endsection
 
 @section('content')
@@ -27,5 +27,40 @@
     </div>
   @endif
   <h1>Pagos última semana</h1>
-  
+    <div>
+      {!! Form::open(['method'=>'GET','url'=>'reportes/reporte_deudas','class'=>'navbar-form navbar-left','role'=>'search'])  !!}
+          {{ Form::input('text', 'search', null, array('class'=>'form-control', 'placeholder'=>'Documento')) }}
+          {{ Form::submit('Buscar', array('class' => 'btn btn-primary')) }}
+      {{ Form::close() }}
+    </div>
+
+    <table class="table table-striped table-bordered">
+        <thead>
+            <tr>
+                <td>Fecha</td>
+                <td>Documento</td>
+                <td>Usuario</td>
+                <td>Factura</td>
+                <td>Valor pagado</td>
+                <td>Valor a pagar</td>
+                <td>Plazo crédito</td>
+                <td>Estado</td>
+                <!--td colspan="2"></td-->
+            </tr>
+        </thead>
+        <tbody>
+        @foreach($deudas as $deuda)
+            <tr>
+                <td>{{ $deuda->created_at }}</td>
+                <td>{{ $deuda->user->id }}</td>
+                <td>{{ $deuda->user->name }}</td><!--td>{{ $deuda->id_usuario }}</td-->
+                <td>{{ $deuda->factura->fecha }}</td>
+                <td>{{ $deuda->valor_pagado }}</td>
+                <td>{{ $deuda->valor_a_pagar }}</td>
+                <td>{{ $deuda->plazo_credito }}</td>
+                <td>{{ $deuda->estado }}</td>
+            </tr>
+        @endforeach
+        </tbody>
+    </table>
 @endsection

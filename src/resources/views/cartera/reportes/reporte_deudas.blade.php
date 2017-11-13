@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('titulo')
-  <h4>Cartera</h4>
+  <h4>Cartera / <a href="{{ URL::to('reportes') }}">Reportes</a></h4>
   @endsection
 
 @section('content')
@@ -27,11 +27,19 @@
     </div>
   @endif
   <h1>Reporte deudas</h1>
+    <div>
+      {!! Form::open(['method'=>'GET','url'=>'reportes/reporte_deudas','class'=>'navbar-form navbar-left','role'=>'search'])  !!}
+          {{ Form::input('text', 'search', null, array('class'=>'form-control', 'placeholder'=>'Documento')) }}
+          {{ Form::submit('Buscar', array('class' => 'btn btn-primary')) }}
+      {{ Form::close() }}
+    </div>
+
     <table class="table table-striped table-bordered">
         <thead>
             <tr>
+                <td>Fecha</td>
+                <td>Documento</td>
                 <td>Usuario</td>
-                <td>deuda</td>
                 <td>Factura</td>
                 <td>Valor pagado</td>
                 <td>Valor a pagar</td>
@@ -43,8 +51,9 @@
         <tbody>
         @foreach($deudas as $deuda)
             <tr>
+                <td>{{ $deuda->created_at }}</td>
+                <td>{{ $deuda->user->id }}</td>
                 <td>{{ $deuda->user->name }}</td><!--td>{{ $deuda->id_usuario }}</td-->
-                <td>{{ $deuda->id_deuda }}</td>
                 <td>{{ $deuda->factura->fecha }}</td>
                 <td>{{ $deuda->valor_pagado }}</td>
                 <td>{{ $deuda->valor_a_pagar }}</td>
