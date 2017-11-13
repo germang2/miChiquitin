@@ -5,6 +5,16 @@
     @endsection
 
 @section('content')
+  @if(count($errors)>0)
+          <div class="alert alert-warning" role="alert">
+             @foreach ($errors->all() as $error)
+                <div>{{ $error }}</div>
+                <script type="text/javascript">
+                    alert("{{ $error }}");
+                </script>
+            @endforeach
+          </div>
+      @endif </br>
   {!!Form::open(['route'=>['Empleado.store'], 'method'=>'POST'])!!}
     {{csrf_field()}}
       <div class="form-group">
@@ -26,10 +36,6 @@
       <div class="form-group">
       {!!form::label('Direccion: ')!!}
       {!!form::text('direccion',null,['class'=>'form', 'placeholder'=>'your address','autofocus required'])!!}
-      </div>
-      <div class="form-group">
-      {!!form::label('Tipo Rol: ')!!}
-      {!!form::select('tipo_rol',['empleado', 'cliente'])!!}
       </div>
       <div class="form-group">
       {!!form::label('Estado: ')!!}

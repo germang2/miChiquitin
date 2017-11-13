@@ -3,7 +3,9 @@
   @section('titulo')
       Lista Empleados
       @if(Session::has('flash_message'))
-        {{Session::get('flash_message')}}
+                  <script type="text/javascript">
+                    alert("{{Session::get('flash_message')}}");
+                  </script>
       @endif
       @endsection
   @section('content')

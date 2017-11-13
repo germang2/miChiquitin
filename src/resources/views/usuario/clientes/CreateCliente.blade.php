@@ -5,6 +5,16 @@
   @endsection
 
   @section('content')
+    @if(count($errors)>0)
+            <div class="alert alert-warning" role="alert">
+               @foreach ($errors->all() as $error)
+                    <div>{{ $error }}</div>
+                  <script type="text/javascript">
+                    alert("{{ $error }}");
+                  </script>
+                @endforeach
+            </div>
+        @endif </br>
   {!!Form::open(['route'=>['Cliente.store'], 'data-toggle'=>'validator', 'role'=>'form', 'method'=>'POST'])!!}
     {{csrf_field()}}
       <div class="form-group">
