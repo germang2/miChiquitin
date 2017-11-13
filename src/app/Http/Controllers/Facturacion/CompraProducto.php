@@ -65,6 +65,7 @@ class CompraProducto extends Controller
     $factura = Factura::create($datos_factura);
 
 		return view('Facturacion.factura')->with('fecha',$fecha->format('d-M-Y'))
+                                      ->with('idFactura',$factura->id)
                                       ->with('total',$valorPagar)
                 										  ->with('id_cliente',$id_cliente)
                 										  ->with('nombre_cliente',$cliente->name)
