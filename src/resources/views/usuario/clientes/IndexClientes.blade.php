@@ -8,6 +8,9 @@
             alert("{{Session::get('flash_message')}}");
           </script>
         @endif
+        @if (Session::has('deleted'))
+     <div class="alert alert-warning" role="alert"> Contacto borrado, si desea deshacer el cambio <a href="{{ route('restore', [Session::get('deleted')]) }}">Click aqui</a> </div>
+   @endif
 @endsection
 
   @section('content')
