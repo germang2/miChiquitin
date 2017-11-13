@@ -1,8 +1,9 @@
 <?php
 
 use Illuminate\Database\Seeder;
+use App\Models\Usuarios\Contrato;
 
-class users extends Seeder
+class Contratos extends Seeder
 {
     /**
      * Run the database seeds.
@@ -11,6 +12,6 @@ class users extends Seeder
      */
     public function run()
     {
-        //
+        factory(Contrato::class, 5)->create();
     }
 }
