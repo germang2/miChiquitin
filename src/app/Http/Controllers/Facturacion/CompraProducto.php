@@ -5,7 +5,11 @@ namespace App\Http\Controllers\Facturacion;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\Inventario\Articulo;
+use App\Models\Usuarios\User;
+use App\Models\Facturacion\Factura;
 use App\Models\Facturacion\FacturaProducto;
+use App\Http\Controllers\Facturacion\MetodoDePago;
+use Carbon\Carbon;
 
 class CompraProducto extends Controller
 {
@@ -14,34 +18,58 @@ class CompraProducto extends Controller
 	}
 
 	public function imprimirFactura(Request $request) {
+    $id_cliente = (int)$request->id_cliente;
+    $id_vendedor = (int)$request->idVendedor;
+    $cliente = User::find($id_cliente);
+    $cuota = (int)$request->cuota_credito;
+    $fecha = Carbon::now('America/Bogota');
+    $lista_productos = $request->lista;
+    if ($request->plan_pago == 'Efectivo'){
+      $metodo = 1;
+      $valorPagar = MetodoDePago::compraEfectivo(1000);
+      $valorCuota = 0;
+    } else {
+      if ($request->plan_pago == 'Credito'){
+        if ($request->cuota_credito == '1') {
+          $metodo = 2;
+          $obj = MetodoDePago::compraCredito($id_cliente, 1000, $cuota);
+          $valorPagar = $obj["valorPagar"];
+          $valorCuota = $obj["valorCuota"];
+        }
+        if ($request->cuota_credito == '3') {
+          $metodo = 3;
+          $obj = MetodoDePago::compraCredito($id_cliente, 1000, $cuota);
+          $valorPagar = $obj["valorPagar"];
+          $valorCuota = $obj["valorCuota"];
+        }
+        if ($request->cuota_credito == '6') {
+          $metodo = 4;
+          $obj = MetodoDePago::compraCredito($id_cliente, 1000, $cuota);
+          $valorPagar = $obj["valorPagar"];
+          $valorCuota = $obj["valorCuota"];
+        }
+      }
+    }
 
-		/*
-			TODO: Este controlador inicia cuando se oprime el botón "Generar Factua"
-			desde la vista. Este controlador tiene que hacer:
-				* traerse el id_cliente, id_vendedor, valor_total_pagar
-				* preguntar si el plan de pago es Efectivo o Crédito
-					* Si es Efectivo:
-						* Deberá llamar al método compraEfectivo del controlador MetodoDePago
-							y generar la factura con TODOS los datos pertinentes.
-						* Una vez generada la factura, deberá retornar view('Facturacion.factura')
-						  con TODOS los valores informativos
-					* Si es Crédito:
-					* Deberá llamar al método compraCredito del controlador MetodoDePago
-						y generar la factura con TODOS los datos pertinentes.
-					* Una vez generada la factura, deberá retornar view('Facturacion.factura')
-						con TODOS los valores informativos.
-				* Retornar la vista de error si en alguno de los casos anteriores se necesita
-		*/
+    $datos_factura = [
+      'fecha' => $fecha,
+      'id_cliente' => $id_cliente,
+      'id_plan_pago' => $metodo,
+      'cuotas' => $cuota,
+      'valor_cuota' => $valorCuota,
+      'id_vendedor' => $id_vendedor,
+      'valor_total' => $valorPagar,
+      'estado' => 'cancelado'
+      ];
 
-		// $id_cliente = $request->id_cliente;
-		// echo "<br> id_cliente ".$id_cliente;
-		// $id_vendedor = $request->id_vendedor;
-		// echo "<br> id_vendedor ".$id_vendedor;
-		// $plan_pago = $request->metodo;
-		// echo "<br>plan_pago ".$plan_pago;
-		// $cuotas = $request->cuotas;
-		// echo "<br>cuotas ".$cuotas;
-		// return view('Facturacion.factura');
+    $factura = Factura::create($datos_factura);
+
+		return view('Facturacion.factura')->with('fecha',$fecha->format('d-M-Y'))
+                                      ->with('total',$valorPagar)
+                										  ->with('id_cliente',$id_cliente)
+                										  ->with('nombre_cliente',$cliente->name)
+                										  ->with('plan_pago',$request->plan_pago)
+                										  ->with('cuota_credito',$cuota);
 	}
 
 	public function insertFacturaProducto(Request $req) {

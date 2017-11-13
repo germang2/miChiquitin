@@ -4,11 +4,11 @@
 
   <div class="container">
     <div class="row">
-      <div class="col-sm-9">
+      <div class="col-sm-10">
         Factura de Venta # 
       </div>
-      <div class="col-sm-3">
-        Fecha
+      <div class="col-sm-2">
+        {{$fecha}}
       </div>
     </div>
   </div>
@@ -19,11 +19,11 @@
 <div class="container-fluid información">
   <div class="row">
      <div class="col-md-8">
-      <label> Vendedor: </label> <br>
-      <label> Identificación del cliente: </label> <br>
-      <label> Nombre del cliente: </label> <br>
-      <label> Plan de pago: </label><br>
-      <label> Cuotas: </label><br>
+      <label> Vendedor: {{ Auth::user()->name }}</label> <br>
+      <label> Identificación del cliente: {{ $id_cliente }}</label> <br>
+      <label> Nombre del cliente: {{ $nombre_cliente }} </label> <br>
+      <label> Plan de pago: {{ $plan_pago }}  </label><br>
+      <label> Cuotas: {{ $cuota_credito }}  </label><br>
     </div>
 
     <div class="col-md-4" align="right">
@@ -49,6 +49,10 @@
       <tbody>
       </tbody>
   </table>
+</div>
+
+<div class="container-fluid productos">
+  Total:
 </div>
 
 @endsection

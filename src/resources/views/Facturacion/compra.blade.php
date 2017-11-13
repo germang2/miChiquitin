@@ -7,14 +7,18 @@
 </div>
 
 <div class="col-sm-2">
-  {!! Form::open(['route' => 'factura.compra.impresion', 'method' => 'GET','id_vendedor' => Auth::user()->id_tipo]) !!}
+  {!! Form::open(['route' => 'factura.compra.impresion', 'method' => 'GET']) !!}
+    {{ Form::hidden('id_cliente', $id_cliente) }}
+    {{ Form::hidden('idVendedor', Auth::user()->id) }}
+    {{ Form::hidden('plan_pago', $metodo) }}
+    {{ Form::hidden('cuota_credito', $cuotas_credito) }} 
     {!! Form::submit('Generar Factura', ['class' => 'btn btn-primary']) !!}
   {!! Form::close()!!}
   <br>
 </div>
 
 <div class="col-sm-1">
-  {!! Form::open(['route' => 'home', 'method' => 'GET','id_vendedor' => Auth::user()->id_tipo]) !!}
+  {!! Form::open(['route' => 'home', 'method' => 'GET']) !!}
     {!! Form::submit('Cancelar Compra', ['class' => 'btn btn-primary']) !!}
   {!! Form::close()!!}
   <br>
@@ -27,17 +31,9 @@
 <div class="container-fluid 1">
   <label> Identificación del Cliente: {{ $id_cliente }}</label><br>
 
-  @if($metodo == 'Efectivo')
-    <label> Plan de pago: Efectivo</label><br>
-  @else
-    <label> Plan de pago: Credito</label><br>
-  @endif
+  <label> Plan de pago: {{$metodo}}</label><br>
 
-  @if($metodo == 'Efectivo')
-    <label> Cuotas: 0</label>
-  @else
-    <label> Cuotas: {{ $cuotas }}</label>
-  @endif
+  <label> Cuotas: {{ $cuotas_credito }}</label>
 </div>
 
 <div class="container-fluid 1">
