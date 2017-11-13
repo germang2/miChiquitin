@@ -28,10 +28,13 @@
   @endif
   <h1>Pagos última semana</h1>
     <div>
-      {!! Form::open(['method'=>'GET','url'=>'reportes/reporte_deudas','class'=>'navbar-form navbar-left','role'=>'search'])  !!}
+      {!! Form::open(['method'=>'GET','url'=>'reportes/pagos_ultima_semana','class'=>'navbar-form navbar-left','role'=>'search'])  !!}
           {{ Form::input('text', 'search', null, array('class'=>'form-control', 'placeholder'=>'Documento')) }}
           {{ Form::submit('Buscar', array('class' => 'btn btn-primary')) }}
       {{ Form::close() }}
+
+      <a href="{{action('cartera\ReportesController@downloadPDF', 'w'.Input::get('search') )}}" 
+        type="button" class="btn btn-danger" style="float: right;">PDF</a>
     </div>
 
     <table class="table table-striped table-bordered">

@@ -28,5 +28,7 @@ Route::get('reportes/pagos_ultima_semana', 'cartera\ReportesController@pagos_ult
 
 Route::get('reportes/pagos_ultimo_mes', 'cartera\ReportesController@pagos_ultimo_mes');
 
+Route::get('reportes/downloadPDF/{any?}','cartera\ReportesController@downloadPDF');
+
 Route::resource('deuda', 'cartera\DeudaController');
 Route::resource('plan_de_pago', 'cartera\Plan_de_pagoController');

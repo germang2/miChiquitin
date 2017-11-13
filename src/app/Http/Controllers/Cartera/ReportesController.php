@@ -17,6 +17,7 @@ use App\Models\Cartera\Deuda;
 
 use Session;
 use Carbon\carbon;
+use PDF;
 
 class ReportesController extends Controller
 {
@@ -35,8 +36,11 @@ class ReportesController extends Controller
     public function reporte_deudas()
     {
         //
+        //$search = Deuda::search();
         $deudas = Deuda::orderBy('created_at','desc')->search()->paginate(20);
+        
         return view('cartera.reportes.reporte_deudas', compact('deudas'));
+        
         
     }
 
@@ -44,7 +48,7 @@ class ReportesController extends Controller
     {
         //
         $one_week_ago = Carbon::now()->subWeek(1)->toDateString();
-        $deudas = Deuda::orderBy('created_at','desc')->whereDate('created_at','>=',$one_week_ago)->orderBy('created_at')->search()->paginate(20);
+        $deudas = Deuda::orderBy('created_at','desc')->whereDate('created_at','>=',$one_week_ago)->search()->paginate(20);
       
         return view('cartera.reportes.pagos_ultima_semana', compact('deudas'));
 
@@ -54,10 +58,50 @@ class ReportesController extends Controller
     {
         //
         $one_month_ago = Carbon::now()->subMonth(1)->toDateString();
-        $deudas = Deuda::orderBy('created_at','desc')->whereDate('created_at','>=',$one_month_ago)->orderBy('created_at')->search()->paginate(20);
+        $deudas = Deuda::orderBy('created_at','desc')->whereDate('created_at','>=',$one_month_ago)->search()->paginate(20);
       
         return view('cartera.reportes.pagos_ultimo_mes', compact('deudas'));
         
+    }
+
+    public function downloadPDF($id = null)
+    {
+      $data_key = substr($id,0,1);
+      $user_key = substr($id,1,strlen($id));
+      $one_week_ago = Carbon::now()->subWeek(1)->toDateString();
+      $one_month_ago = Carbon::now()->subMonth(1)->toDateString();
+      //dd($data_key,$user_key);
+
+      if (strlen($user_key) == 0){
+        //dd('No user');
+        $deudas = Deuda::orderBy('created_at','desc')->get();
+        $pdf = PDF::loadView('cartera.reportes.pdf', compact('deudas'));
+        return $pdf->stream('reporte_'.Carbon::now().'.pdf');
+      }else{
+        $user = User::find($user_key);
+        switch ($data_key) {
+          case "d"://deuda
+              $deudas = Deuda::where('id_usuario',$user_key)->orderBy('created_at','desc')->get();
+              $pdf = PDF::loadView('cartera.reportes.pdf', compact('deudas'));
+              return $pdf->stream('reporte_'.$user->name.'_'.Carbon::now().'.pdf');
+              break;
+          case "w"://week
+              
+              $deudas = Deuda::orderBy('created_at','desc')->whereDate('created_at','>=',$one_week_ago)
+                ->search($user_key)->paginate(20);
+              $pdf = PDF::loadView('cartera.reportes.pdf', compact('deudas'));
+              return $pdf->stream('reporte_'.$user->name.'_'.Carbon::now().'.pdf');
+              break;
+          case "m"://month
+              
+              $deudas = Deuda::orderBy('created_at','desc')->whereDate('created_at','>=',$one_month_ago)
+                ->search($user_key)->paginate(20);
+              $pdf = PDF::loadView('cartera.reportes.pdf', compact('deudas'));
+              return $pdf->stream('reporte_'.$user->name.'_'.Carbon::now().'.pdf');
+              break;
+        }
+        //dd($data_key);
+      }
     }
 
 }

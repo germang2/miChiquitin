@@ -36,10 +36,9 @@ class Deuda extends Model
 			return $this->belongsTo('App\Models\Facturacion\Factura','id_factura');
   }
   
-  public function scopeSearch($q)
-  {
+  public function scopeSearch($q){
+    //dd(request()->search);
     return empty(request()->search) ? $q : $q->where('id_usuario', request()->search);
-    //return empty(request()->search) ? $q : $q->where('id_usuario', request()->search);
   }
 
 }

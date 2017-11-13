@@ -32,10 +32,14 @@
           {{ Form::input('text', 'search', null, array('class'=>'form-control', 'placeholder'=>'Documento')) }}
           {{ Form::submit('Buscar', array('class' => 'btn btn-primary')) }}
       {{ Form::close() }}
+      
+      <a href="{{action('cartera\ReportesController@downloadPDF', 'd'.Input::get('search') )}}" 
+        type="button" class="btn btn-danger" style="float: right;">PDF</a>
     </div>
-
+    
     <table class="table table-striped table-bordered">
         <thead>
+         
             <tr>
                 <td>Fecha</td>
                 <td>Documento</td>
@@ -59,6 +63,7 @@
                 <td>{{ $deuda->valor_a_pagar }}</td>
                 <td>{{ $deuda->plazo_credito }}</td>
                 <td>{{ $deuda->estado }}</td>
+                <!--td><a href="{{action('cartera\ReportesController@downloadPDF', $deuda->id_deuda)}}">PDF</a></td-->
             </tr>
         @endforeach
         </tbody>
