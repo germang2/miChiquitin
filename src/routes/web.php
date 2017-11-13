@@ -41,6 +41,11 @@ Route::group(['prefix' => 'Facturacion'], function(){
     'as' => 'factura.validacion.intermediar',
   ]);
 
+  Route::get('compra/{cantidad}/{id_producto}', [
+    'as' => 'compra',
+    'uses' => 'Facturacion\CompraProducto@compra'
+  ]);
+
   Route::get('index', [
     'uses' => 'Facturacion\ValidarCliente@index',
     'as' => 'factura.validacion.index',

@@ -40,19 +40,33 @@
 
 <div class="container-fluid productos">
   <table class='table table-striped'>
-      <thead>
-        <th>Codigo</th>
-        <th>Descripción</th>
-        <th>Cantidad</th>
-        <th>Precio venta</th>
-      </thead>
-      <tbody>
-      </tbody>
+    <thead>
+      <th>Codigo</th>
+      <th class="col-sm-5">Descripción</th>
+      <th>Cantidad</th>
+      <th>Precio unitario</th>
+      <th>Precio total</th>
+      <th>Pendiente</th>
+    </thead>
+    <tbody id="body">
+        @for ($i = 0; $i < count($lista_productos); $i++)
+          @if( ($i%7) == 0 )
+          <tr>
+            <td>{{ $lista_productos[$i] }}</td>
+            <td>{{ $lista_productos[$i+1] }}</td>
+            <td>{{ $lista_productos[$i+2] }}</td>
+            <td>{{ $lista_productos[$i+3] }}</td>
+            <td>{{ $lista_productos[$i+4] }}</td>
+            <td>{{ $lista_productos[$i+5] }}</td>
+          </tr>
+          @endif
+        @endfor
+    </tbody>
   </table>
 </div>
 
 <div class="container-fluid productos">
-  Total:
+  <h2>Total: $ {{ (int)$total}}</h2>
 </div>
 
 @endsection
