@@ -23,28 +23,30 @@ class CompraProducto extends Controller
     $cliente = User::find($id_cliente);
     $cuota = (int)$request->cuota_credito;
     $fecha = Carbon::now('America/Bogota');
-    $lista_productos = $request->lista;
+    //$lista_productos = preg_split(",", $request->lista, PREG_SPLIT_NO_EMPTY);
+    //$total = $request->total;
+    $total = 1000;
     if ($request->plan_pago == 'Efectivo'){
       $metodo = 1;
-      $valorPagar = MetodoDePago::compraEfectivo(1000);
+      $valorPagar = MetodoDePago::compraEfectivo($total);
       $valorCuota = 0;
     } else {
       if ($request->plan_pago == 'Credito'){
         if ($request->cuota_credito == '1') {
           $metodo = 2;
-          $obj = MetodoDePago::compraCredito($id_cliente, 1000, $cuota);
+          $obj = MetodoDePago::compraCredito($id_cliente, $total, $cuota);
           $valorPagar = $obj["valorPagar"];
           $valorCuota = $obj["valorCuota"];
         }
         if ($request->cuota_credito == '3') {
           $metodo = 3;
-          $obj = MetodoDePago::compraCredito($id_cliente, 1000, $cuota);
+          $obj = MetodoDePago::compraCredito($id_cliente, $total, $cuota);
           $valorPagar = $obj["valorPagar"];
           $valorCuota = $obj["valorCuota"];
         }
         if ($request->cuota_credito == '6') {
           $metodo = 4;
-          $obj = MetodoDePago::compraCredito($id_cliente, 1000, $cuota);
+          $obj = MetodoDePago::compraCredito($id_cliente, $total, $cuota);
           $valorPagar = $obj["valorPagar"];
           $valorCuota = $obj["valorCuota"];
         }
@@ -63,14 +65,25 @@ class CompraProducto extends Controller
       ];
 
     $factura = Factura::create($datos_factura);
+		
+    // foreach ($lista_productos as $articulo){
+    //   $req = new Request();
+    //   $req->id_factura = $factura->id;
+    //   $req->id_articulo = $articulo[0];
+    //   $req->cantidad = $articulo[2];
+    //   $req->precio_venta = $articulo[3];
+    //   $req->pendiente = $articulo[5];
 
-		return view('Facturacion.factura')->with('fecha',$fecha->format('d-M-Y'))
+    //   self::insertFacturaProducto($req);
+    // }
+
+    return view('Facturacion.factura')->with('fecha',$fecha->format('d-M-Y'))
                                       ->with('idFactura',$factura->id)
                                       ->with('total',$valorPagar)
-                										  ->with('id_cliente',$id_cliente)
-                										  ->with('nombre_cliente',$cliente->name)
-                										  ->with('plan_pago',$request->plan_pago)
-                										  ->with('cuota_credito',$cuota);
+                                      ->with('id_cliente',$id_cliente)
+                                      ->with('nombre_cliente',$cliente->name)
+                                      ->with('plan_pago',$request->plan_pago)
+                                      ->with('cuota_credito',$cuota);
 	}
 
 	public function insertFacturaProducto(Request $req) {
@@ -80,6 +93,7 @@ class CompraProducto extends Controller
 		$new->id_articulo = $req->id_articulo;
 		$new->cantidad = $req->cantidad;
 		$new->precio_venta = $req->precio_venta;
+		$new->pendiente = $req->pendiente;
 
 		$new->save();
 	}
