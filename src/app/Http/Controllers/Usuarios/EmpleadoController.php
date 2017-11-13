@@ -28,22 +28,33 @@ class EmpleadoController extends Controller
 
     public function store(Request $request)
     {
-      $data = $request->all();
-      $data['tipo_rol'] = 'empleado';
-      $data['password'] = Hash::make(rand(0,8));
-      $data['confirmation_password'] = Hash::make($data['password']);
-      $Usuario= User::create($data);
-      $contrato = Contrato::create($data);
-      $data['id_usuario'] = $Usuario->id;
-      $Telefono= Telefono::create($data);
-      $data['id_empresa'] = 1; //id de la unica empresa registrada en el seed
-      $data['id_contrato'] = $contrato->id_contrato; //hay algo mal en el modelo o tabla, solucionado  --rename pk en el modelo
-      $Empleado = Empleado::create($data);
-      Mail::raw('$Usuario->email', function ($message) {   //funcion para enviar al correo del empleado la clave, por ahora crea un log
-          echo 'welcome tu contraseña es $data[password]';
-      });
-      Session::flash('flash_message', 'Registro Exitoso');
-      return redirect()->route('Empleado.index');
+      $v = \Validator::make($request->all(), [
+          'name' => 'required',
+          'apellidos' => 'required',
+          'email'    => 'required|email|unique:users',
+          'telefono' => 'required|numeric|min:7',
+      ]);
+      if ($v->fails())
+      {
+        return redirect()->back()->withInput()->withErrors($v->errors());
+      }else{
+          $data = $request->all();
+          $data['tipo_rol'] = 'empleado';
+          $data['password'] = Hash::make(rand(0,8));
+          $data['confirmation_password'] = Hash::make($data['password']);
+          $Usuario= User::create($data);
+          $contrato = Contrato::create($data);
+          $data['id_usuario'] = $Usuario->id;
+          $Telefono= Telefono::create($data);
+          $data['id_empresa'] = 1; //id de la unica empresa registrada en el seed
+          $data['id_contrato'] = $contrato->id_contrato; //hay algo mal en el modelo o tabla, solucionado  --rename pk en el modelo
+          $Empleado = Empleado::create($data);
+          Mail::raw('$Usuario->email', function ($message) {   //funcion para enviar al correo del empleado la clave, por ahora crea un log
+              echo 'welcome tu contraseña es $data[password]';
+          });
+          Session::flash('flash_message', 'Registro Exitoso');
+          return redirect()->route('Empleado.index');
+        }
     }
 
     public function show($id)

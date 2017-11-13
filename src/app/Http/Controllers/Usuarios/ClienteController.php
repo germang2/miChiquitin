@@ -40,16 +40,27 @@ class ClienteController extends Controller
 
     public function store(Request $request)
     {
-      $data = $request->all();
-      $data['tipo_rol'] = 'cliente';
-      $data['password'] = Hash::make(rand(0,10));
-      $data['confirmation_password'] = Hash::make($data['password']);
-      $Usuario= User::create($data);
-      $data['id_usuario'] = $Usuario->id;
-      $Cliente= Cliente::create($data);
-      $Telefono= Telefono::create($data);
-      Session::flash('flash_message', 'Registro Exitoso');
-      return redirect()->route('Cliente.index');
+      $v = \Validator::make($request->all(), [
+          'name' => 'required',
+          'apellidos' => 'required',
+          'email'    => 'required|email|unique:users',
+          'telefono' => 'required|numeric|min:7',
+      ]);
+      if ($v->fails())
+      {
+        return redirect()->back()->withInput()->withErrors($v->errors());
+      }else{
+          $data = $request->all();
+          $data['tipo_rol'] = 'cliente';
+          $data['password'] = Hash::make(rand(0,10));
+          $data['confirmation_password'] = Hash::make($data['password']);
+          $Usuario= User::create($data);
+          $data['id_usuario'] = $Usuario->id;
+          $Cliente= Cliente::create($data);
+          $Telefono= Telefono::create($data);
+          Session::flash('flash_message', 'Registro Exitoso');
+          return redirect()->route('Cliente.index');
+      }
     }
 
     public function show($id)
