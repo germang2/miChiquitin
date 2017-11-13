@@ -113,7 +113,7 @@ class UsuarioController extends Controller
         $user->delete();
         $telefono->delete();
       }
-      Session::flash('flash_message', 'Usuario Eliminado');
-      return redirect()->route('Usuario.index');
+      Session::flash('deleted', 'Usuario Eliminado');
+      return redirect()->route('Usuario.index')->with("deleted" , $id );
     }
 }

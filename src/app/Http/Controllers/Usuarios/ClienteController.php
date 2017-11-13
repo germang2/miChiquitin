@@ -96,7 +96,7 @@ class ClienteController extends Controller
           $cliente->delete(); //agregar sofdelete
           $user->delete();
           $telefono->delete();
-          Session::flash('flash_message', 'Usuario Eliminado');
-          return redirect()->route('Cliente.index');
+          Session::flash('deleted', 'Usuario Eliminado');
+          return redirect()->route('Cliente.index')->with("deleted" , $id );;
     }
 }

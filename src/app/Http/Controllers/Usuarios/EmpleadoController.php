@@ -96,7 +96,7 @@ class EmpleadoController extends Controller
         $contrato->delete();
         $user->delete();
         $telefono->delete();
-        Session::flash('flash_message', 'Usuario Eliminado');
-        return redirect()->route('Empleado.index');
+        Session::flash('deleted', 'Usuario Eliminado');
+        return redirect()->route('Empleado.index')->with("deleted" , $id );
     }
 }
