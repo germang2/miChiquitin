@@ -14,6 +14,7 @@ use App\Models\Usuarios\User;
 use App\Models\Facturacion\Factura;
 use App\Models\Usuarios\Cliente;
 use App\Models\Cartera\Deuda;
+use App\Models\Cartera\Pago;
 
 use Session;
 use Carbon\carbon;
@@ -36,9 +37,15 @@ class ReportesController extends Controller
     public function reporte_deudas()
     {
         //
-        //$search = Deuda::search();
-        $deudas = Deuda::orderBy('created_at','desc')->search()->paginate(20);
+        $doc = Input::get('search');
         
+        if(is_null($doc)){
+          $deudas = Deuda::orderBy('created_at','desc')->get();
+        }else{
+          $user_id = User::where('id_tipo',$doc)->first()->id;
+          $deudas = Deuda::where('id_usuario',$user_id)->orderBy('created_at','desc')->get();
+          
+        }
         return view('cartera.reportes.reporte_deudas', compact('deudas'));
         
         
@@ -47,20 +54,42 @@ class ReportesController extends Controller
     public function pagos_ultima_semana()
     {
         //
+        $doc = Input::get('search');
         $one_week_ago = Carbon::now()->subWeek(1)->toDateString();
-        $deudas = Deuda::orderBy('created_at','desc')->whereDate('created_at','>=',$one_week_ago)->search()->paginate(20);
+
+        if(is_null($doc)){
+          //Pagos en orden de creacion descendente y efectuados en la ultima semana
+          $pagos = Pago::orderBy('created_at','desc')->whereDate('created_at','>=',$one_week_ago)->get();
+        }else{
+          $user_id = User::where('id_tipo',$doc)->first()->id;
+          //Pagos pertenecientes a un usuario efectuados en la ultima semana
+          $data = User::whereId($user_id)->with('deuda.pagos')->get();
+          $pagos = $data[0]->deuda->pagos->where('created_at','>=',$one_week_ago);
+          //dd($pagos);
+        }  
       
-        return view('cartera.reportes.pagos_ultima_semana', compact('deudas'));
+        return view('cartera.reportes.pagos_ultima_semana', compact('pagos'));
 
     }
 
     public function pagos_ultimo_mes()
     {
         //
+        $doc = Input::get('search');
         $one_month_ago = Carbon::now()->subMonth(1)->toDateString();
-        $deudas = Deuda::orderBy('created_at','desc')->whereDate('created_at','>=',$one_month_ago)->search()->paginate(20);
+
+        if(is_null($doc)){
+          //Pagos en orden de creacion descendente y efectuados en la ultima semana
+          $pagos = Pago::orderBy('created_at','desc')->whereDate('created_at','>=',$one_month_ago)->get();;
+        }else{
+          $user_id = User::where('id_tipo',$doc)->first()->id;
+          //Pagos pertenecientes a un usuario efectuados en la ultima semana
+          $data = User::whereId($user_id)->with('deuda.pagos')->get();
+          $pagos = $data[0]->deuda->pagos->where('created_at','>=',$one_month_ago);
+          //dd($pagos);
+        }  
       
-        return view('cartera.reportes.pagos_ultimo_mes', compact('deudas'));
+        return view('cartera.reportes.pagos_ultimo_mes', compact('pagos'));
         
     }
 

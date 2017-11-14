@@ -15,7 +15,7 @@ class Deuda extends Model
 
 	public function pagos()
 	{
-		return $this->hasmany('App\Models\Cartera\Pago');
+		return $this->hasmany('App\Models\Cartera\Pago','id_deuda');
 	}
 
 	public function plan_de_pago()
@@ -36,9 +36,5 @@ class Deuda extends Model
 			return $this->belongsTo('App\Models\Facturacion\Factura','id_factura');
   }
   
-  public function scopeSearch($q){
-    //dd(request()->search);
-    return empty(request()->search) ? $q : $q->where('id_usuario', request()->search);
-  }
 
 }

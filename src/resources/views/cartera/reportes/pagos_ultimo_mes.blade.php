@@ -8,7 +8,7 @@
 
   <!--link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css"-->
 
-  <div class="container">
+<div class="container">
 
     <nav class="navbar navbar-inverse">
       <ul class="nav navbar-nav">
@@ -27,43 +27,43 @@
     </div>
   @endif
   <h1>Pagos último mes</h1>
-    <div>
-      {!! Form::open(['method'=>'GET','url'=>'reportes/pagos_ultimo_mes','class'=>'navbar-form navbar-left','role'=>'search'])  !!}
-          {{ Form::input('text', 'search', null, array('class'=>'form-control', 'placeholder'=>'Documento')) }}
-          {{ Form::submit('Buscar', array('class' => 'btn btn-primary')) }}
-      {{ Form::close() }}
-
+  <div class="row row-md-6">
+    {!! Form::open(['method'=>'GET','url'=>'reportes/pagos_ultimo_mes','class'=>'navbar-form navbar-left','role'=>'search'])  !!}
+        {{ Form::input('text', 'search', null, array('class'=>'form-control', 'placeholder'=>'Documento')) }}
+        {{ Form::submit('Buscar', array('class' => 'btn btn-primary')) }}
+    {{ Form::close() }}
+    
       <a href="{{action('cartera\ReportesController@downloadPDF', 'm'.Input::get('search') )}}" 
         type="button" class="btn btn-danger" style="float: right;">PDF</a>
-    </div>
+    
+  </div>
 
+  <div class="table-inverse table-responsive">
     <table class="table table-striped table-bordered">
         <thead>
             <tr>
-                <td>Fecha</td>
+                <td>Fecha pago</td>
                 <td>Documento</td>
                 <td>Usuario</td>
-                <td>Factura</td>
+                <td>Fecha deuda</td>
                 <td>Valor pagado</td>
-                <td>Valor a pagar</td>
-                <td>Plazo crédito</td>
-                <td>Estado</td>
+                <td>Estado deuda</td>
                 <!--td colspan="2"></td-->
             </tr>
         </thead>
         <tbody>
-        @foreach($deudas as $deuda)
+        @foreach($pagos as $pago)
             <tr>
-                <td>{{ $deuda->created_at }}</td>
-                <td>{{ $deuda->user->id }}</td>
-                <td>{{ $deuda->user->name }}</td><!--td>{{ $deuda->id_usuario }}</td-->
-                <td>{{ $deuda->factura->fecha }}</td>
-                <td>{{ $deuda->valor_pagado }}</td>
-                <td>{{ $deuda->valor_a_pagar }}</td>
-                <td>{{ $deuda->plazo_credito }}</td>
-                <td>{{ $deuda->estado }}</td>
+                <td>{{ $pago->created_at }}</td>
+                <td>{{ $pago->deuda->user->id_tipo }}</td>
+                <td>{{ $pago->deuda->user->name }}</td><!--td>{{ $pago->id_usuario }}</td-->
+                <td>{{ $pago->deuda->created_at }}</td>
+                <td>{{ $pago->valor }}</td>
+                <td>{{ $pago->deuda->estado }}</td>
             </tr>
         @endforeach
         </tbody>
     </table>
+  </div>
+</div>
 @endsection
