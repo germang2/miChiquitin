@@ -15,8 +15,10 @@
         </thead>
     @foreach($clientes as $cliente)
     <tbody>
-        @php
-        $user = App\Models\Usuarios\User::findOrFail($cliente->id_cliente);
+      @php 
+      $user = App\Models\Usuarios\User::findOrFail($cliente->id_cliente);
+      @endphp
+        @if ($user->tipo_rol!='root' and $user->tipo_rol!='admin')@php
         $Telefono = App\Models\Usuarios\Telefono::findOrFail($user->id);
       @endphp
             <td><a href="{{route('Usuario.show',['usuario' => $user->id])}}">{{$user->name}}</a></td>
@@ -28,5 +30,6 @@
                   <a href="{{route ('Usuario.edit',['user' => $user->id])}}" class="btn btn-info">Edit</a>
             </small></td>
           </tbody>
+        @endif
     @endforeach
 @endsection

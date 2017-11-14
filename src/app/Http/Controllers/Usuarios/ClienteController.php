@@ -25,13 +25,24 @@ class ClienteController extends Controller
 
     public function ciudad(Request $request){
       $clientes =  Cliente::all()->where('ciudad', $request->ciudad);
-      return view('usuario.filtros.IndexCiudad',['clientes'=>$clientes]);
+      if(empty($clientes)){
+        Session::flash('flash_message', 'Usuario Eliminado');
+        return redirect()->back();
+      }else{
+        return view('usuario.filtros.IndexCiudad',['clientes'=>$clientes]);
+      }
     }
 
     public function genero(Request $request){
       $clientes = Cliente::all()->where('genero', $request->genero);
-      return view('usuario.filtros.IndexGenero',['clientes'=>$clientes]);
-    }
+      if(empty($clientes)){
+            Session::flash('flash_message', 'Usuario Eliminado');
+            return redirect()->back();
+        } else{
+          return view('usuario.filtros.IndexGenero',['clientes'=>$clientes]);
+        }
+      }
+    
 
     public function create()
     {

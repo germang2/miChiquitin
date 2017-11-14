@@ -23,8 +23,20 @@ class UsuarioController extends Controller
     }
 
     public function name(Request $request){
+      $v = \Validator::make($request->all(), [
+          'name' => 'required',
+          'apellidos' => 'required',
+          'email'    => 'required|email|unique:users',
+          'telefono' => 'required|numeric|min:7',
+      ]);
+      if ($v->fails())
+      {
+        Session::flash('flash_message', 'Busqueda no encotrada   ');
+        return redirect()->back();
+      }else{
       $user = User::where('name',$request->name)->first();
       return redirect()->route('Usuario.show',['usuario'=>$user->id]);
+    }
     }
 
     public function acceso(Request $request){   //acceso users

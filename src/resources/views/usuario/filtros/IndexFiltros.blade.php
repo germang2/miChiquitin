@@ -5,6 +5,11 @@
     @endsection
 
 @section('content')
+  @if(Session::has('flash_message'))
+              <script type="text/javascript">
+                alert("{{Session::get('flash_message')}}");
+              </script>
+  @endif
 <div class="jumbotron">
   <div class="col-md-12 col-lx-12 col-lg-12 col-sm-12">
 
