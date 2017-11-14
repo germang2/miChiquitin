@@ -17,9 +17,7 @@ class DatabaseSeeder extends Seeder
       $this->call(Clientes::class);
       $this->call(Facturas::class);
       // $this->call(rootSeeder::class);
-      // $this->call(articulos::class);
-      $this->call(factura_producto::class);
-      $this->call(factura::class);
+      $this->call(FacturasProductos::class);
       $this->call(plan_pago::class);
       $this->call(proveedores::class);
       $this->call(usuario::class);

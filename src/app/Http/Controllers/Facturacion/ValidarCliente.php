@@ -3,7 +3,6 @@ namespace App\Http\Controllers\Facturacion;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\Usuarios\Empleado;
-
 class ValidarCliente extends Controller
 {
 	public function validar($id_cliente, $id_vendedor) {
@@ -29,23 +28,22 @@ class ValidarCliente extends Controller
 			return false;
 		}
 	}
-
 	public function index() {
 		return view('Facturacion.index');
 	}
-
 	public function intermediar(Request $request) {
 		$id_cliente = $request->id_cliente;
-		// echo "<br> id_cliente ".$id_cliente;
-		$id_vendedor = $request->id_vendedor;
-		// echo "<br> id_vendedor ".$id_vendedor;
+		if($request->metodo == 'Efectivo'){
+      $cuotas = 0;	
+		} else{
+      $cuotas = $request->cuotas;
+    }
 		
 		// if (self::validar($id_cliente, $id_vendedor)) {
 		if (true) {
 			return view('Facturacion.compra')->with('id_cliente',$id_cliente)
 															 ->with('metodo',$request->metodo)
-															 ->with('cuotas',$request->cuotas)
-															 ->with('id_vendedor',$id_vendedor);
+															 ->with('cuotas_credito',$cuotas);
 		} else {
 			return view('Facturacion.error')->with('error', "Error en la identificación del cliente");
 		}
