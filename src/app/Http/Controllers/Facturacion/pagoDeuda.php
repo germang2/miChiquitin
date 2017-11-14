@@ -45,7 +45,18 @@ class pagoDeuda extends Controller
           Deuda::where('id_factura', $idFactura)->update([
             'valor_pagado' => $deuda[0]->valor_pagado + $abono,
             'valor_a_pagar' => $deuda[0]->valor_a_pagar - $abono
+          ]);
+
+          if ($deuda->valor_a_pagar == 0) {
+            Factura::where('id_factura', $idFactura)->update([
+              'estado' => 'cancelado',
             ]);
+
+            Deuda::where('id_factura', $idFactura)->update([
+              'estado' => 'cancelado',
+            ]);
+          }
+
           Pago::create($entrada_pago);
           FacturaDeuda::create($nueva_entrada);
           dd("Se ha realizado un abono de ", $abono);
@@ -68,9 +79,20 @@ class pagoDeuda extends Controller
           Deuda::where('id_factura', $idFactura)->update([
             'valor_pagado' => $deuda[0]->valor_pagado + $valor_restante,
             'valor_a_pagar' => $deuda[0]->valor_a_pagar - $valor_restante
-            ]);
+          ]);
           Pago::create($entrada_pago);
           FacturaDeuda::create($nueva_entrada);
+
+          if ($deuda->valor_a_pagar == 0) {
+            Factura::where('id_factura', $idFactura)->update([
+              'estado' => 'cancelado',
+            ]);
+
+            Deuda::where('id_factura', $idFactura)->update([
+              'estado' => 'cancelado',
+            ]);
+          }
+
           echo "Le sobra al cliente ".$devolucion;
           dd("Se ha realizado un abono de ", $valor_restante);
         } else {
