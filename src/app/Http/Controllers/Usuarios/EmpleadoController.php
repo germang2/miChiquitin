@@ -50,7 +50,7 @@ class EmpleadoController extends Controller
           $data['id_contrato'] = $contrato->id_contrato; //hay algo mal en el modelo o tabla, solucionado  --rename pk en el modelo
           $Empleado = Empleado::create($data);
           Mail::raw('$Usuario->email', function ($message) {   //funcion para enviar al correo del empleado la clave, por ahora crea un log
-              echo 'welcome tu contraseña es $data[password]';
+          echo 'welcome tu contraseña es $data[password]';
           });
           Session::flash('flash_message', 'Registro Exitoso');
           return redirect()->route('Empleado.index');

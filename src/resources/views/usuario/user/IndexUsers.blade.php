@@ -26,7 +26,7 @@
           <th>Tipo Rol</th>
         </thead>
     @foreach($users as $user)
-    @if ($user->tipo_rol!='root')
+    @if ($user->tipo_rol!='admin'and $user->tipo_rol!='root')
     <tbody>
         @php
         $Telefono = App\Models\Usuarios\Telefono::findOrFail($user->id);

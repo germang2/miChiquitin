@@ -3,7 +3,7 @@
 namespace App\Http\Middleware;
 
 use Closure;
-
+use Session;
 class empleadoMiddleware
 {
     /**
@@ -15,10 +15,18 @@ class empleadoMiddleware
      */
     public function handle($request, Closure $next)
     {
-      if($request->user()->tipo_rol == "empleado" || $request->user()->tipo_rol == "root"){
+      if($request->user()->tipo_rol == "empleado"){
          return $next($request);
-       }else{
-         return redirect()->route('home');
+       }
+      elseif ( $request->user()->tipo_rol == "admin") {
+          return $next($request);
+        }
+      if($request->user()->tipo_rol == "root"){
+          return $next($request);
+        }
+      else{
+        Session::flash('flash_message','Acceso denegado');
+         return redirect()->back();
        }
     }
 }

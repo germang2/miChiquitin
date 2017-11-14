@@ -3,7 +3,7 @@
 namespace App\Http\Middleware;
 
 use Closure;
-
+use Session;
 class rootMiddleware
 {
     /**
@@ -19,7 +19,8 @@ class rootMiddleware
          return $next($request);
        }else{
          //Session::flash('flash_message', 'Acceso denegado');
-         return redirect()->route('home');
+         Session::flash('flash_message','Acceso denegado');
+         return redirect()->back();
        }
     }
 }
