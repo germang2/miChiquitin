@@ -28,7 +28,7 @@ Route::group(['prefix' => 'Facturacion'], function(){
     'uses' => 'Facturacion\ArticuloControlador@CancelarCompra'
   ]);
 
-  Route::get('metodoPago/{metodo}/{valorTotal}/{idCliente}/{NumeroCuotas}/{idFactura}', [
+  Route::get('metodoPago/{metodo}/{valorTotal}/{idCliente}/{idVendedor}/{NumeroCuotas}', [
     'uses' => 'Facturacion\MetodoDePago@metodoPago'
   ]);
 
@@ -36,9 +36,14 @@ Route::group(['prefix' => 'Facturacion'], function(){
     'uses' => 'Facturacion\CompraProducto@registrarProductos'
   ]);
 
-  Route::get('validacion', [
-    'uses' => 'Facturacion\ValidarCliente@validar',
-    'as' => 'factura.validacion.validar',
+  Route::post('validacion', [
+    'uses' => 'Facturacion\ValidarCliente@intermediar',
+    'as' => 'factura.validacion.intermediar',
+  ]);
+
+  Route::get('compra/{cantidad}/{id_producto}', [
+    'as' => 'compra',
+    'uses' => 'Facturacion\CompraProducto@compra'
   ]);
 
   Route::get('index', [
@@ -46,10 +51,9 @@ Route::group(['prefix' => 'Facturacion'], function(){
     'as' => 'factura.validacion.index',
   ]);
 
-  // Route::get('Factura', [
-  //   'uses' => 'Facturacion\CompraProducto@index',
-  //   'as' => 'factura.compra.index',
-  // ]);
+  Route::get('pagoDeuda/{id_factura}/{cuota}', [
+    'uses' => 'Facturacion\pagoDeuda@pagar'
+  ]);
 
   Route::get('FacturaImpresion', [
     'uses' => 'Facturacion\CompraProducto@imprimirFactura',
@@ -57,14 +61,17 @@ Route::group(['prefix' => 'Facturacion'], function(){
   ]);
 
   Route::get('reporte', [
-    'uses' => 'Facturacion\Reporte@index'
+    'uses' => 'Facturacion\Reporte@index',
+    'as' => 'factura.reporte'
   ]);
 
   Route::get('reporteFiltro', [
-    'uses' => 'Facturacion\Reporte@reporte'
-  ])->name('ReporteFiltro');
+    'uses' => 'Facturacion\Reporte@reporte',
+    'as' => 'ReporteFiltro'
+  ]);
 
   Route::get('reporteDetalle', [
-    'uses' => 'Facturacion\Reporte@reporte_detalle'
-  ])->name('ReporteDetalle');
+    'uses' => 'Facturacion\Reporte@reporte_detalle',
+    'as' => 'ReporteDetalle'
+  ]);
 });
