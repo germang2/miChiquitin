@@ -40,10 +40,6 @@
       {!!form::text('direccion',old('direccion'),['class'=>'form', 'placeholder'=>'your address','autofocus required'])!!}
       </div>
       <div class="form-group">
-      {!!form::label('Tipo Rol: ')!!}
-      {!!form::select('tipo_rol',['cliente' => 'Cliente', 'empleado'=>'empleado'],null)!!}
-      </div>
-      <div class="form-group">
       {!!form::label('Genero: ')!!}
       {!! Form::select('genero',['Masculino' => 'Masculino', 'Femenino' => 'Femenino'], null)!!}
       </div>
