@@ -136,7 +136,7 @@ class CompraProducto extends Controller
       $valorVenta = self::precioVenta($id_producto, $Producto[0]->precio_basico);
       $unitario = $valorVenta;
       $total = $valorVenta * $cantidad;
-      
+
       if ($pendiente > 0) {
         $pendiente = 0;
       }
@@ -154,4 +154,3 @@ class CompraProducto extends Controller
     return "false";
   }
 }
-
