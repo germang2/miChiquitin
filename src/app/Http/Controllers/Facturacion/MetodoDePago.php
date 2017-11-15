@@ -34,8 +34,8 @@ class MetodoDePago extends Controller
 
     //dd($credito_actual);
 		$credito_actual = $cliente->credito_actual;
-		echo "Credito actual : ".$credito_actual;
-		echo "<br>Valor total pago : ".$valorTotalPago;
+		//echo "Credito actual : ".$credito_actual;
+		//echo "<br>Valor total pago : ".$valorTotalPago;
 
 		if ($valorTotalPago <= $credito_actual) {
       $obj = self::numeroCuotas($N, $valorTotalPago);

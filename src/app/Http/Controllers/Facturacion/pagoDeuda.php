@@ -18,6 +18,7 @@ class pagoDeuda extends Controller
   }
 
   public function pagar(Request $request) {
+
     $abono = $request->abono;
     $idFactura = $request->id_factura;
 
@@ -34,6 +35,7 @@ class pagoDeuda extends Controller
     } else {
       $valor_cuota = $factura->valor_cuota; // 407.45 -> 6 cuotas
       //echo "<br>valor_cuota ".$valor_cuota;
+      dd("Hola",$deuda);
       $valor_restante = $deuda[0]->valor_a_pagar; // 150000
       //echo "<br>valor_restante ".$valor_restante;
       if ($valor_restante == 0) {

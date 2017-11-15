@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\Inventario\Articulo;
 use App\Models\Usuarios\User;
+use App\Models\Cartera\Deuda;
 use App\Models\Facturacion\Factura;
 use App\Models\Facturacion\FacturaProducto;
 use App\Http\Controllers\Facturacion\MetodoDePago;
@@ -98,6 +99,22 @@ class CompraProducto extends Controller
           $producto[0]->save();
         }
       }
+
+      if ($request->plan_pago == 'Credito') {
+
+        $datos_deuda = [
+          'id_usuario' => $id_cliente,
+          'id_plan' => $metodo,
+          'id_factura' => $factura->id,
+          'valor_pagado' => (int)$valorPagar,
+          'valor_a_pagar' => (int)$valorTotal,
+          'plazo_credito' => $fecha->addMonths($cuota),
+          'estado' => "pendiente"
+        ];
+
+        //dd($datos_deuda);
+        $deuda = Deuda::create($datos_deuda);
+        }
 
       return view('Facturacion.factura')->with('fecha',$fecha->format('d-M-Y'))
                                         ->with('idFactura',$factura->id)
