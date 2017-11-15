@@ -20,6 +20,7 @@ class CreateFacturaProducto extends Migration
             $table->string('id_articulo', 100); //->index();
             $table->integer('cantidad');
             $table->decimal('precio_venta', 15, 2);
+            $table->integer('pendiente');
 
             $table->foreign('id_factura')->references('id')->on('facturas');
             $table->foreign('id_articulo')->references('id')->on('articulos');
