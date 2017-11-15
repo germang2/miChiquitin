@@ -28,28 +28,39 @@ class CompraProducto extends Controller
 
     if ($request->plan_pago == 'Efectivo'){
       $metodo = 1;
-      $valorPagar = MetodoDePago::compraEfectivo($total);
+      $valorTotal = MetodoDePago::compraEfectivo($total);
       $valorCuota = 0;
+      $valorPagar = 0;
+      $estado = "cancelado";
     } else {
 
       if ($request->plan_pago == 'Credito'){
+
+        $estado = "pendiente";
         if ($request->cuota_credito == '1') {
           $metodo = 2;
           $obj = MetodoDePago::compraCredito($id_cliente, $total, $cuota);
           $valorPagar = $obj["valorPagar"];
+          $valorTotal = $obj["valorCompra"];
           $valorCuota = $obj["valorCuota"];
         }
         if ($request->cuota_credito == '3') {
           $metodo = 3;
           $obj = MetodoDePago::compraCredito($id_cliente, $total, $cuota);
           $valorPagar = $obj["valorPagar"];
+          $valorTotal = $obj["valorCompra"];
           $valorCuota = $obj["valorCuota"];
         }
         if ($request->cuota_credito == '6') {
           $metodo = 4;
           $obj = MetodoDePago::compraCredito($id_cliente, $total, $cuota);
           $valorPagar = $obj["valorPagar"];
+          $valorTotal = $obj["valorCompra"];
           $valorCuota = $obj["valorCuota"];
+        }
+
+        if ($obj == false) {
+          return view('Facturacion.error')->with('error', "El cliente no posee credito suficiente");
         }
       }
     }
@@ -63,13 +74,14 @@ class CompraProducto extends Controller
         'cuotas' => $cuota,
         'valor_cuota' => $valorCuota,
         'id_vendedor' => $id_vendedor,
-        'valor_total' => $valorPagar,
-        'estado' => 'cancelado'
+        'valor_total' => $valorTotal,
+        'estado' => $estado
         ];
 
       $factura = Factura::create($datos_factura);
 
       $lista_productos = preg_split("/[,]+/", $lista_productos[0]);
+
 
       for ($i = 0; $i < count($lista_productos); $i++) {
         if(($i%7) == 0){
@@ -84,14 +96,14 @@ class CompraProducto extends Controller
           $producto = Articulo::where("id", $lista_productos[$i])->get();
           $producto[0]->cantidad = $producto[0]->cantidad - (int)$lista_productos[$i+2];
           $producto[0]->save();
-          //dd($producto[0]->cantidad, $lista_productos[$i+2]);
         }
       }
 
       return view('Facturacion.factura')->with('fecha',$fecha->format('d-M-Y'))
                                         ->with('idFactura',$factura->id)
                                         ->with('lista_productos',$lista_productos)
-                                        ->with('total',$valorPagar)
+                                        ->with('total',$valorTotal)
+                                        ->with('pagado',$valorPagar)
                                         ->with('id_cliente',$id_cliente)
                                         ->with('nombre_cliente',$cliente->name)
                                         ->with('plan_pago',$request->plan_pago)
