@@ -8,6 +8,7 @@ class Pedido extends Model
 {
 	protected $table = "pedidos";
 	
+
 	protected $fillable = [ 'id_articulo', 'id_proveedor', 'cantidad', 'costo_total', 'fecha', 'estado','borrado'];
 	
 	public function proveedor(){

@@ -21,4 +21,5 @@ class Articulo extends Model
 	public function factura_producto(){
 		return $this->hasOne('App\Models\Facturacion\Factura_producto');
 	}
+
 }
