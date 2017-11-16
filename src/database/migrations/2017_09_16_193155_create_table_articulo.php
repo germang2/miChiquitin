@@ -21,6 +21,7 @@ class CreateTableArticulo extends Migration
 			$table->integer('cantidad');
 			$table->integer('id_proveedor')->unsigned();
 			$table->date('fecha');
+            $table->tinyinteger('borrado');
             $table->timestamps();
 			
 			$table->primary('id');
