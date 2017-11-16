@@ -180,6 +180,9 @@ return [
         //Laravel Collective for forms
         Collective\Html\HtmlServiceProvider::class,
 
+        //Hash Ids
+        Vinkla\Hashids\HashidsServiceProvider::class,
+
     ],
 
     /*
@@ -231,6 +234,7 @@ return [
 
         'Form' => Collective\Html\FormFacade::class,
         'Html' => Collective\Html\HtmlFacade::class,
+        'Hashids' => Vinkla\Hashids\Facades\Hashids::class,
 
     ],
 
