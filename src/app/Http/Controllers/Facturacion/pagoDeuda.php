@@ -12,14 +12,13 @@ use Carbon\Carbon;
 
 class pagoDeuda extends Controller
 {
-  public function index(){
+  public function index() {
     return view('Facturacion.cuota');
   }
 
   public function pagar(Request $request){
     $abono = $request->abono;
     $idFactura = $request->id_factura;
-
     $abono = (int)$abono;
     // echo "<br>abono ".$abono;
     $idFactura = (int)$idFactura;
@@ -35,14 +34,17 @@ class pagoDeuda extends Controller
     // echo "<br>time ".$time;
 
     if ($factura == null) {
-      dd("ID de la Factura no válida.");
+      // dd("ID de la Factura no válida.");
+      return view('Facturacion.error')->with('error', "ID de la Factura no válida.");
     } else {
       $valor_cuota = $factura->valor_cuota; // 407.45 -> 6 cuotas
       // echo "<br>valor_cuota ".$valor_cuota;
       $valor_restante = $deuda[0]->valor_a_pagar;
       //echo "<br>valor_restante ".$valor_restante;
       if ($valor_restante == 0) {
-        dd("La Factura ya esta paga, este es el id: ", $idFactura);
+        // dd("La Factura ya esta paga, este es el id: ", $idFactura);
+        $msg = "La Factura ya esta paga, este es el id: " . $idFactura;
+        return view('Facturacion.pagoDeuda')->with('msg', $msg);
       } else {
         if ($abono >= $valor_cuota && $abono < $valor_restante) {
           //echo "<br>abono >= valor_cuota && abono <= valor_restante";
@@ -64,7 +66,9 @@ class pagoDeuda extends Controller
             'valor_a_pagar' => $deuda[0]->valor_a_pagar - $abono
           ]);
 
-          dd("Se ha realizado un abono de ", $abono);
+          // dd("Se ha realizado un abono de ", $abono);
+          $msg = "Se ha realizado un abono de " . $abono;
+          return view('Facturacion.pagoDeuda')->with('msg', $msg);
         } else if ($abono >= $valor_restante) {
           //echo "<br>abono > valor_restante";
           $full_date = Carbon::now('America/Bogota');
@@ -96,10 +100,15 @@ class pagoDeuda extends Controller
             'estado' => 'cancelado'
           ]);
 
-          dd("Le sobra al cliente ", $devolucion);
-          dd("Se ha realizado un abono de ", $valor_restante);
+          // dd("Le sobra al cliente ", $devolucion);
+          // dd("Se ha realizado un abono de ", $valor_restante);
+          $msg = "Le sobra al cliente " . $devolucion
+                 . ". Se ha realizado un abono de " . $valor_restante;
+          return view('Facturacion.pagoDeuda')->with('msg', $msg);
         } else {
-          dd("Debe pagar un monto mayor o igual a ", $valor_cuota);
+          // dd("Debe pagar un monto mayor o igual a ", $valor_cuota);
+          $msg = "Debe pagar un monto mayor o igual a " . $valor_cuota;
+          return view('Facturacion.error')->with('error', $msg);
         }
       }
     }
