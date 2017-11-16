@@ -51,10 +51,6 @@ Route::group(['prefix' => 'Facturacion'], function(){
     'as' => 'factura.validacion.index',
   ]);
 
-  Route::get('pagoDeuda/{id_factura}/{cuota}', [
-    'uses' => 'Facturacion\pagoDeuda@pagar'
-  ]);
-
   Route::get('FacturaImpresion', [
     'uses' => 'Facturacion\CompraProducto@imprimirFactura',
     'as' => 'factura.compra.impresion',
@@ -63,6 +59,16 @@ Route::group(['prefix' => 'Facturacion'], function(){
   Route::get('reporte', [
     'uses' => 'Facturacion\Reporte@index',
     'as' => 'factura.reporte'
+  ]);
+
+  Route::get('cuota', [
+    'uses' => 'Facturacion\pagoDeuda@index',
+    'as' => 'factura.cuota'
+  ]);
+
+  Route::get('PagoCuota', [
+    'uses' => 'Facturacion\pagoDeuda@pagar',
+    'as' => 'factura.pagoCuota'
   ]);
 
   Route::get('reporteFiltro', [
