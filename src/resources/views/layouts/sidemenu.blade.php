@@ -49,9 +49,21 @@
                 </a>
                 <ul class="sub-menu" style="display: none;">
                     <li class="nav-item">
-                        <a href="#" class="nav-link ">
+                        <a href="{{ route('proveedores') }}" class="nav-link ">
                             <i class="fa fa-cogs"></i>
-                            <span class="title">Opcion 1</span>
+                            <span class="title">Proveedores</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="{{ route('articulos') }}" class="nav-link ">
+                            <i class="fa fa-cogs"></i>
+                            <span class="title">Articulos</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="{{ route('pedidos') }}" class="nav-link ">
+                            <i class="fa fa-cogs"></i>
+                            <span class="title">Pedidos</span>
                         </a>
                     </li>
 
