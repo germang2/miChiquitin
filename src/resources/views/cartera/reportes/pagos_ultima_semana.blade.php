@@ -32,15 +32,17 @@
         {{ Form::input('text', 'search', null, array('class'=>'form-control', 'placeholder'=>'Documento')) }}
         {{ Form::submit('Buscar', array('class' => 'btn btn-primary')) }}
     {{ Form::close() }}
-  
-    <a href="{{action('cartera\ReportesController@downloadPDF', 'w'.Input::get('search') )}}" 
-      type="button" class="btn btn-danger" style="float: right;">PDF</a>
+
+    <div class="col col-md-12">
+      <a href="{{action('cartera\ReportesController@downloadPDF', 'w'.Input::get('search') )}}" 
+        type="button" class="btn btn-sm btn-danger" style="float: right;">PDF</a>
+    </div>
 
   </div>
   <div class="table-inverse table-responsive">
     <table class="table table-striped table-bordered">
         <thead>
-            <tr>
+            <tr style="background-color:lightgrey; font-weight:bold">
                 <td>Fecha pago</td>
                 <td>Documento</td>
                 <td>Usuario</td>
@@ -57,10 +59,16 @@
                 <td>{{ $pago->deuda->user->id_tipo }}</td>
                 <td>{{ $pago->deuda->user->name }}</td><!--td>{{ $pago->id_usuario }}</td-->
                 <td>{{ $pago->deuda->created_at }}</td>
-                <td>{{ $pago->valor }}</td>
+                <td>${{ number_format($pago->valor) }}</td>
                 <td>{{ $pago->deuda->estado }}</td>
             </tr>
         @endforeach
+          <tr style="background-color:lightgrey; font-weight:bold">
+            <td><h4>Total</h4></td>
+            <td colspan='3'></td>
+            <td><h4>${{ number_format($total_pagado) }}</h4></td>
+            <td colspan='1'></td>
+          </tr>
         </tbody>
     </table>
   </div>

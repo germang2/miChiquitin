@@ -29,21 +29,24 @@
 
   <h1>Reporte deudas</h1>
   
-  <div class="row row-md-6">
-    {!! Form::open(['method'=>'GET','url'=>'reportes/reporte_deudas','class'=>'navbar-form navbar-left','role'=>'search'])  !!}
+  <div class="row">
+    
+      {!! Form::open(['method'=>'GET','url'=>'reportes/reporte_deudas','class'=>'navbar-form navbar-left','role'=>'search'])  !!}
         {{ Form::input('text', 'search', null, array('class'=>'form-control', 'placeholder'=>'Documento')) }}
         {{ Form::submit('Buscar', array('class' => 'btn btn-primary')) }}
-    {{ Form::close() }}
+      {{ Form::close() }}
     
-    <a href="{{action('cartera\ReportesController@downloadPDF', 'd'.Input::get('search') )}}" 
-      type="button" class="btn btn-danger" style="float: right;">PDF</a>
-
+    <div class="col col-md-12">
+      <a href="{{action('cartera\ReportesController@downloadPDF', 'd'.Input::get('search') )}}" 
+        type="button" class="btn btn-sm btn-danger" style="float: right;">PDF</a>
+    </div>
   </div>
+  
   <div class="table-inverse table-responsive">
     <table class="table table-striped table-bordered">
         <thead>
          
-            <tr>
+            <tr style="background-color:lightgrey; font-weight:bold">
                 <td>Fecha deuda</td>
                 <td>Documento</td>
                 <td>Usuario</td>
@@ -62,13 +65,20 @@
                 <td>{{ $deuda->user->id_tipo }}</td>
                 <td>{{ $deuda->user->name }}</td><!--td>{{ $deuda->id_usuario }}</td-->
                 <td>{{ $deuda->factura->fecha }}</td>
-                <td>{{ $deuda->valor_pagado }}</td>
-                <td>{{ $deuda->valor_a_pagar }}</td>
+                <td>${{ number_format($deuda->valor_pagado) }}</td>
+                <td>${{ number_format($deuda->valor_a_pagar) }}</td>
                 <td>{{ $deuda->plazo_credito }}</td>
                 <td>{{ $deuda->estado }}</td>
                 
             </tr>
         @endforeach
+          <tr style="background-color:lightgrey; font-weight:bold">
+            <td><h4>Total</h4></td>
+            <td colspan='3'></td>
+            <td><h4>${{ number_format($total_pagado) }}</h4></td>
+            <td><h4>${{ number_format($total_pagar) }}</h4></td>
+            <td colspan='2'></td>
+          </tr>
         </tbody>
     </table>
   </div>

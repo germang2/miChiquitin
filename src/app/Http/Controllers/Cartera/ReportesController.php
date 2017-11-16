@@ -46,7 +46,15 @@ class ReportesController extends Controller
           $deudas = Deuda::where('id_usuario',$user_id)->orderBy('created_at','desc')->get();
           
         }
-        return view('cartera.reportes.reporte_deudas', compact('deudas'));
+
+        $total_pagar = 0;
+        $total_pagado = 0;
+        foreach ($deudas as $deuda) {
+          # code...
+          $total_pagar += $deuda->valor_a_pagar;
+          $total_pagado += $deuda->valor_pagado;
+        }
+        return view('cartera.reportes.reporte_deudas', compact('deudas','total_pagar','total_pagado'));
         
         
     }
@@ -66,9 +74,15 @@ class ReportesController extends Controller
           $data = User::whereId($user_id)->with('deuda.pagos')->get();
           $pagos = $data[0]->deuda->pagos->where('created_at','>=',$one_week_ago);
           //dd($pagos);
-        }  
+        }
+        
+        $total_pagado = 0;
+        foreach ($pagos as $pago) {
+          # code...
+          $total_pagado += $pago->valor;
+        }
       
-        return view('cartera.reportes.pagos_ultima_semana', compact('pagos'));
+        return view('cartera.reportes.pagos_ultima_semana', compact('pagos','total_pagado'));
 
     }
 
@@ -87,9 +101,15 @@ class ReportesController extends Controller
           $data = User::whereId($user_id)->with('deuda.pagos')->get();
           $pagos = $data[0]->deuda->pagos->where('created_at','>=',$one_month_ago);
           //dd($pagos);
-        }  
+        }
+
+        $total_pagado = 0;
+        foreach ($pagos as $pago) {
+          # code...
+          $total_pagado += $pago->valor;
+        }
       
-        return view('cartera.reportes.pagos_ultimo_mes', compact('pagos'));
+        return view('cartera.reportes.pagos_ultimo_mes', compact('pagos','total_pagado'));
         
     }
 
