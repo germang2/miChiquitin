@@ -27,7 +27,7 @@
                 <!--td>ID</td-->
                 <td>Descripción</td>
                 <td>Cuotas</td>
-                <!--td>Valor cuota ($)</td-->
+                <td>Valor cuota</td>
                 <td>Interés</td>
                 <td>Forma de pago</td>
                 <td colspan="3"></td>
@@ -39,8 +39,8 @@
                 <!--td>{{ $plan->id_plan_de_pago }}</td-->
                 <td>{{ $plan->nombre_plan }}</td>
                 <td>{{ $plan->cuotas }}</td>
-                <!--td>{{ number_format($plan->valor_cuota) }}</td-->
-                <td>{{ number_format($plan->interes) }}</td>
+                <td>{{ $plan->valor_cuota }}</td>
+                <td>{{ $plan->interes }}</td>
                 <td>{{ $plan->forma_pago }}</td>
 
                 <!-- we will also add show, edit, and delete buttons -->
@@ -50,14 +50,14 @@
                 <td/>
                    <!-- edit this plan (uses the edit method found at GET /plan/{id}/edit -->
                   <a class="btn btn-small btn-info" href="{{ URL::to('plan_de_pago/' . $plan->id_plan_de_pago . '/edit') }}">Editar</a>
-                <!--td/>
-                    < delete the plan (uses the destroy method DESTROY /plan_de_pago/{id} >
+                <td/>
+                    <!-- delete the plan (uses the destroy method DESTROY /plan_de_pago/{id} -->
                     {{ Form::open([
                       'method' => 'DELETE',
                       'route' => ['plan_de_pago.destroy', $plan->id_plan_de_pago]]) }}
                       {{ Form::submit('Eliminar', ['class' => 'btn btn-small btn-danger']) }}
                     {{ Form::close() }}
-                </td-->
+                </td>
             </tr>
         @endforeach
         </tbody>

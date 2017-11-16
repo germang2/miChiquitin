@@ -2,7 +2,7 @@
 
 @section('titulo')
   <h4>Cartera</h4>
-  @endsection
+@endsection
 
 @section('content')
   <div class="container">
@@ -24,12 +24,12 @@
       <div class="jumbotron text-center">
         <p>
             <strong>Cuotas:</strong> {{ $plan->cuotas }}<br>
-            <strong>Valor cuotas:</strong> $ {{ number_format($plan->valor_cuota) }}<br>
-            <strong>Interes:</strong> {{ number_format($plan->interes) }} %<br>
+            <strong>Valor cuotas:</strong> $ {{ $plan->valor_cuota }}<br>
+            <strong>Interes:</strong> {{ $plan->interes }} %<br>
             <strong>Medio de pago:</strong> {{ $plan->forma_pago }}
         </p>
       </div>
     <div/>
-    
+
   <div/>
 @endsection

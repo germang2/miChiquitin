@@ -80,11 +80,10 @@ class Plan_de_pagoController extends Controller
      * @param  \App\Models\Cartera\Plan_de_pago  $plan_de_pago
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Plan_de_pago $plan_de_pago)
     {
         //
-        //$plan = Plan_de_pago::find($plan_de_pago->id_plan_de_pago);
-        $plan = Plan_de_pago::find($id);
+        $plan = Plan_de_pago::find($plan_de_pago->id_plan_de_pago);
         
         return view('cartera.plan_de_pago.show', compact('plan'));
     }
@@ -95,10 +94,10 @@ class Plan_de_pagoController extends Controller
      * @param  \App\Models\Cartera\Plan_de_pago  $plan_de_pago
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Plan_de_pago $plan_de_pago)
     {
         //
-        $plan = Plan_de_pago::find($id);
+        $plan = Plan_de_pago::find($plan_de_pago->id_plan_de_pago);
         
         return view('cartera.plan_de_pago.edit', compact('plan'));
     }
@@ -151,11 +150,11 @@ class Plan_de_pagoController extends Controller
      * @param  \App\Models\Cartera\Plan_de_pago  $plan_de_pago
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Plan_de_pago $plan_de_pago)
     {
         //
         // delete
-        $plan = Plan_de_pago::find($id);
+        $plan = Plan_de_pago::find($plan_de_pago->id_plan_de_pago);
         $plan->delete();
 
         // redirect

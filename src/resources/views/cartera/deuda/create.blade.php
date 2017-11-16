@@ -16,61 +16,39 @@
           <li><a href="{{ URL::to('deuda/create') }}">Nuevo crédito</a>
       </ul>
     </nav>
-  @if ($errors->any())
-    <div class="alert alert-danger">
+
+  <h1>Nuevo Pago</h1>
+        @if (count($errors)>0)
+      <div class="alert alert-danget">
         <ul>
-            @foreach ($errors->all() as $error)
-                <li>{{ $error }}</li>
-            @endforeach
+        @foreach($errors->all() as $error)
+          <li>{{$error}}</li>
+        @endforeach
         </ul>
+      </div>
+      @endif
+  
+
+      <!--Patch para enviar al update -->
+      {!!Form::model($deudas,['method'=>'PATCH', 'route'=>['deuda.update',$deudas->id_factura]])!!}
+      {{Form::token()}}
+      <h3>Seleccione la factura que desea pagar</h3>
+      <div class="col-lg-10 col-sm-10 col-md-10 col-xs-10">
+        <div class="form-group">
+        <select name="idcliente" id="idcliente" class="form-control selectpicker" data-live-search="true">
+            @foreach($deudas as $deuda)
+            <option value="0"></option>
+            <option value="{{$deuda->id_factura}}">{{$deuda->id_factura}}</option>
+            @endforeach
+          </select>
+      </div>
     </div>
-  @endif
+    <div class="col-lg-10 col-sm-10 col-md-10 col-xs-10">
+      <h3>Digite el valor que desea pagar</h3>
+      <input type="text" name="valor">
+    </div>
 
-  <h1>Nuevo crédito</h1>
-  <div class="col-lg-6">
-    {{ Form::open(array('url' => 'deuda')) }}
 
-      <div class="form-group">
-          {{ Form::label('id_usuario', 'Usuario') }}
-          {{ Form::select('id_usuario', $usuarios, null, array('class' => 'form-control')) }}
-      </div>
 
-      <div class="form-group">
-          {{ Form::label('id_plan', 'Plan') }}
-          {{ Form::select('id_plan', $planes, null, array('class' => 'form-control')) }}
-      </div>
-
-      <div class="form-group">
-          {{ Form::label('id_factura', 'Factura') }}
-          {{ Form::select('id_factura', $facturas, null, array('class' => 'form-control')) }}
-      </div>
-
-      <div class="form-group">
-          {{ Form::label('valor_pagado', 'Valor pagado') }}
-        {{ Form::number('valor_pagado', null, array('class' => 'form-control')) }}
-      </div>
-  </div>
-  <div class="col-lg-6">
-      <div class="form-group">
-          {{ Form::label('valor_a_pagar', 'Valor a pagar') }}
-        {{ Form::number('valor_a_pagar', null, array('class' => 'form-control')) }}
-      </div>
-
-      <div class="form-group">
-          {{ Form::label('plazo_credito', 'Plazo crédito') }}
-        {{ Form::date('plazo_credito', null, array('class' => 'form-control')) }}
-      </div>
-
-      <div class="form-group">
-          {{ Form::label('estado', 'Estado') }}
-        {{ Form::select('estado', ['Activo' => 'Activo', 'Pendiente' => 'Pendiente', 'Cancelado' => 'Cancelado']) }}
-      </div>
-  </div>
-  </div>
-
-   <div class="row" align="center"><br>
-    {{ Form::submit('Guardar', array('class' => 'btn btn-primary')) }}
-  </div>
-
-   {{ Form::close() }}
+</div>
 @endsection

@@ -17,7 +17,7 @@ class pagoProveedores extends Model
 	}
 
 	public function plan_de_pago(){
-		return $this->belongsTo('App\Models\Cartera\Plan_de_pago','id_plan_pago');
+		return $this->belongsTo('App\Models\Cartera\Plan_de_pago');
 	}
 
 }

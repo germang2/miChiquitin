@@ -11,10 +11,17 @@ use App\Http\Controllers\Controller;
 
 use App\Models\Cartera\Plan_de_pago;
 use App\Models\Usuarios\User;
+use App\Models\Cartera\Pago;
 use App\Models\Facturacion\Factura;
 use App\Models\Usuarios\Cliente;
+use App\Models\Facturacion\Factura_deuda;
+use App\Models\Cartera\Paz_y_salvo;
+use Carbon\Carbon;
+use DB;
+
 
 use Session;
+
 
 class DeudaController extends Controller
 {
@@ -23,14 +30,47 @@ class DeudaController extends Controller
      * 
      * @return \Illuminate\Http\Response
      */
-    public function index()
-    {
-        //
-        $deudas = Deuda::all();
-
-        return view('cartera.deuda.index', compact('deudas'));
-        
+    public function index(Request $request){
+       if($request){
+            //Buscar texto de busqueda para filtrar las categorias
+            $query=trim($request->get('searchText'));
+            $date=Carbon::now();
+            //$date= $date->addDay();
+            $date=$date->format('Y-m-d');
+            $deudas=DB::table('deudas')
+            ->select('id_deuda','valor_a_pagar','id_factura','valor_pagado','plazo_credito','estado')
+            ->where('id_factura','LIKE','%'.$query.'%')
+            ->where('estado','!=','Pagado')
+            ->orderBy('id_deuda','desc')
+            ->paginate(7);
+             return view('cartera.deuda.index',["deudas"=>$deudas,"searchText"=>$query, "date"=> $date]);
+       }
     }
+
+    public function mora($id){
+        $deudas=Deuda::findOrFail($id);
+        $deudas->estado="En mora";
+        $deudas->valor_a_pagar=$deudas->valor_a_pagar*(1.1);
+        $deudas->update();
+
+        return Redirect::to('deuda');
+
+
+    }
+
+    public function hcliente(Request $request){
+       if($request){
+            $query=trim($request->get('searchText'));
+            $deudas=DB::table('deudas')
+            ->select('id_deuda','valor_a_pagar','id_factura','estado')
+            ->where('id_factura','LIKE','%'.$query.'%')
+            ->orderBy('id_deuda','desc')
+            ->paginate(7);
+             return view('cartera.deuda.hcliente',["deudas"=>$deudas,"searchText"=>$query]);
+       }
+    } 
+
+
 
     /**
      * Show the form for creating a new resource.
@@ -42,7 +82,7 @@ class DeudaController extends Controller
       //$cliente = Cliente::find($cliente->id_cliente);
       $planes = Plan_de_pago::pluck('nombre_plan','id_plan_de_pago');
       $usuarios = User::pluck('name','id');
-      $facturas = Factura::pluck('fecha','id');
+      $facturas = Factura::pluck('id');
       return view('cartera.deuda.create', compact('planes','usuarios','facturas'));
     }
 
@@ -95,14 +135,9 @@ class DeudaController extends Controller
      * @param  \App\Models\Cartera\Deuda  $deuda
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
-    {
-        //
-        $deuda = Deuda::find($id);
+    public function show(Request $request){
 
-        return view('cartera.deuda.show', compact('deuda'));
-        
-    }
+    } 
 
     /**
      * Show the form for editing the specified resource.
@@ -110,13 +145,9 @@ class DeudaController extends Controller
      * @param  \App\Models\Cartera\Deuda  $deuda
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
-    {
-        //
-        $deuda = Deuda::find($id);
-
-        return view('cartera.deuda.edit', compact('deuda'));
-        
+    public function edit($id){
+        $deuda=Deuda::findOrFail($id);        
+        return view("cartera.deuda.edit",["deuda"=>$deuda]);
     }
 
     /**
@@ -126,8 +157,41 @@ class DeudaController extends Controller
      * @param  \App\Models\Cartera\Deuda  $deuda
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Deuda $deuda)
+    public function update(Request $request, $id)
     {
+            $hoy = date("Y-m-d H:i:s"); 
+            $hora = date("Y-m-d H:i:s"); 
+        $deudas=Deuda::findOrFail($id);
+        $deudas->valor_pagado+=$request->get('abono');
+        $deudas->estado="Pendiente";
+
+        $fecha=$deudas->plazo_credito;
+
+        $fechames=date('Y-m-d',strtotime('+1 month', strtotime($fecha)));
+
+
+        $deudas->plazo_credito=$fechames;
+        if($deudas->valor_pagado >= $deudas->valor_a_pagar){
+            $deudas->estado="Pagado";
+            $deudas->update();
+            $paz= new Paz_y_salvo();
+            $paz->concepto="Deuda";
+            $paz->id_deuda=$deudas->id_deuda;
+            $paz->fecha=$hoy;
+            $paz->hora=$hora;
+            $paz->save();
+
+        }else{
+            $deudas->update();
+        }
+
+        $pagos=new Pago;
+        $pagos->id_deuda=$deudas->id_deuda;
+        $pagos->valor=$request->get('abono');
+        $pagos->save();
+        
+
+         return Redirect::to('deuda');
         //
     }
 
@@ -137,10 +201,10 @@ class DeudaController extends Controller
      * @param  \App\Models\Cartera\Deuda  $deuda
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Deuda $deuda)
     {
         // delete
-        $deuda = Deuda::find($id);
+        $deuda = Deuda::find($deuda->id_deuda);
         $deuda->delete();
 
         // redirect
