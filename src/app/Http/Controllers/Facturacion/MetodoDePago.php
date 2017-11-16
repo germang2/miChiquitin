@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Facturacion;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\Usuarios\User;
+use App\Models\Cartera\Deuda;
 use App\Models\Facturacion\Factura;
 use Carbon\Carbon;
 
@@ -13,11 +14,11 @@ class MetodoDePago extends Controller
 
   public static function compraEfectivo($valorTotal) {
     $totalPagar = $valorTotal - ($valorTotal*0.05);
-    return $totalPagar;
+    return $totalPagar + ($totalPagar * 0.19);
   }
 
   public static function numeroCuotas($N, $valorTotalCompra) {
-    $valorTotalCompra = $valorTotalCompra + ($valorTotalCompra * 0.05);
+    $valorTotalCompra = $valorTotalCompra + ($valorTotalCompra * 0.05) + ($valorTotalCompra * 0.19);
     $valorPagar = $valorTotalCompra * 0.10;
     return  [
 			'valorCuota' => ($valorTotalCompra - $valorPagar) / $N,
@@ -30,6 +31,8 @@ class MetodoDePago extends Controller
   	$cliente = User::find($idCliente);
 		$valorTotalPago = (int)$valorTotalPago;
 		$N = (int)$N;
+
+    //dd($credito_actual);
 		$credito_actual = $cliente->credito_actual;
 		//echo "Credito actual : ".$credito_actual;
 		//echo "<br>Valor total pago : ".$valorTotalPago;

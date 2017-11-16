@@ -43,6 +43,18 @@
                             <span class="title">Reportes</span>
                         </a>
                     </li>
+                    <li class="nav-item">
+                        <a href="{{ route('factura.cuota') }}" class="nav-link ">
+                            <i class="fa fa-cogs"></i>
+                            <span class="title">Pagar Credito</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="{{ route('EntregasPendiente') }}" class="nav-link ">
+                            <i class="fa fa-cogs"></i>
+                            <span class="title">Entrgar pendiente</span>
+                        </a>
+                    </li>
                 </ul>
             </li>
 
