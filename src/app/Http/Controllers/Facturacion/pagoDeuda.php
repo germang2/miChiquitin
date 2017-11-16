@@ -12,26 +12,33 @@ use Carbon\Carbon;
 
 class pagoDeuda extends Controller
 {
-  public function pagar($idFactura, $abono){
+  public function index(){
+    return view('Facturacion.cuota');
+  }
+
+  public function pagar(Request $request){
+    $abono = $request->abono;
+    $idFactura = $request->id_factura;
+
     $abono = (int)$abono;
-    echo "<br>abono ".$abono;
+    // echo "<br>abono ".$abono;
     $idFactura = (int)$idFactura;
-    echo "<br>idFactura ".$idFactura;
+    // echo "<br>idFactura ".$idFactura;
     $factura = Factura::find($idFactura);
     $deuda = Deuda::where("id_factura", $idFactura)->get();
-    echo "<br>id_deuda ".$deuda[0]->id_deuda;
+    // echo "<br>id_deuda ".$deuda[0]->id_deuda;
     $full_date = Carbon::now('America/Bogota');
-    echo "<br>full_date ".$full_date;
+    // echo "<br>full_date ".$full_date;
     $date = Carbon::now('America/Bogota')->format('Y-m-d');
-    echo "<br>date ".$date;
+    // echo "<br>date ".$date;
     $time = $full_date->toTimeString();
-    echo "<br>time ".$time;
+    // echo "<br>time ".$time;
 
     if ($factura == null) {
       dd("ID de la Factura no válida.");
     } else {
       $valor_cuota = $factura->valor_cuota; // 407.45 -> 6 cuotas
-      echo "<br>valor_cuota ".$valor_cuota;
+      // echo "<br>valor_cuota ".$valor_cuota;
       $valor_restante = $deuda[0]->valor_a_pagar;
       //echo "<br>valor_restante ".$valor_restante;
       if ($valor_restante == 0) {
@@ -45,19 +52,19 @@ class pagoDeuda extends Controller
             'abono' => $abono,
             'fecha' => $date,
             'hora' => $time
-          ]); 
+          ]);
 
           Pago::create([
             'id_deuda' => $deuda[0]->id_deuda,
             'valor' => $abono
-          ]); 
+          ]);
 
           Deuda::where('id_factura', $idFactura)->update([
             'valor_pagado' => $deuda[0]->valor_pagado + $abono,
             'valor_a_pagar' => $deuda[0]->valor_a_pagar - $abono
           ]);
 
-          echo "<br> Se ha realizado un abono de ".$abono;
+          dd("Se ha realizado un abono de ", $abono);
         } else if ($abono >= $valor_restante) {
           //echo "<br>abono > valor_restante";
           $full_date = Carbon::now('America/Bogota');
@@ -89,8 +96,8 @@ class pagoDeuda extends Controller
             'estado' => 'cancelado'
           ]);
 
-          echo "<br> Le sobra al cliente ".$devolucion;
-          echo "<br> Se ha realizado un abono de ".$valor_restante;
+          dd("Le sobra al cliente ", $devolucion);
+          dd("Se ha realizado un abono de ", $valor_restante);
         } else {
           dd("Debe pagar un monto mayor o igual a ", $valor_cuota);
         }
