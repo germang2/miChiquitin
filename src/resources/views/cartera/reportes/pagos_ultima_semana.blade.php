@@ -34,13 +34,13 @@
     {{ Form::close() }}
 
     <div class="col col-md-12">
-      <a href="{{action('cartera\ReportesController@downloadPDF', 'w'.Input::get('search') )}}" 
-        type="button" class="btn btn-sm btn-danger" style="float: right;">PDF</a>
+      <!--a href="{{action('cartera\ReportesController@downloadPDF', 'w'.Input::get('search') )}}" 
+        type="button" class="btn btn-sm btn-danger" style="float: right;">PDF</a-->
     </div>
 
   </div>
   <div class="table-inverse table-responsive">
-    <table class="table table-striped table-bordered">
+    <table class="table table-striped table-bordered table-hover">
         <thead>
             <tr style="background-color:lightgrey; font-weight:bold">
                 <td>Fecha pago</td>
