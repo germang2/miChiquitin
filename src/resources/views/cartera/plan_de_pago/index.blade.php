@@ -47,17 +47,19 @@
                 <td>
                    <!-- show the plan (uses the show method found at GET /plan_de_pago/{id} -->
                   <a class="btn btn-small btn-success" href="{{ URL::to('plan_de_pago/' . $plan->id_plan_de_pago) }}">Ver</a>
-                <td/>
+                </td>
+                <td>
                    <!-- edit this plan (uses the edit method found at GET /plan/{id}/edit -->
                   <a class="btn btn-small btn-info" href="{{ URL::to('plan_de_pago/' . $plan->id_plan_de_pago . '/edit') }}">Editar</a>
-                <td/>
-                    <!-- delete the plan (uses the destroy method DESTROY /plan_de_pago/{id} -->
+                </td>
+                <!--td>
+                    <delete the plan (uses the destroy method DESTROY /plan_de_pago/{id}>
                     {{ Form::open([
                       'method' => 'DELETE',
                       'route' => ['plan_de_pago.destroy', $plan->id_plan_de_pago]]) }}
                       {{ Form::submit('Eliminar', ['class' => 'btn btn-small btn-danger']) }}
                     {{ Form::close() }}
-                </td>
+                </td-->
             </tr>
         @endforeach
         </tbody>

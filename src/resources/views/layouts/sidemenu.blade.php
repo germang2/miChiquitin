@@ -88,12 +88,11 @@
                     </a>
                   </li>
                   <li class="nav-item">
-                     <!--PLan de pagos de las personas 準備-->
-                    <a href="{{ URL::to('/deuda') }}" class="nav-link ">
-                      <i class="fa fa-cogs"></i>
-                      <span class="title">Generar reporte</span>
-                    </a>
-                  </li>
+										<a href="{{ URL::to('/reportes') }}" class="nav-link ">
+											<i class="fa fa-cogs"></i>
+											<span class="title">Reportes</span>
+										</a>
+									</li>
                   <li class="nav-item">
                     <!-- 私はそれをやるつもりだ-->
                     <a href="{{ URL::to('/pago/show') }}" class="nav-link ">

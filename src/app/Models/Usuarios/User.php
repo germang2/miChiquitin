@@ -48,6 +48,6 @@ class User extends Authenticatable
     }
 
     public function deuda(){
-        return $this->hasOne('App\Models\Cartera\Deuda');
+        return $this->hasOne('App\Models\Cartera\Deuda','id_usuario');
     }
 }

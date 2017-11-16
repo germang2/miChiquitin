@@ -238,6 +238,8 @@ return [
         'Hashids' => Vinkla\Hashids\Facades\Hashids::class,
         'PDF' => Barryvdh\DomPDF\Facade::class,
 
+        'Input' => Illuminate\Support\Facades\Input::class,
+
     ],
 
 ];

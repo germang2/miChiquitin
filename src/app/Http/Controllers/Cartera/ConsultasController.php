@@ -20,7 +20,7 @@ class ConsultasController extends Controller
     	$plan=DB::table('plan_de_pagos as pp')
     	->join('facturas as f','pp.id_plan_de_pago','=','f.id_plan_pago')
     	->where('f.id_plan_pago', '!=','1')
-    	->select('f.id_factura','pp.id_plan_de_pago','pp.nombre_plan')
+    	->select('f.id','pp.id_plan_de_pago','pp.nombre_plan')
     	->groupBy('f.id_plan_pago')
         ->orderBy(\DB::raw('count(f.id_plan_pago)', 'desc'))
         ->get();
