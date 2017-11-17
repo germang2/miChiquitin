@@ -39,8 +39,8 @@
                 <!--td>{{ $plan->id_plan_de_pago }}</td-->
                 <td>{{ $plan->nombre_plan }}</td>
                 <td>{{ $plan->cuotas }}</td>
-                <td>{{ $plan->valor_cuota }}</td>
-                <td>{{ $plan->interes }}</td>
+                <td>${{ number_format($plan->valor_cuota) }}</td>
+                <td>{{ number_format($plan->interes) }}%</td>
                 <td>{{ $plan->forma_pago }}</td>
 
                 <!-- we will also add show, edit, and delete buttons -->

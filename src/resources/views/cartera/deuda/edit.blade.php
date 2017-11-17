@@ -3,8 +3,8 @@
   <div class="row">
     <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
       <h3>Abonar a la Deuda: Nombre del usuario</h3>
-      <h3>Deuda total {{ $deuda->valor_a_pagar}}</h3>
-      <h3>Valor pagado {{ $deuda->valor_pagado}}</h3>
+      <h3>Deuda total ${{ number_format($deuda->valor_a_pagar)}}</h3>
+      <h3>Valor pagado ${{ number_format($deuda->valor_pagado)}}</h3>
       @if (count($errors)>0)
       <div class="alert alert-danget">
         <ul>
