@@ -18,14 +18,14 @@ class CreateDeudasTable extends Migration
             $table->integer('id_usuario')->unsigned();
             $table->integer('id_plan')->unsigned();
             $table->integer('id_factura')->unsigned();
-            $table->float('valor_pagado');
-            $table->float('valor_a_pagar');
+            $table->decimal('valor_pagado', 8, 2);
+            $table->decimal('valor_a_pagar');
             $table->date('plazo_credito');
             $table->string('estado');
 
-            $table->foreign('id_usuario')->references('id_usuario')->on('usuarios');
-            $table->foreign('id_plan')->references('id_plan')->on('planes');
-            $table->foreign('id_factura')->references('id_factura')->on('facturas');
+            $table->foreign('id_usuario')->references('id')->on('users');
+            $table->foreign('id_plan')->references('id_plan_de_pago')->on('plan_de_pagos');
+            $table->foreign('id_factura')->references('id')->on('facturas');
 
             $table->timestamps();
         });
