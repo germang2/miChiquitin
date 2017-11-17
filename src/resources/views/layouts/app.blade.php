@@ -17,6 +17,7 @@
     <link href="{{ asset('assets/css/componentes.css') }}" rel="stylesheet">
     <link href="{{ asset('assets/css/select2.min.css') }}" rel="stylesheet">
     <link href="{{ asset('assets/css/layout.css') }}" rel="stylesheet">
+    <link href="{{ asset('assets/css/custom-clients.css') }}" rel="stylesheet">
     <link href="{{ asset('assets/css/theme-dark.css') }}" rel="stylesheet">
     <!-- Scripts -->
     <script>

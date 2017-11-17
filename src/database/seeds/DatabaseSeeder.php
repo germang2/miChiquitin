@@ -11,6 +11,11 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        // $this->call(UsersTableSeeder::class);
+      $this->call(rootSeeder::class);
+      $this->call(empresaSeeder::class);
+      $this->call(adminSeed::class);
+      $this->call(empleadoSeed::class);
+      factory(App\Models\Usuarios\Cliente::class,10)->create();
+      factory(App\Models\Usuarios\Empleado::class,15)->create();  //este factory no generra la foreign key para id_usuario
     }
-}
+  }
