@@ -6,6 +6,8 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 class Cliente extends Model
 {
+    //protected $primaryKey = 'id_cliente';
+
     protected $table = 'clientes';
     protected $primaryKey = 'id_cliente';
     use softDeletes;

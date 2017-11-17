@@ -18,6 +18,7 @@ $factory->define(App\Models\Usuarios\User::class, function (Faker\Generator $fak
         'name' => $faker->name,
         'email' => $faker->unique()->safeEmail,
         'password' => $password ?: $password = bcrypt('secret'),
+        'id_tipo' => $faker->unique()->rand(100, 1000),
         'apellidos' => $faker->lastname,
         'direccion'=> $faker->address,
         'credito_maximo' => $faker->numberBetween($min = 1000, $max = 6000),

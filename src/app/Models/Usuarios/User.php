@@ -18,7 +18,7 @@ class User extends Authenticatable
      use softDeletes;
      protected $dates = ['deleted_at'];
     protected $fillable = [
-        'name', 'email', 'password','tipo_rol', 'apellidos', 'direccion', 'edad', 'credito_maximo','credito_actual',
+        'name', 'email', 'password','id_tipo' ,'tipo_rol', 'apellidos', 'direccion', 'edad', 'credito_maximo','credito_actual',
     ];
 
     /**
@@ -51,6 +51,6 @@ class User extends Authenticatable
     }
 
     public function deuda(){
-        return $this->hasOne('App\Models\Cartera\Deuda');
+        return $this->hasOne('App\Models\Cartera\Deuda','id_usuario');
     }
 }

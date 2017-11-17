@@ -6,12 +6,14 @@ use Illuminate\Database\Eloquent\Model;
 
 class Pago extends Model
 {
-    protected $table = "pagos";
+  protected $primaryKey = 'id_pago';
 
-    protected $fillable = ['id_deuda', 'valor'];
+  protected $table = "pagos";
 
-    public function deuda()
-    {
-    	return $this->belongsTo('App\Models\Cartera\Deuda');
-    }
+  protected $fillable = ['id_deuda', 'valor'];
+
+  public function deuda()
+  {
+    return $this->belongsTo('App\Models\Cartera\Deuda','id_deuda');
+  }
 }

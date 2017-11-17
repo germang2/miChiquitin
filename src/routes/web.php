@@ -17,8 +17,37 @@ Route::get('/', function () {
 
 Auth::routes();
 
-Route::get('/home', 'HomeController@index')->name('home');
+Route::get('/home', 'HomeController@index')->name('home');  
 
+// ------------------------- Rutas modulo Cartera -----------------
+
+Route::get('/deuda/hcliente','Cartera\DeudaController@hcliente');
+Route::get('/pago/hpago','Cartera\PagoController@hpago');
+Route::get('/consultas/planes','Cartera\ConsultasController@planes');
+Route::get('/consultas/mayor','Cartera\ConsultasController@mayor');
+Route::get('/consultas/mdeudas','Cartera\ConsultasController@mdeudas');
+Route::get('/deuda/mora/{id}','Cartera\DeudaController@mora');
+
+
+Route::get('deuda/setCliente', 'Cartera\DeudaController@setCliente');
+Route::get('/downloadPDF/{id}','Cartera\PagoController@downloadPDF');
+Route::resource('deuda', 'Cartera\DeudaController');
+Route::resource('pago', 'Cartera\PagoController');
+Route::resource('plan_de_pago', 'Cartera\Plan_de_pagoController');
+Route::resource('consultas', 'Cartera\ConsultasController');
+
+Route::get('reportes', 'Cartera\ReportesController@index');
+Route::get('reportes/reporte_deudas', 'Cartera\ReportesController@reporte_deudas');
+Route::get('reportes/pagos_ultima_semana', 'Cartera\ReportesController@pagos_ultima_semana');
+Route::get('reportes/pagos_ultimo_mes', 'Cartera\ReportesController@pagos_ultimo_mes');
+Route::get('reportes/downloadPDF/{any?}','Cartera\ReportesController@downloadPDF');
+Route::resource('deuda', 'Cartera\DeudaController');
+Route::resource('plan_de_pago', 'Cartera\Plan_de_pagoController');
+
+// ------------------ Terminan rutas de modulo cartera ---------------
+
+
+//----------------------- Rutas de modulo usuarios ---------------------
 Route::middleware(['auth', 'rootMiddleware'])->group(function () {
       Route::resource('Usuario','Usuarios\UsuarioController',['only' => 'destroy']);
       Route::resource('Empleado','Usuarios\EmpleadoController',['only' => 'destroy']);
@@ -48,4 +77,5 @@ Route::middleware(['auth', 'empleadoMiddleware'])->group(function () {
 
 });
 Route::get('/homeCliente', function(){return view('usuario.index');})->name('homeCliente'); //esta ruta no esta en uso por ahora
-//Cartera::reoutes();
+
+//----------------- Terminan rutas de modulo usuarios --------------------------
