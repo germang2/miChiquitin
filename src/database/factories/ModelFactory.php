@@ -81,21 +81,3 @@ $factory->define(App\Models\Usuarios\Contrato::class, function (Faker\Generator 
       'fecha_fin'=> $faker->date,
     ];
 });
-
-//Empresaaa
-//Contrato
-
-/*
-$factory->define(App\Models\Inventario\Pedido::class, function (Faker\Generator $faker) {
-    static $password;
-
-    return [
-        'id_articulo' => rand(1,4),
-        'id_proveedor' => rand(1,3),
-        'cantidad' => rand(50,80),
-        'costo_total' => rand(100000,100000000) / 100,
-        'fecha' => $faker->dateTimeThisYear($max = 'now', $timezone = date_default_timezone_get()) ,
-        'estado' => 'EnEspera',
-    ];
-});
-*/
