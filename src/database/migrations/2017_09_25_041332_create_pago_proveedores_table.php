@@ -17,7 +17,7 @@ class CreatePagoProveedoresTable extends Migration
             $table->increments('id');
             $table->date('fecha_pago')->nullable();
             $table->date('fecha_orden');
-            $table->decimal('valor_pagar', 8, 2);
+            $table->decimal('valor_pagar', 15, 2);
             $table->integer('id_pedido')->unsigned();
             $table->integer('id_plan_pago')->unsigned();
             $table->string('estado')->nullable();
