@@ -30,6 +30,7 @@ Route::group(['middleware' => 'auth'], function() {
     Route::resource('pagoproveedores', 'Contabilidad\pagoProveedoresCtr');
     Route::post('pagos/ajax', 'Contabilidad\pagoProveedoresCtr@getPagos');
     Route::post('pagar/pedido', 'Contabilidad\pagoProveedoresCtr@pagarPedido');
+    Route::post('pagar/nomina', 'Contabilidad\NominaCtr@pagarNom');
     Route::post('rechazar/pedido', 'Contabilidad\pagoProveedoresCtr@rechazarPedido');
     Route::resource('balances', 'Contabilidad\balanceCtr');
     Route::resource('conta/varcontr', 'Contabilidad\VariablesController');

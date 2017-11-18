@@ -10,7 +10,10 @@
 @endsection
 
 @section('btnAccion')
-    <a href="#" class="verNomina btn btn-success pull-right" miVlr="-1">
+    <a href="#" class="modalPagarN btn btn-success pull-right" miVlr="-1">
+        <i class="fa fa-money"></i> Pagar Nominas
+    </a>
+    <a href="#" class="verNomina btn btn-default pull-right" miVlr="-1">
         <i class="fa fa-plus-square"></i> Nueva Nomina
     </a>
 @endsection
@@ -97,10 +100,43 @@
 
 
     @include('Contabilidad.modalNomina')
+    @include('Contabilidad.modalPagarNomina')
 @endsection
 
 @section('jsAdicional')
     <script>
+
+        $(document).on('click', '.pagarN', function(e) {
+            e.preventDefault();
+            var pedId = $(this).attr('miVlr');
+            $.ajax({
+                url: $('#urlAct').html() + '/pagar/nomina',
+                type: 'post',
+                data: {
+                    idp: pedId,
+                    _token : $('input[name="_token"]').val()
+                },
+                beforeSend: function() {
+                    $('.loaderPed').append('<img id="#imgld" height="70" width="200" src="/assets/img/loader.gif">');
+                },
+                success:function(r) {
+                    $('.loaderPed img').remove();
+                    if(r.ok){
+                        bootbox.confirm('La nomida fue pagado con exito!', function (resp) {
+                            window.location.reload();
+                        });
+                    }
+                    else{
+                        bootbox.alert(r.err);
+                    }
+                }
+            });
+        });
+
+        $(document).on('click', '.modalPagarN', function(e) {
+            e.preventDefault();
+            $('#mNominasP').modal();
+        });
 
         $(document).on('click', '.verNomina', function(e) {
             e.preventDefault();
@@ -477,6 +513,21 @@
         });
 
         $('#tbNominas').dataTable({
+            'bPaginate':     false,
+            'bLengthChange': false,
+            'bFilter':       true,
+            'bSort':         true,
+            'bInfo':         false,
+            'bAutoWidth':    false,
+            'aaSorting':     [[0, 'asc']],
+            'language': {
+                'zeroRecords':  'No hay registros',
+                'infoEmpty':    'No hay registros',
+                'search':       'Buscar: '
+            }
+        });
+
+        $('#tbNominasP').dataTable({
             'bPaginate':     false,
             'bLengthChange': false,
             'bFilter':       true,

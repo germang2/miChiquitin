@@ -26,10 +26,13 @@ class NominaCtr extends Controller
         $dt = $dt->format('Y-m');
         $str = $dt .'%';
         $nominas = nomina::where('fecha_prenomina', 'like', $str)->get();
+        $nominasP = nomina::orWhere('estado', '=', 'PorPagar')
+            ->orWhere('estado', '=', 'RechazadoCapital')->get();
         return view('Contabilidad.nominas')->with(
             [
                 'date'=> $dt,
-                'nominas' => $nominas
+                'nominas' => $nominas,
+                'nominasP'=> $nominasP
             ]
         );
     }
@@ -157,6 +160,8 @@ class NominaCtr extends Controller
             )
             ->limit($limite)
             ->get();
+
+
         $respuesta = [];
                 foreach ($empleados as $empleado) {
                     $respuesta[] = [
@@ -259,9 +264,9 @@ class NominaCtr extends Controller
                 $rtJson['ok'] = true;
                 $nominas = nomina::where([
                     ['id_empleado', '=', $nomina->id_empleado],
-                    ['fecha_prenomina', 'like', $dt],
+                    ['fecha_prenomina', 'like', $dt.'%'],
                 ])->get();
-                if(!is_null($nominas)){
+                if(count($nominas)>0){
                     $nomina->delete();
                     $rtJson['ok'] = false;
                     $rtJson['err'] = 'Ya hay nomina generado este mes para este empleado';
@@ -271,14 +276,12 @@ class NominaCtr extends Controller
                 $dt = $dt->format('Y-m');
                 $dt = $dt . '%';
                 $nomina = grupo::find($hash);
-                $nominas = nomina::where([
-                    ['id', '=', $nomina->id],
-                    ['fecha_prenomina', 'like', $dt],
-                    ['estado', '=', 'PorPagar']
-                ])->get()->first();
-                if(!is_null($nominas)){
+                if($nomina->estado == 'PorPagar'){
                     $nomina->update($input);
                     $rtJson['ok'] = true;
+                }
+                else{
+                    $rtJson['err'] = 'No se puede editar nomina que esta por pagar';
                 }
             }
             // try code
@@ -289,5 +292,36 @@ class NominaCtr extends Controller
         return $rtJson;
         //Hacer Seguridad
 
+    }
+
+    public function pagarNom(Request $request){
+        $input = $request->all();
+        $rtJson    = [
+            'ok' => false,
+            'err' => '',
+        ];
+        try{
+            if($hash = Hashids::decode($input['idp'])){
+                $nomina = nomina::find($hash[0]);
+                if(is_null($nomina)){
+                    $rtJson['err'] = 'No se encontró la nomina';
+                }
+                else{
+                    $dt = Carbon::now();
+                    $dt = $dt->format('Y-m-d');
+                    $nomina->update(['estado'=> 'Pagado', 'fecha_pago' => $dt]);
+                    $rtJson['ok']= true;
+                }
+            }
+            else{
+                $rtJson['err'] = 'Algo salió con el identificador';
+            }
+            // try code
+        }
+        catch(\Exception $e){
+            $rtJson['err'] = 'Algo salió mal' . $e;
+        }
+
+        return $rtJson;
     }
 }
