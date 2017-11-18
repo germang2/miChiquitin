@@ -14,7 +14,7 @@ class Empleado extends Model
     ];
 
     public function user(){
-    	return $this->belongsTo('App\Models\Usuarios\User');
+    	return $this->belongsTo('App\Models\Usuarios\User', 'id_usuario');
     }
 
     public function empresa(){
@@ -22,6 +22,6 @@ class Empleado extends Model
     }
 
     public function contrato(){
-    	return $this->belongsTo('App\Models\Usuarios\Contrato');
+    	return $this->belongsTo('App\Models\Usuarios\Contrato', 'id_contrato', 'id_contrato');
     }
 }

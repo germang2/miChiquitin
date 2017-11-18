@@ -19,6 +19,7 @@
     <link href="{{ asset('assets/css/layout.css') }}" rel="stylesheet">
     <link href="{{ asset('assets/css/custom-clients.css') }}" rel="stylesheet">
     <link href="{{ asset('assets/css/theme-dark.css') }}" rel="stylesheet">
+    <link href="{{ asset('assets/css/bootstrap-datepicker3.css') }}" rel="stylesheet">
     <!-- Scripts -->
     <script>
         window.Laravel = {!! json_encode([
@@ -109,8 +110,10 @@
 <script src="{{ asset('assets/js/datatables.min.js') }}"></script>
 <script src="{{ asset('assets/js/select2.min.js') }}"></script>
 <script src="{{ asset('assets/js/layout.js') }}"></script>
+<script src="{{ asset('assets/js/bootstrap-datepicker.min.js') }}"></script>
 <!-- Script Español Select2 -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.0/js/i18n/es.js"></script>
+<script src="{{ asset('assets/js/jquery.mtz.monthpicker.js') }}"></script>
 
 @yield('jsAdicional')
 </body>
