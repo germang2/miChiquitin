@@ -28,6 +28,8 @@
         <thead>
             <tr>
                 <td>Posición</td>
+                <td>ID. Cliente</td>
+                <td>Nombre del cliente</td>
                 <td>Número de deuda</td>
                 <td>Valor total</td>
                 <td>Estado de la deuda</td>
@@ -38,6 +40,8 @@
         @foreach($deudas as $deuda)
             <tr>
               <td>{{$a}} <?php $a++; ?></td>
+              <td>{{ $deuda->user->id_tipo }}</td>
+              <td>{{ $deuda->user->name }}</td>
               <td>No. Deuda {{ $deuda->id_deuda}}</td>
               <td>{{ $deuda->valor_a_pagar }}</td>
               <td>{{ $deuda->estado }}</td>

@@ -7,13 +7,9 @@
 @section('content')
   <div class="container">
 
-  <nav class="navbar navbar-inverse">
-      <ul class="nav navbar-nav">
-          <li><a href="{{ URL::to('/pago/hpago?searchText=n') }}">Pago de un cliente</a>
-      </ul>
-  </nav> 
+
   <h1>Todos los pagos</h1>
-  @include('cartera.pago.per')
+  @include('cartera.pago.search')
   <div class="col-lg-12">
 
     <!-- will be used to show any messages -->
@@ -24,7 +20,9 @@
     <table class="table table-striped table-bordered">
         <thead>
             <tr>
-                <td>id_deuda</td>
+                <td>ID. Cliente</td>
+                <td>Nombre Usuario</td> 
+                <td>ID. Deuda</td>
                 <td>Pago</td>
                 <td>Fecha de pago</td>
                 <!--<td colspan="2"></td>-->
@@ -33,8 +31,10 @@
         <tbody>
         @foreach($pagos as $pag)
             <tr>
+              <td>{{ $pag->deuda->user->id_tipo }}</td>
+              <td>{{ $pag->deuda->user->name }}</td>
               <td>{{ $pag->id_deuda }}</td>
-              <td>{{ $pag->valor }}</td><!--Deuda-->
+              <td>{{ $pag->valor }}</td>
                <td>{{ $pag->created_at }}</td>
             </tr>
         @endforeach

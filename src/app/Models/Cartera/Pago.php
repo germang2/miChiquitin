@@ -6,8 +6,6 @@ use Illuminate\Database\Eloquent\Model;
 
 class Pago extends Model
 {
-  protected $primaryKey = 'id_pago';
-
   protected $table = "pagos";
 
   protected $fillable = ['id_deuda', 'valor'];

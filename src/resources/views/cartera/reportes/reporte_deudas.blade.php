@@ -32,7 +32,7 @@
   <div class="row">
     
       {!! Form::open(['method'=>'GET','url'=>'reportes/reporte_deudas','class'=>'navbar-form navbar-left','role'=>'search'])  !!}
-        {{ Form::input('text', 'search', null, array('class'=>'form-control', 'placeholder'=>'Documento')) }}
+        {{ Form::input('number', 'search', null, array('class'=>'form-control', 'placeholder'=>'Documento')) }}
         {{ Form::submit('Buscar', array('class' => 'btn btn-primary')) }}
       {{ Form::close() }}
     

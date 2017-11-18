@@ -9,13 +9,13 @@
 
     <nav class="navbar navbar-inverse">
       <ul class="nav navbar-nav">
-          <li><a href="{{ URL::to('/deuda/hcliente?searchText=n') }}">Credito de un cliente</a>
+          <li><a href="{{ URL::to('/deuda/hcliente') }}">Credito de un cliente</a>
       </ul>
   </nav>
   <h1>Todos los créditos</h1>
-  @include('cartera.deuda.search')
+  
   <div class="col-lg-12">
-
+@include('cartera.deuda.search')
     <!-- will be used to show any messages -->
     @if (Session::has('message'))
         <div class="alert alert-info">{{ Session::get('message') }}</div>
@@ -25,7 +25,7 @@
         <thead>
             <tr>
                 <td>ID. Cliente</td>
-                <td>Nombre del cliente</td>
+                <td>Nombre del Cliente</td>
                 <td>Factura</td>
                 <td>Valor pagado</td>
                 <td>Valor a pagar</td>
@@ -38,8 +38,8 @@
         <tbody>
         @foreach($deudas as $deuda)
             <tr>
-              <td>{{ $deuda->id_tipo }}</td>
-              <td>{{ $deuda->name }}</td>
+              <td>{{ $deuda->user->id_tipo }}</td>
+              <td>{{ $deuda->user->name }}</td>
               <td>{{ $deuda->id_factura }}</td>
               <td>{{ $deuda->valor_pagado }}</td><!--Deuda-->
                <td>{{ $deuda->valor_a_pagar }}</td>

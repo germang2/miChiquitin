@@ -32,19 +32,17 @@ class DeudaController extends Controller
      */
     public function index(Request $request){
        if($request){
-            //Buscar texto de busqueda para filtrar las categorias
-            $query=trim($request->get('searchText'));
+            $query=$request->get('searchText');
+            if (is_null($query)){
+                $deudas = Deuda::all();    
+            }else{
+                $user_id = User::where('id_tipo', $query)->first()->id;
+                $deudas = Deuda::where('id_usuario',$user_id)->get();
+            }            
             $date=Carbon::now();
             //$date= $date->addDay();
             $date=$date->format('Y-m-d');
-            $deudas=DB::table('deudas as d')
-            ->join('users as u','d.id_usuario','=','u.id')
-            ->select('d.id_deuda','d.valor_a_pagar','d.id_factura','d.valor_pagado','d.plazo_credito','d.estado','u.id_tipo','u.name')
-            ->where('id_factura','LIKE','%'.$query.'%')
-            ->where('estado','!=','Pagado')
-            ->orderBy('id_deuda','desc')
-            ->paginate(7);
-             return view('cartera.deuda.index',["deudas"=>$deudas,"searchText"=>$query, "date"=> $date]);
+             return view('cartera.deuda.index',["deudas"=>$deudas,'searchText'=>$query, "date"=> $date]);
        }
     }
 
@@ -53,20 +51,19 @@ class DeudaController extends Controller
         $deudas->estado="En mora";
         $deudas->valor_a_pagar=$deudas->valor_a_pagar*(1.1);
         $deudas->update();
-
         return Redirect::to('deuda');
-
-
     }
 
     public function hcliente(Request $request){
        if($request){
-            $query=trim($request->get('searchText'));
-            $deudas=DB::table('deudas')
-            ->select('id_deuda','valor_a_pagar','id_factura','estado')
-            ->where('id_factura','LIKE','%'.$query.'%')
-            ->orderBy('id_deuda','desc')
-            ->paginate(7);
+            $query=$request->get('searchText');
+            if (is_null($query)){
+                $deudas=Deuda::all();
+            }else{
+                $user_id=User::where('id_tipo',$query)->first()->id;
+                $deudas=Deuda::where('id_usuario', $user_id)->get();
+            }
+
              return view('cartera.deuda.hcliente',["deudas"=>$deudas,"searchText"=>$query]);
        }
     } 

@@ -24,6 +24,7 @@
     <table class="table table-striped table-bordered">
         <thead>
             <tr>
+                <td>ID. Cliente</td>
                 <td>Cliente</td>
                 <td>Factura</td>
                 <td>Valor a pagar</td>
@@ -34,7 +35,8 @@
         <tbody>
         @foreach($deudas as $deuda)
             <tr>
-              <td>Nombre usuario</td>
+              <td>{{ $deuda->user->id_tipo }}</td>
+              <td>{{ $deuda->user->name }}</td>
               <td>{{ $deuda->id_factura }}</td>
                <td>{{ $deuda->valor_a_pagar }}</td>    
               <td>{{ $deuda->estado}}</td>
