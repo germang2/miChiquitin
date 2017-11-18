@@ -34,10 +34,15 @@ class MetodoDePago extends Controller
 
     //dd($credito_actual);
 		$credito_actual = $cliente->credito_actual;
+    $credito_maximo = $cliente->credito_maximo;
 		//echo "Credito actual : ".$credito_actual;
 		//echo "<br>Valor total pago : ".$valorTotalPago;
+    $obj = [];
 
-		if ($valorTotalPago <= $credito_actual) {
+    if ($credito_actual == $credito_maximo) return $obj;
+
+		if (($credito_actual + $valorTotalPago) > $credito_maximo) return $obj;
+    else {
       $obj = self::numeroCuotas($N, $valorTotalPago);
 			//echo "<br>Valor total a pagar : ".$obj["valorPagar"];
 			$nuevo_credito_actual = $credito_actual - $valorTotalPago;
@@ -47,8 +52,6 @@ class MetodoDePago extends Controller
 
 			return $obj;
 
-    } else {
-      return false;
     }
 	}
 }
