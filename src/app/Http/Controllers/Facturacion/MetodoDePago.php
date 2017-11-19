@@ -45,7 +45,7 @@ class MetodoDePago extends Controller
     else {
       $obj = self::numeroCuotas($N, $valorTotalPago);
 			//echo "<br>Valor total a pagar : ".$obj["valorPagar"];
-			$nuevo_credito_actual = $credito_actual - $valorTotalPago;
+			$nuevo_credito_actual = $credito_actual + $valorTotalPago;
 
 			$cliente->credito_actual = $nuevo_credito_actual;
 			$cliente->save();
