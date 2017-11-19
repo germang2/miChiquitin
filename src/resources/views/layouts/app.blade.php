@@ -203,14 +203,16 @@
 
             $( function() {
                 $( "#searchBar" ).autocomplete({
-                    source: 'http://localhost:8000/articulos/agregar/search'
+                    //source: 'http://localhost:8000/articulos/agregar/search'
+                    source: 'http://www.michiquitin.herokuapp.com/'
                 });
             } );
             /*-------------------Scripts de Reportes para Articulos-------------------------*/
             
             $( function() {
                 $( "#texto2" ).autocomplete({
-                    source: 'http://localhost:8000/reportes/articulos/buscar'
+                    //source: 'http://localhost:8000/reportes/articulos/buscar'
+                    source: 'http://www.michiquitin.herokuapp.com/'
                 });
             } );
             
