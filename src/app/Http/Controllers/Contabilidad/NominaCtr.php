@@ -258,30 +258,31 @@ class NominaCtr extends Controller
                 $dt = Carbon::now();
                 $dt = $dt->format('Y-m-d');
                 $input['fecha_prenomina'] = $dt;
+                $nominas = nomina::where([
+                    ['id_empleado', '=', $input['id_empleado']],
+                    ['fecha_prenomina', 'like', $dt.'%'],
+                ])->get();
                 $nomina = nomina::create($input);
                 $dt = Carbon::now();
                 $dt = $dt->format('Y-m');
                 $rtJson['ok'] = true;
-                $nominas = nomina::where([
-                    ['id_empleado', '=', $nomina->id_empleado],
-                    ['fecha_prenomina', 'like', $dt.'%'],
-                ])->get();
+
                 if(count($nominas)>0){
                     $nomina->delete();
                     $rtJson['ok'] = false;
                     $rtJson['err'] = 'Ya hay nomina generado este mes para este empleado';
                 }
             } else {
-                $dt = Carbon::now();
-                $dt = $dt->format('Y-m');
-                $dt = $dt . '%';
-                $nomina = grupo::find($hash);
-                if($nomina->estado == 'PorPagar'){
-                    $nomina->update($input);
-                    $rtJson['ok'] = true;
+                $nomina = nomina::find($hash);
+                if($nomina->estado == 'Pagado'){
+                    $rtJson['err'] = 'No se puede editar nomina que esta por pagar';
                 }
                 else{
-                    $rtJson['err'] = 'No se puede editar nomina que esta por pagar';
+                    $nomina->update([
+                        'base' => $input['base'],
+                        ''
+                    ]);
+                    $rtJson['ok'] = true;
                 }
             }
             // try code

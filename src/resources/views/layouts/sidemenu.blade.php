@@ -42,6 +42,13 @@
                                 <span class="title">Datos Contables</span>
                             </a>
                         </li>
+
+                        <li class="nav-item">
+                            <a href="{{route('permisos.index')}}" class="nav-link ">
+                                <i class="fa fa-cogs"></i>
+                                <span class="title">Permisos Contables Usuarios</span>
+                            </a>
+                        </li>
                         @endif
 
 

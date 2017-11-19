@@ -95,7 +95,7 @@ Route::group(['middleware' => 'auth'], function() {
     Route::post('rechazar/pedido', 'Contabilidad\pagoProveedoresCtr@rechazarPedido');
     Route::resource('balances', 'Contabilidad\balanceCtr');
     Route::resource('conta/varcontr', 'Contabilidad\VariablesController');
-
+    Route::resource('cont/permisos', 'Contabilidad\permisosController');
     Route::bind('varcontr', function($varcontr){
         return App\Models\Contabilidad\Varcontrol::find($varcontr);
 
