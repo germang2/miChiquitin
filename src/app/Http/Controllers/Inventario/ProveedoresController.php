@@ -162,7 +162,7 @@ class ProveedoresController extends Controller
      public function showReporte()
     {
         //
-        return view('Inventario/reportes');
+        return view('Inventario/reportesInventario');
     }
 
     public function reportesProveedores(){
