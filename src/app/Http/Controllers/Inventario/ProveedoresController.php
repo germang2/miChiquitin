@@ -114,12 +114,13 @@ class ProveedoresController extends Controller
     {
 
         $this->validate(request(), [
-            'id_tipo' => 'required',
-            'representante_legal' => 'required',
-            'id_representante_legal' => 'required',
+            'idTipo' => 'required',
+            'representanteLegal' => 'required',
+            'idRepresentante' => 'required',
             'fecha' => 'required',
             'telefono' => 'required',
-            'razon_social' => 'required',
+            'razonSocial' => 'required',
+            'perJur' => 'required',
             'departamento' => 'required', 
             'direccion' => 'required',
             'ciudad' => 'required',          

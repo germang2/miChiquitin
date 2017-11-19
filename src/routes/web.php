@@ -76,7 +76,7 @@ Route::get('/proveedores', 'Inventario\ProveedoresController@proveedores')->name
 
 
 //Rutas Reportes
-	Route::get('/reportes', 'Inventario\ProveedoresController@showReporte')->name('reportesInventario');
+	Route::get('/reportesInventario', 'Inventario\ProveedoresController@showReporte')->name('reportesInventario');
 
 	Route::get('/reportes/proveedores', 'Inventario\ProveedoresController@reportesProveedores')->name('reportesProveedores');
 	Route::post('/reportes/proveedores/resultado', 'Inventario\ProveedoresController@reporteProveedor')->name('reporteProveedor');
