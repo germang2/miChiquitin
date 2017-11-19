@@ -14,15 +14,15 @@ class CreateFacturaDeuda extends Migration
     public function up()
     {
         Schema::create('factura_deuda', function (Blueprint $table) {
-            $table->increments('id');
+            $table->increments('id')->unique();
             $table->timestamps();
 
-            $table->integer('id_factura')->unsigned()->index();
-            $table->decimal('abono', 53, 2)->default(0.0);
-            $table->dateTime('fecha');
+            $table->integer('id_factura')->unsigned();
+            $table->decimal('abono', 15, 2);
+            $table->date('fecha');
             $table->time('hora');
 
-            $table->foreign('id_factura')->references('id')->on('factura');
+            $table->foreign('id_factura')->references('id')->on('facturas');
         });
     }
 

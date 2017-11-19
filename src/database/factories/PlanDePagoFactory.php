@@ -10,15 +10,16 @@
 | database. Just tell the factory how a default model should look.
 |
 */
+use App\Models\Cartera\Plan_de_pago;
 
 /** @var \Illuminate\Database\Eloquent\Factory $factory */
-$factory->define(App\User::class, function (Faker\Generator $faker) {
-    static $password;
+$factory->define(Plan_de_pago::class, function (Faker\Generator $faker) {
 
     return [
-        'name' => $faker->name,
-        'email' => $faker->unique()->safeEmail,
-        'password' => $password ?: $password = bcrypt('secret'),
-        'remember_token' => str_random(10),
+        'nombre_plan' => "",
+        'cuotas' => 0,
+        'valor_cuota' => 0,
+        'interes' => 0,
+        'forma_pago' => ""
     ];
 });
