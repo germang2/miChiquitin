@@ -37,32 +37,21 @@ class CompraProducto extends Controller
 
       if ($request->plan_pago == 'Credito'){
 
-        $estado = "pendiente";
-        if ($request->cuota_credito == '1') {
-          $metodo = 2;
-          $obj = MetodoDePago::compraCredito($id_cliente, $total, $cuota);
-          $valorPagar = $obj["valorPagar"];
-          $valorTotal = $obj["valorCompra"];
-          $valorCuota = $obj["valorCuota"];
-        }
-        if ($request->cuota_credito == '3') {
-          $metodo = 3;
-          $obj = MetodoDePago::compraCredito($id_cliente, $total, $cuota);
-          $valorPagar = $obj["valorPagar"];
-          $valorTotal = $obj["valorCompra"];
-          $valorCuota = $obj["valorCuota"];
-        }
-        if ($request->cuota_credito == '6') {
-          $metodo = 4;
-          $obj = MetodoDePago::compraCredito($id_cliente, $total, $cuota);
-          $valorPagar = $obj["valorPagar"];
-          $valorTotal = $obj["valorCompra"];
-          $valorCuota = $obj["valorCuota"];
-        }
+        $obj = MetodoDePago::compraCredito($id_cliente, $total, $cuota);
 
-        if ($obj == false) {
+        if ($obj == []) {
           return view('Facturacion.error')->with('error', "El cliente no posee credito suficiente");
         }
+
+        $valorPagar = $obj["valorPagar"];
+        $valorTotal = $obj["valorCompra"];
+        $valorCuota = $obj["valorCuota"];
+
+        $estado = "pendiente";
+        if ($request->cuota_credito == '1') $metodo = 2;
+        if ($request->cuota_credito == '3') $metodo = 3;
+        if ($request->cuota_credito == '6') $metodo = 4;
+
       }
     }
 
