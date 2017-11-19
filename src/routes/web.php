@@ -74,5 +74,20 @@ Route::get('/proveedores', 'Inventario\ProveedoresController@proveedores')->name
 	Route::post('/pedidos/actualizar', 'Inventario\PedidosController@update')->name('updatePedido');
 
 
+//Rutas Reportes
+	Route::get('/reportes', 'Inventario\ProveedoresController@showReporte')->name('reportes');
+
+	Route::get('/reportes/proveedores', 'Inventario\ProveedoresController@reportesProveedores')->name('reportesProveedores');
+	Route::post('/reportes/proveedores/resultado', 'Inventario\ProveedoresController@reporteProveedor')->name('reporteProveedor');
+
+	Route::get('/reportes/articulos', 'Inventario\ArticuloController@reportesArticulos')->name('reportesArticulos');
+	Route::post('/reportes/articulos/resultado', 'Inventario\ArticuloController@reporteArticulo')->name('reporteArticulo');
+
+	Route::get('/reportes/articulos/buscar', 'Inventario\ArticuloController@searchProveedor')->name('search.Proveedor');
+
+	Route::get('/reportes/pedidos', 'Inventario\PedidosController@reportesPedidos')->name('reportesPedidos');
+	Route::post('/reportes/pedidos/resultado', 'Inventario\PedidosController@reportePedido')->name('reportePedido');
+
+
 
 //------------------------------RUTAS INVENTARIO----------------------------------

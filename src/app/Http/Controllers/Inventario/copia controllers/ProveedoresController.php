@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Inventario;
 use App\Http\Controllers\Controller;
 
-use App\Models\Inventario\Proveedor;
+use App\Models\Inventario\proveedor;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -55,18 +55,6 @@ class ProveedoresController extends Controller
     public function update_actualizar(Request $request)
     {
         //function to flag a proveedor as erased
-        $this->validate(request(), [
-            'id_tipo' => 'required',
-            'representante_legal' => 'required',
-            'id_representante_legal' => 'required',
-            'fecha' => 'required',
-            'telefono' => 'required',
-            'razon_social' => 'required',
-            'departamento' => 'required', 
-            'direccion' => 'required',
-            'ciudad' => 'required',          
-        ]);
-
         $proveedor = Proveedor::find($request->id);
 
         $proveedor->id_tipo = $request->id_tipo;
@@ -112,19 +100,6 @@ class ProveedoresController extends Controller
 
     public function agregarProveedor(Request $request)
     {
-
-        $this->validate(request(), [
-            'id_tipo' => 'required',
-            'representante_legal' => 'required',
-            'id_representante_legal' => 'required',
-            'fecha' => 'required',
-            'telefono' => 'required',
-            'razon_social' => 'required',
-            'departamento' => 'required', 
-            'direccion' => 'required',
-            'ciudad' => 'required',          
-        ]);
-                
         $id_tipo = $request->idTipo;
         $representante_legal = $request->representanteLegal;
         $id_representante = $request->idRepresentante;
@@ -153,44 +128,45 @@ class ProveedoresController extends Controller
     }
 
 
-    
-    public function destroy(proveedores $proveedores)
-    {
-        //
-    }
-
-     public function showReporte()
-    {
-        //
-        return view('Inventario/reportes');
-    }
-
-    public function reportesProveedores(){
-
-        return view('Inventario/reportes_proveedores');
-    }
-
-    public function reporteProveedor(Request $request){
-        $tipo = $request->optionsRadios;
-        $valor = $request->texto;
-        if($tipo == 'option1'){
-            $consulta = DB::table('proveedores')
-                     ->where('ciudad','LIKE','%'.$valor.'%')
-                     ->orWhere('departamento','LIKE','%'.$valor.'%')
-                     ->paginate(50);                    
-        }else if($tipo == 'option2'){
-            $consulta = DB::table('proveedores')
-                     ->where('id_tipo','LIKE','%'.$valor.'%')                     
-                     ->paginate(50);  
-        }
-                return view('Inventario/resultadoReporte', compact('consulta'));
-    }
-
     /**
      * Display the specified resource.
      *
      * @param  \App\proveedores  $proveedores
      * @return \Illuminate\Http\Response
      */
+    public function show(proveedores $proveedores)
+    {
+        //
+    }
+
+    /**
+     * Show the form for editing the specified resource.
+     *
+     * @param  \App\proveedores  $proveedores
+     * @return \Illuminate\Http\Response
+     */
+    public function edit(proveedores $proveedores)
+    {
+        //
+    }
+
+    /**
+     * Update the specified resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  \App\proveedores  $proveedores
+     * @return \Illuminate\Http\Response
+     */
     
+
+    /**
+     * Remove the specified resource from storage.
+     *
+     * @param  \App\proveedores  $proveedores
+     * @return \Illuminate\Http\Response
+     */
+    public function destroy(proveedores $proveedores)
+    {
+        //
+    }
 }
