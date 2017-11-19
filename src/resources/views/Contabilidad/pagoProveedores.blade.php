@@ -2,11 +2,7 @@
 
 @section('titulo')
     PAGO PROVEEDORES
-    <?php
-    function numhash($n) {
-    return (((0x0000FFFF & $n) << 16) + ((0xFFFF0000 & $n) >> 16));
-    }
-    ?>
+    
 @endsection
 
 @section('btnAccion')
@@ -73,10 +69,7 @@
                 @foreach($pagos as $pago)
                     @if(!is_null($pago->pedido) or !is_null($pago->pedido->proveedor) or !is_null($pago->pedido->articulo))
                     <tr>
-                        <td><?php
-                                echo numHash($pago->pedido->id);
-                            ?>
-                        </td>
+                        <td>{{ $pago->pedido->id }}</td>
                         <td>{{ $pago->fecha_orden }} </td>
                         <td>{{$pago->pedido->proveedor->representante_legal}}</td>
                         <td>

@@ -124,7 +124,7 @@ class ArticuloController extends Controller
         $this->validate(request(), [
             'Nombre' => 'required',
             'Cantidad' => 'required',
-            'Basico' => 'required',
+            'precio_basico' => 'required',
             'Descripcion' => 'required',          
         ]);
 

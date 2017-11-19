@@ -101,10 +101,6 @@ class pagoProveedoresCtr extends Controller
         //
     }
 
-    public function numhash($n) {
-        return (((0x0000FFFF & $n) << 16) + ((0xFFFF0000 & $n) >> 16));
-    }
-
     public function getPagos(Request $request){
         $rtJson    = [
             'ok' => false,
@@ -121,7 +117,7 @@ class pagoProveedoresCtr extends Controller
             foreach ($datos as $key => $dato) {
                 if(!is_null($dato->pedido) or !is_null($dato->pedido->proveedor) or !is_null($dato->pedido->articulo)) {
                     $rtJson['dat'][$key] = [
-                        'id'=> $this->numhash($dato->pedido->id),
+                        'id'=>  $dato->pedido->id,
                         'fo' => $dato->fecha_orden,
                         'pr' => $dato->pedido->proveedor->representante_legal,
                         'ar' => $dato->pedido->articulo->nombre,

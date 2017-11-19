@@ -10,28 +10,28 @@ class Planpago extends Seeder
     public function run()
     {
         DB::table('plan_de_pagos')->insert([
-        	'nombre_plan' => 'Efectivo',
-        	'cuotas' => '0',
-        	'interes' => '0',
-        	'forma_pago' => 'Efectivo'
+            'nombre_plan' => 'Efectivo',
+            'cuotas' => '0',
+            'interes' => '0',
+            'forma_pago' => 'Efectivo'
         ]);
         DB::table('plan_de_pagos')->insert([
-        	'nombre_plan' => '1 Mes',
-        	'cuotas' => '1',
-        	'interes' => '0',
-        	'forma_pago' => 'Efectivo'
+            'nombre_plan' => '1 Mes',
+            'cuotas' => '1',
+            'interes' => '0',
+            'forma_pago' => 'Efectivo'
         ]);
         DB::table('plan_de_pagos')->insert([
-        	'nombre_plan' => '3 Meses',
-        	'cuotas' => '3',
-        	'interes' => '0',
-        	'forma_pago' => 'Efectivo'
+            'nombre_plan' => '3 Meses',
+            'cuotas' => '3',
+            'interes' => '0',
+            'forma_pago' => 'Efectivo'
         ]);
         DB::table('plan_de_pagos')->insert([
-        	'nombre_plan' => '6 Meses',
-        	'cuotas' => '6',
-        	'interes' => '0',
-        	'forma_pago' => 'Efectivo'
+            'nombre_plan' => '6 Meses',
+            'cuotas' => '6',
+            'interes' => '0',
+            'forma_pago' => 'Efectivo'
         ]);
     }
 }

@@ -41,10 +41,7 @@
                                 <tbody>
                                 @foreach($pedidos as $pedido)
                                         <tr>
-                                            <td><?php
-                                                echo numHash($pedido->id);
-                                                ?>
-                                            </td>
+                                            <td>{{ $pedido->id }}</td>
                                             <td class="text-center">{{ $pedido->articulo->nombre}} </td>
                                             <td class="text-center">{{$pedido->proveedor->representante_legal}}</td>
                                             <td class="text-center">{{$pedido->fecha}}</td>

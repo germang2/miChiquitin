@@ -41,7 +41,7 @@
                         </div>
                         <div class="form-group">
                             <label for="idRepresentante">Fecha</label>                            
-                            <input class="form-control" type="text" name="fecha" id="fecha">  
+                            <input class="form-control" type="date" name="fecha" id="fecha">  
                         </div>
                         <div class="form-group">
                             <label for="telefono">Telefono</label>                            
