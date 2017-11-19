@@ -17,8 +17,13 @@
     <link href="{{ asset('assets/css/componentes.css') }}" rel="stylesheet">
     <link href="{{ asset('assets/css/select2.min.css') }}" rel="stylesheet">
     <link href="{{ asset('assets/css/layout.css') }}" rel="stylesheet">
+    <link href="{{ asset('assets/css/custom-clients.css') }}" rel="stylesheet">
     <link href="{{ asset('assets/css/theme-dark.css') }}" rel="stylesheet">
+
     <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+
+    <link href="{{ asset('assets/css/bootstrap-datepicker3.css') }}" rel="stylesheet">
+
     <!-- Scripts -->
     <script>
         window.Laravel = {!! json_encode([
@@ -109,9 +114,14 @@
 <script src="{{ asset('assets/js/datatables.min.js') }}"></script>
 <script src="{{ asset('assets/js/select2.min.js') }}"></script>
 <script src="{{ asset('assets/js/layout.js') }}"></script>
+
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+
+<script src="{{ asset('assets/js/bootstrap-datepicker.min.js') }}"></script>
+
 <!-- Script Español Select2 -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.0/js/i18n/es.js"></script>
+<script src="{{ asset('assets/js/jquery.mtz.monthpicker.js') }}"></script>
 
 <!-- SCRIPTS INVENTARIO-->
 <script>
@@ -203,7 +213,7 @@
 
             $( function() {
                 $( "#searchBar" ).autocomplete({
-                    //source: 'http://localhost:8000/articulos/agregar/search'
+                    source: 'http://localhost:8000/articulos/agregar/search'
                     source: 'http://www.michiquitin.herokuapp.com/'
                 });
             } );
@@ -211,8 +221,8 @@
             
             $( function() {
                 $( "#texto2" ).autocomplete({
-                    //source: 'http://localhost:8000/reportes/articulos/buscar'
-                    source: 'http://www.michiquitin.herokuapp.com/'
+                    source: 'http://localhost:8000/reportes/articulos/buscar'
+                    //source: 'http://www.michiquitin.herokuapp.com/'
                 });
             } );
             

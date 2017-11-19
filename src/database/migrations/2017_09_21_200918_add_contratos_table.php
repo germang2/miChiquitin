@@ -19,6 +19,7 @@ class AddContratosTable extends Migration
             $table->decimal('salario', 8, 2);
             $table->date('fecha_inicial');
             $table->date('fecha_fin');
+            $table->softDeletes();
             $table->timestamps();
         });
     }

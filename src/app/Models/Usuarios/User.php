@@ -1,9 +1,10 @@
-<?php 
+<?php
 
 namespace App\Models\Usuarios;
 
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class User extends Authenticatable
 {
@@ -14,8 +15,10 @@ class User extends Authenticatable
      *
      * @var array
      */
+     use softDeletes;
+     protected $dates = ['deleted_at'];
     protected $fillable = [
-        'name', 'email', 'password', 'id_tipo', 'tipo_rol', 'apellidos', 'direccion', 'edad',
+        'name', 'email', 'password','id_tipo' ,'tipo_rol', 'apellidos', 'direccion', 'edad', 'credito_maximo','credito_actual',
     ];
 
     /**
@@ -36,7 +39,7 @@ class User extends Authenticatable
     }
 
     public function telefonos(){
-        return $this->hasMany('App\Models\Usuarios\Telefono');   
+        return $this->hasMany('App\Models\Usuarios\Telefono');
     }
 
     public function facturas(){
@@ -48,6 +51,6 @@ class User extends Authenticatable
     }
 
     public function deuda(){
-        return $this->hasOne('App\Models\Cartera\Deuda');
+        return $this->hasOne('App\Models\Cartera\Deuda','id_usuario');
     }
 }
