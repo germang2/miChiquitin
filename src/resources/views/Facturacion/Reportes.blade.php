@@ -88,8 +88,6 @@
 				@endforeach
 			</tbody>
 		</table>
-	@else
-		<h1>aun no se an aplicado los filtros</h1>
 	@endif
 
 @endsection
