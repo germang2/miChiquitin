@@ -66,6 +66,20 @@
                             <span class="title">Pedidos</span>
                         </a>
                     </li>
+                    <li class="nav-item">
+                        <a href="{{ route('reportes') }}" class="nav-link ">
+                            <i class="fa fa-cogs"></i>
+                            <span class="title">Reportes</span>
+                        </a>
+                        <ul class="sub-menu" style="display: none;">
+                            <li class="nav-item">
+                                <a href="#" class="nav-link ">
+                                    <i class="fa fa-cogs"></i>
+                                    <span class="title">Opcion 1</span>
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
 
                 </ul>
             </li>

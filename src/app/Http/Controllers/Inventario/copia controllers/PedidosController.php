@@ -67,17 +67,6 @@ class PedidosController extends Controller
     public function store(Request $request)
     {
         //
-
-        $this->validate(request(), [
-            'id_articulo' => 'required',
-            'id_proveedor' => 'required',
-            'costo_total' => 'required',
-            'estado' => 'required',    
-            'cantidad' => 'required',
-            'fecha' => 'required',
-        ]);
-
-
         $id_articulo = $request ->id_articulo;
         $id_proveedor = $request ->id_proveedor;
         $costo_total = $request ->costo_total;
@@ -129,16 +118,7 @@ class PedidosController extends Controller
      */
     public function update(Request $request, Pedido $pedidos)
     {
-        //
-
-        $this->validate(request(), [
-            //'id_articulo' => 'required',
-            //'id_proveedor' => 'required',
-            'costo_total' => 'required',
-            'estado' => 'required',    
-            'cantidad' => 'required',        
-        ]);
-
+        //        
         $pedidos = Pedido::find($request->id);
 
         //$pedidos->id_articulo = $request->id_articulo;
@@ -180,20 +160,5 @@ class PedidosController extends Controller
         $pedidos->save();
 
         return $this->index();
-    }
-
-    public function reportesPedidos()
-    {
-        return view('Inventario/reportes_pedidos');
-    }    
-
-    public function reportePedido(Request $request){        
-        $valor = $request->estado;
-
-        $consulta = DB::table('pedidos')
-                     ->where('estado','=', $valor)                     
-                     ->paginate(50);                    
-        
-        return view('Inventario/resultadoReportePedido', compact('consulta'));
     }
 }

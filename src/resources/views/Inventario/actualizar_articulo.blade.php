@@ -5,7 +5,17 @@
     <div class="row">
         <div class="col-md-10 ">
             
-                <div class="panel-heading">Dashboard</div>
+                <div class="panel-heading">
+                  @if(count($errors)>0)
+                    <div class="alert alert-danger">
+                        <ul>
+                          @foreach($errors->all() as $error)
+                            <li> {{ $error }} </li>
+                          @endforeach
+                        </ul>
+                    </div>  
+                  @endif  
+                </div>
                 <div class="panel-body">
 	                <div class="container">                              
                             <select  class="form-control" name="idArticulo" id="idArticulo">                            

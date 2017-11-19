@@ -59,17 +59,7 @@ class ArticuloController extends Controller
      */
     public function store(Request $request)
     {
-       //  
-       $this->validate(request(), [
-           'searchBar' => 'required',
-           'nombre' => 'required',
-           'descripcion' => 'required',
-           'cantidad' => 'required',    
-           'precio_basico' => 'required',
-           'fecha' => 'required',
-           'id_proveedor' => 'required',         
-       ]);
-
+       //    
         Articulo::create([
             'id' => $request->searchBar,
             'nombre' => $request->nombre,
@@ -120,14 +110,6 @@ class ArticuloController extends Controller
     public function update(Request $request)
     {
         //
-
-        $this->validate(request(), [
-            'Nombre' => 'required',
-            'Cantidad' => 'required',
-            'Basico' => 'required',
-            'Descripcion' => 'required',          
-        ]);
-
         $Articulo = Articulo::find($request->id);
 
         $Articulo->Nombre = $request->Nombre;
@@ -186,49 +168,4 @@ class ArticuloController extends Controller
         }        
         return $searchResult;
     }    
-
-    public function reportesArticulos()
-    {
-        return view('Inventario/reportes_articulos');
-    }    
-
-    public function reporteArticulo(Request $request){
-        $tipo = $request->optionsRadios;
-        $valor = $request->texto;
-        if($tipo == 'option1'){
-            $consulta = DB::table('articulos')
-                     ->where('nombre','LIKE','%'.$valor.'%')                     
-                     ->paginate(50);                    
-        }else if($tipo == 'option2'){
-            $consulta1 = DB::table('proveedores')
-                     ->select('id')
-                     ->where('representante_legal','=',$request->texto2)
-                     ->get(); 
-            foreach ($consulta1 as $proveedor => $value) {                     
-                $consulta = DB::table('articulos')
-                         ->where('id_proveedor','=',$value->id)
-                         ->paginate(50);     
-            }                                                                                            
-        }
-            return view('Inventario/resultadoReporteArticulo', compact('consulta'));
-    }
-
-    public function searchProveedor(Request $request)
-    {
-        $terms = $request->term;
-        $users = DB::table('proveedores')
-                     ->select('representante_legal')
-                     ->where('representante_legal','LIKE','%'.$terms.'%')->get();
-        if (count($users)==0) {
-            $searchResult[] = 'No Existe el Proveedor';
-        }
-        else{
-            foreach ($users as $user => $value) {
-                $searchResult[] = $value->representante_legal;
-            }
-        }        
-        return $searchResult;
-    }
 }
-  
-

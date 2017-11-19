@@ -18,6 +18,7 @@
     <link href="{{ asset('assets/css/select2.min.css') }}" rel="stylesheet">
     <link href="{{ asset('assets/css/layout.css') }}" rel="stylesheet">
     <link href="{{ asset('assets/css/theme-dark.css') }}" rel="stylesheet">
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
     <!-- Scripts -->
     <script>
         window.Laravel = {!! json_encode([
@@ -108,6 +109,7 @@
 <script src="{{ asset('assets/js/datatables.min.js') }}"></script>
 <script src="{{ asset('assets/js/select2.min.js') }}"></script>
 <script src="{{ asset('assets/js/layout.js') }}"></script>
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 <!-- Script Español Select2 -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.0/js/i18n/es.js"></script>
 
@@ -198,6 +200,34 @@
                     alert('Los pedidos con valor negativo no son permitidos. Por favor intente de nuevo.');                   
                 }
             });
+
+            $( function() {
+                $( "#searchBar" ).autocomplete({
+                    source: 'http://localhost:8000/articulos/agregar/search'
+                });
+            } );
+            /*-------------------Scripts de Reportes para Articulos-------------------------*/
+            
+            $( function() {
+                $( "#texto2" ).autocomplete({
+                    source: 'http://localhost:8000/reportes/articulos/buscar'
+                });
+            } );
+            
+
+            $('#optionsRadiosArticulo1').click(function(event) {
+                
+                    document.getElementById('campo2').setAttribute("hidden",true);
+                    document.getElementById('campo1').removeAttribute("hidden");
+                
+            });  
+
+            $('#optionsRadiosArticulo2').click(function(event) {
+                
+                    document.getElementById('campo1').setAttribute("hidden",true);
+                     document.getElementById('campo2').removeAttribute("hidden");
+                
+            });              
 </script>
 
 <!-- SCRIPTS INVENTARIO-->
