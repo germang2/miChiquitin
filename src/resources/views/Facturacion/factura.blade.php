@@ -67,7 +67,8 @@
 
 <div class="container-fluid productos">
   @if ( $plan_pago == "Credito")
-    <h3>Total pagado: $ {{ (int)$pagado}}</h3>
+    <b>Valor a pagar (10%): $ {{ $pagado}}<b><br>
+    <b>Valor de compra: $ {{ $pagado+$total }}<b>
   @endif
   <h2>Total: $ {{ (int)$total}}</h2>
 </div>
