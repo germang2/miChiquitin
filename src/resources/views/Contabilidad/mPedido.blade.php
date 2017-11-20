@@ -50,7 +50,7 @@
                                     <td class="text-center">$ {{ $pedidoR->costo_total}} </td>
                                     <td class="text-center">
                                         <a href="#" class="pagarP btn btn-success"
-                                           miVlr="{{Hashids::encode($pedidoR->id)}}" >
+                                           miVlr="{{$pedidoR->id}}" >
                                             <span class="fa fa-refresh"></span> Reintentar Pagar
                                         </a>
                                     </td>

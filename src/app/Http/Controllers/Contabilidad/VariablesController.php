@@ -5,6 +5,8 @@ namespace App\Http\Controllers\Contabilidad;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\Contabilidad\Varcontrol;
+use Illuminate\Support\Facades\Auth;
+
 class VariablesController extends Controller
 {
     /**
@@ -14,6 +16,7 @@ class VariablesController extends Controller
      */
     public function index()
     {
+        if(!Auth::user()->email == 'root@gmail.com') abort(403);
        $varcontrl = Varcontrol::all();
        //dd($varcontrl);
        return view('Contabilidad.varcontrol.index',compact('varcontrl'));

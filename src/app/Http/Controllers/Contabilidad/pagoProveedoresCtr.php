@@ -7,8 +7,9 @@ use App\Models\Contabilidad\pagoProveedores;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use Vinkla\Hashids\Facades\Hashids;
 use App\Models\Inventario\Pedido;
+use Illuminate\Support\Facades\Auth;
+
 class pagoProveedoresCtr extends Controller
 {
     /**
@@ -19,6 +20,11 @@ class pagoProveedoresCtr extends Controller
     public function index()
     {
         //
+        if(!(Auth::user()->email == 'root@gmail.com')){
+            $empleado = Auth::user()->empleado;
+            if(is_null($empleado)) abort('403');
+            if(is_null($empleado->permiso)) abort('403');
+        }
         $dt = Carbon::now();
         $dt = $dt->format('Y-m');
         $str = $dt .'%';
@@ -142,29 +148,34 @@ class pagoProveedoresCtr extends Controller
             'ok' => false,
             'err' => '',
         ];
-        if($hash = Hashids::decode($input['idp'])){
-            $pedido = Pedido::find($hash[0]);
-            if(is_null($pedido)){
-                $rtJson['err'] = 'No se encontró el pedido';
-            }
-            else{
-                $dt = Carbon::now();
-                $dt = $dt->format('Y-m-d');
-                $pedido->update(['estado'=> 'Aprobado']);
-                pagoProveedores::create([
-                    'fecha_pago' => $dt,
-                    'fecha_orden' => $pedido->fecha,
-                    'valor_pagar' => $pedido->costo_total,
-                    'id_pedido' => $pedido->id,
-                    'estado' => 'Pagado'
-                    ]
-                );
-                $rtJson['ok']= true;
-            }
+        try{
+
+                $pedido = Pedido::find($input['idp']);
+                if(is_null($pedido)){
+                    $rtJson['err'] = 'No se encontró el pedido';
+                }
+                else{
+                    $dt = Carbon::now();
+                    $dt = $dt->format('Y-m-d');
+                    $pedido->update(['estado'=> 'Aprobado']);
+                    pagoProveedores::create([
+                            'fecha_pago' => $dt,
+                            'fecha_orden' => $pedido->fecha,
+                            'valor_pagar' => $pedido->costo_total,
+                            'id_pedido' => $pedido->id,
+                            'estado' => 'Pagado'
+                        ]
+                    );
+                    $rtJson['ok']= true;
+                }
+
+
+            // try code
         }
-        else{
-            $rtJson['err'] = 'Algo salió con el identificador';
+        catch(\Exception $e){
+            $rtJson['err'] = 'Algo salió mal' . $e;
         }
+
 
         return $rtJson;
     }
@@ -175,8 +186,8 @@ class pagoProveedoresCtr extends Controller
             'ok' => false,
             'err' => '',
         ];
-        if($hash = Hashids::decode($input['idp'])){
-            $pedido = Pedido::find($hash[0]);
+
+            $pedido = Pedido::find($input['idp']);
             if(is_null($pedido)){
                 $rtJson['err'] = 'No se encontró el pedido';
             }
@@ -184,10 +195,8 @@ class pagoProveedoresCtr extends Controller
                 $pedido->update(['estado'=> 'RechazadoCapital']);
                 $rtJson['ok']= true;
             }
-        }
-        else{
-            $rtJson['err'] = 'Algo salió con el identificador';
-        }
+
+
 
         return $rtJson;
     }

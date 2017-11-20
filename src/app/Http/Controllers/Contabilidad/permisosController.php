@@ -1,58 +1,26 @@
 <?php
 
 namespace App\Http\Controllers\Contabilidad;
-
-use App\Models\Contabilidad\nomina;
-use App\Models\Contabilidad\pagoProveedores;
-use App\Models\Inventario\Pedido;
-use Carbon\Carbon;
-use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use Vinkla\Hashids\Facades\Hashids;
+use App\Models\Contabilidad\permisosContabilidad;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
-class balanceCtr extends Controller
+class permisosController extends Controller
 {
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(Request $request)
+    public function index()
     {
         //
-        $tipo = $request->input('tipo');
-        switch ($tipo) {
-            case 'dia':
-                $dt = Carbon::now();
-                $dt = $dt->format('Y-m-d');
-                $format = 'yyyy-mm-dd';
-                $min = 0;
-
-                break;
-            case 'mes':
-                $dt = Carbon::now();
-                $dt = $dt->format('Y-m');
-                $format = 'yyyy-mm';
-                $min = 1;
-
-                break;
-
-            case 'an':
-                $dt = Carbon::now();
-                $dt = $dt->format('Y');
-                $format = 'yyyy';
-                $min = 2;
-
-                break;
-            default:
-                abort('404');
-                break;
-        }
-        return view('Contabilidad.balances')->with(
+        if(!(Auth::user()->email == 'root@gmail.com')) abort(403);
+        $permisos = permisosContabilidad::all();
+        return view('Contabilidad.permisos')->with(
             [
-                'date'=> $dt,
-                'format' => $format,
-                'min'=> $min
+                'permisos'=> $permisos,
             ]
         );
     }
@@ -65,7 +33,6 @@ class balanceCtr extends Controller
     public function create()
     {
         //
-        return 'balance';
     }
 
     /**
@@ -122,5 +89,42 @@ class balanceCtr extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    public function delPer(Request $request){
+        $input = $request->all();
+        $rtJson    = [
+            'ok' => false,
+            'err' => ''
+        ];
+        try{
+            // try code
+            $permiso = permisosContabilidad::find($input['idp']);
+            $permiso->delete();
+            $rtJson['ok'] = true;
+        }
+        catch(\Exception $e){
+            $rtJson['err'] = 'Algo salió mal' . $e;
+        }
+        return $rtJson;
+    }
+
+    public function addPer(Request $request){
+        try{
+            $input = $request->all();
+            $rtJson    = [
+                'ok' => false,
+                'err' => ''
+            ];
+            $input['id_user'] = $input['idp'];
+            // try code
+            $permiso = permisosContabilidad::create(['id_user' => $input['idp']]);
+            $rtJson['ok'] =true;
+        }
+        catch(\Exception $e){
+            $rtJson['err'] = 'Algo salió mal' . $e;
+        }
+        return $rtJson;
+
     }
 }
