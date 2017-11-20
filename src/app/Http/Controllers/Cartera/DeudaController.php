@@ -3,7 +3,6 @@
 namespace App\Http\Controllers\Cartera;
 
 use App\Models\Cartera\Deuda;
-use App\Models\Contabilidad\Varcontrol;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Input;
@@ -35,7 +34,7 @@ class DeudaController extends Controller
        if($request){
             $query=$request->get('searchText');
             if (is_null($query)){
-                $deudas = Deuda::all();    
+                $deudas = Deuda::all()->where('estado','!=','Pagado');    
             }else{
                 $user_id = User::where('id_tipo', $query)->first()->id;
                 $deudas = Deuda::where('id_usuario',$user_id)->get();
@@ -162,9 +161,6 @@ class DeudaController extends Controller
             $hora = date("Y-m-d H:i:s"); 
         $deudas=Deuda::findOrFail($id);
         $deudas->valor_pagado+=$request->get('abono');
-        $efectivo = Varcontrol::where('nombre', '=', 'efectivo')->get()->first();
-        $resta = $efectivo->valor + $request->get('abono');
-        $efectivo->update(['valor' => $resta]);
         $deudas->estado="Pendiente";
 
         $fecha=$deudas->plazo_credito;

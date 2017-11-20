@@ -90,7 +90,7 @@ Route::get('/proveedores', 'Inventario\ProveedoresController@proveedores')->name
 
 
 // ------------------------- Rutas modulo Cartera -----------------
-
+Route::get('/consultas/mpagos','cartera\ConsultasController@mpagos');
 Route::get('/deuda/hcliente','Cartera\DeudaController@hcliente');
 Route::get('/pago/hpago','Cartera\PagoController@hpago');
 Route::get('/consultas/planes','Cartera\ConsultasController@planes');
