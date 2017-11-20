@@ -53,4 +53,22 @@ class User extends Authenticatable
     public function deuda(){
         return $this->hasOne('App\Models\Cartera\Deuda');
     }
+
+    public function scopeName($query, $name){ //scope query para reporte por nombre
+      if(trim($name)!=""){
+        $query->where("name","LIKE","%$name%")->get();
+      }
+    }
+
+    public function scopeCredito($query, $cre_min,$cre_max){ //query para listar usuarios por un rango de credito
+      $query->whereBetween('credito_actual', [$cre_min, $cre_max])->get();
+    }
+
+    public function scopeCreditomax($query, $cre_min,$cre_max){ //query para listar usuarios por un rango de credito
+      $query->whereBetween('credito_maximo', [$cre_min, $cre_max])->get();
+    }
+
+    public function scopeAcceso($query){
+      $query->where('last_login','!=',null)->get();
+    }
 }

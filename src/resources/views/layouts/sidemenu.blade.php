@@ -109,7 +109,7 @@
                     <li class="nav-item">
                         <a href="{{route('filtros')}}" class="nav-link ">
                             <i class="fa fa-cogs"></i>
-                           <span class="title">Filtros</span>
+                           <span class="title">Reportes</span>
                         </a>
                     </li>
                     <li class="nav-item">
