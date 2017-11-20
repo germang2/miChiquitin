@@ -81,7 +81,7 @@
                             </td>
                             <td>
                                 <a href="#" class="verNomina btn btn-success"
-                                   miVlr="{{Hashids::encode($nomina->id)}}" >
+                                   miVlr="{{$nomina->id}}" >
                                     <span class="fa fa-search"></span> Ver
                                 </a>
                             </td>
@@ -160,7 +160,7 @@
                     url: $('#urlAct').html() + '/nomina/get',
                     type: 'post',
                     data: {
-                        idn : $(this).attr('miVlr'),
+                        idn : $('#nId').val(),
                         _token : $('input[name="_token"]').val()
                     },
                     beforeSend: function() {
