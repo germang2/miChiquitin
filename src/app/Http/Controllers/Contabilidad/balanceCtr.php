@@ -29,6 +29,21 @@ class balanceCtr extends Controller
                 $min = 0;
 
                 break;
+            case 'mes':
+                $dt = Carbon::now();
+                $dt = $dt->format('Y-m');
+                $format = 'yyyy-mm';
+                $min = 1;
+
+                break;
+
+            case 'an':
+                $dt = Carbon::now();
+                $dt = $dt->format('Y');
+                $format = 'yyyy';
+                $min = 2;
+
+                break;
             default:
                 abort('404');
                 break;
