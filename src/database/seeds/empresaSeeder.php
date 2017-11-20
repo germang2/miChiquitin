@@ -2,6 +2,8 @@
 
 use Illuminate\Database\Seeder;
 
+use Illuminate\Database\Eloquent\Model;
+
 class empresaSeeder extends Seeder
 {
     /**

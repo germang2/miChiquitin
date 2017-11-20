@@ -1,5 +1,5 @@
 <?php
-
+ 
 /*
 |--------------------------------------------------------------------------
 | Model Factories
@@ -41,6 +41,9 @@ $factory->define(App\Models\Usuarios\Cliente::class, function (Faker\Generator $
 $factory->define(App\Models\Usuarios\Telefono::class, function (Faker\Generator $faker) {
   return [
         'telefono' => $faker->phoneNumber,
+
+        //'id_usuario'=>random_int(DB::table('users')->min('id'),DB::table('users')->max('id')),
+
     ];
 });
 

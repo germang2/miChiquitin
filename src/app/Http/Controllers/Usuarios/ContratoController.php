@@ -13,7 +13,7 @@ class ContratoController extends Controller
     public function index()
     {
         $contrato = Contrato::orderBy('id_contrato', 'desc')->paginate(10);
-        return view('Usuario.contratos.IndexContratos',['contratos'=>$contrato]);
+        return view('usuario.contratos.IndexContratos',['contratos'=>$contrato]);
     }
 
     public function create()

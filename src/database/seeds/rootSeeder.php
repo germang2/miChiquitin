@@ -2,6 +2,8 @@
 
 use Illuminate\Database\Seeder;
 
+use Illuminate\Database\Eloquent\Model;
+
 class rootSeeder extends Seeder
 {
     /**
@@ -11,6 +13,7 @@ class rootSeeder extends Seeder
      */
     public function run()
     {
+
       DB::table('users')->insert([
         'name' 		=> 	'root',
         'email'		=>	'root@gmail.com',
@@ -22,5 +25,6 @@ class rootSeeder extends Seeder
         'credito_maximo' => 0.00,
         'credito_actual' => 0.00
       ]);
+
     }
 }
