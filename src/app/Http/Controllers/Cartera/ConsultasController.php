@@ -31,16 +31,16 @@ class ConsultasController extends Controller
 
     public function mpagos(){
         $pagos=Pago::all()->sortByDesc('valor');
-        return view('cartera.consultas.mpagos',['pagos' => $pagos]);
+        return view('cartera.consultas.mpagos', compact('pagos'));
     }
 
     public function mayor(){
         $fecha=Deuda::all()->sortBy('valor_a_pagar');
-        return view('cartera.consultas.mayor',['fecha' => $fecha]);
+        return view('cartera.consultas.mayor', compact('fecha'));
     } 
 
     public function mdeudas(){
         $deudas=Deuda::all()->sortByDesc('valor_a_pagar');
-        return view('cartera.consultas.mdeudas',['deudas' => $deudas]);     
+        return view('cartera.consultas.mdeudas', compact('deudas'));     
     }
 }

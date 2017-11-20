@@ -7,12 +7,12 @@
 @section('content')
 
   <div class="container">
-    <h1>Historico de menores deudas</h1>
+    <h1>Historico de Mayores deudas</h1>
   <nav class="navbar navbar-inverse">
       <ul class="nav navbar-nav">
           <li><a href="{{ URL::to('/consultas') }}">Mas consultas</a></li>
+          <li><a href="{{ URL::to('/consultas/mayor') }}">Historico de menores deudas</a></li>
           <li><a href="{{ URL::to('/consultas#') }}">Planes mas solicitados</a></li>
-          <li><a href="{{ URL::to('/consultas/mdeudas') }}">Historico de mayores deudas</a>
           <li><a href="{{ URL::to('/consultas/mpagos') }}">Mayores pagos</a></li>
       </ul>
   </nav>
@@ -38,14 +38,14 @@
         </thead>
         <tbody>
           <?php $a = 1; ?>
-        @foreach($fecha as $fec)
+        @foreach($deudas as $deuda)
             <tr>
               <td>{{$a}} <?php $a++; ?></td>
-              <td>{{ $fec->user->id_tipo }}</td>
-              <td>{{ $fec->user->name }}</td>
-              <td>No. Deuda {{ $fec->id_deuda}}</td>
-              <td>{{ $fec->valor_a_pagar }}</td>
-              <td>{{ $fec->estado }}</td>
+              <td>{{ $deuda->user->id_tipo }}</td>
+              <td>{{ $deuda->user->name }}</td>
+              <td>No. Deuda {{ $deuda->id_deuda}}</td>
+              <td>{{ $deuda->valor_a_pagar }}</td>
+              <td>{{ $deuda->estado }}</td>
           </tr>
         @endforeach
         </tbody>

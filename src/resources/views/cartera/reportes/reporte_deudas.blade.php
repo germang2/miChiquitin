@@ -36,10 +36,7 @@
         {{ Form::submit('Buscar', array('class' => 'btn btn-primary')) }}
       {{ Form::close() }}
     
-    <div class="col col-md-12">
-      <!--a href="{{action('Cartera\ReportesController@downloadPDF', 'd'.Input::get('search') )}}" 
-        type="button" class="btn btn-sm btn-danger" style="float: right;">PDF</a-->
-    </div>
+      <div class="alert alert-info">{{$message}}</div>
   </div>
   
   <div class="table-inverse table-responsive">
