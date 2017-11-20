@@ -58,6 +58,8 @@ class Kernel extends HttpKernel
         'throttle' => \Illuminate\Routing\Middleware\ThrottleRequests::class,
         'adminMiddleware' => \App\Http\Middleware\adminMiddleware::class,
         'rootMiddleware' => \App\Http\Middleware\rootMiddleware::class,
-        'empleadoMiddleware' => \App\Http\Middleware\empleadoMiddleware::class,
+        'cajeroMiddleware' => \App\Http\Middleware\cajeroMiddleware::class,
+        'auxiliarMiddleware' => \App\Http\Middleware\auxiliarMiddleware::class,
+        'vendedorMiddleware' => \App\Http\Middleware\vendedorMiddleware::class,
     ];
 }

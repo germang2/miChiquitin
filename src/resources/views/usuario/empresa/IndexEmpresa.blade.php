@@ -5,24 +5,32 @@
     @endsection
 
 @section('content')
-    <table class="table">
+  @if(Session::has('flash_message'))
+    <script type="text/javascript">
+      alert("{{Session::get('flash_message')}}");
+    </script>
+  @endif
+  <div class="container">
+  <table class="table table-bordered table-condensed ">
         <thead>
+          <tr>
           <th>Nombre</th>
           <th>Direccion</th>
           <th>Telefono</th>
+        </tr>
         </thead>
 	@foreach($empresas as $empresa)
-    <tbody>
+    <tbody><tr>
             <td>{{$empresa->nombre}}</td>
             <td>{{$empresa->direccion}}</td>
             <td>{{$empresa->telefono}}
               <small class="pull-right">
-              <!--<form action="route('Usuario.destroy',['usuario' => $user->id])}}" method="post">
-                {csrf_field()}}
-                {method_field('DELETE')}}
-                <button type="submit" class="btn btn-danger">Delete</button>-->
               </form></small><small class="pull-right">
                   <a href="{{route ('Empresa.edit',['empresa' => $empresa->id_empresa])}}" class="btn btn-info">Edit</a>
             </small></td>
+          </tr>
+        </tbody>
     @endforeach
+  </table>
+</div>
 @endsection

@@ -17,32 +17,26 @@ class ClienteController extends Controller
        return view('usuario.clientes.IndexClientes', ['clientes'=>$clientes]);
     }
 
-    public function ciudades()
-    {
-       $clientes = Cliente::orderBy('ciudad','desc')->paginate(10);
-       return view('usuario.filtros.IndexCiudades', ['clientes'=>$clientes]);
-    }
-
-    public function ciudad(Request $request){
-      $clientes =  Cliente::all()->where('ciudad', $request->ciudad);
-      if(empty($clientes)){
-        Session::flash('flash_message', 'Usuario Eliminado');
-        return redirect()->back();
-      }else{
+    public function ciudad(Request $request){ //funcion para el reporte por genero
+      $clientes = Cliente::ciudad($request->ciudad)->orderBy('ciudad','desc')->paginate(10); //query da un array
+      if(count($clientes)>0){
         return view('usuario.filtros.IndexCiudad',['clientes'=>$clientes]);
+      }else{
+        Session::flash('flash_message', 'Busqueda no encontrada');
+        return redirect()->back();
       }
     }
 
-    public function genero(Request $request){
-      $clientes = Cliente::all()->where('genero', $request->genero);
-      if(empty($clientes)){
-            Session::flash('flash_message', 'Usuario Eliminado');
-            return redirect()->back();
+    public function genero(Request $request){ //funcion para el reporte por genero
+      $clientes = Cliente::genero($request->genero)->orderBy('id_usuario','desc')->paginate(10); //query da un array
+      if(count($clientes)>0){
+            return view('usuario.filtros.IndexGenero',['clientes'=>$clientes]);
         } else{
-          return view('usuario.filtros.IndexGenero',['clientes'=>$clientes]);
+            Session::flash('flash_message', 'Busqueda no encontrada');
+            return redirect()->back();
         }
       }
-    
+
 
     public function create()
     {
