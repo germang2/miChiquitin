@@ -8,6 +8,7 @@ use App\Models\Usuarios\Empleado;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Vinkla\Hashids\Facades\Hashids;
 
@@ -22,6 +23,11 @@ class NominaCtr extends Controller
     {
         //
         //abort(403); AGREGAR SEGURIDAD
+        if(!(Auth::user()->email == 'root@gmail.com')){
+            $empleado = Auth::user()->empleado;
+            if(is_null($empleado)) abort('403');
+            if(is_null($empleado->permiso)) abort('403');
+        }
         $dt = Carbon::now();
         $dt = $dt->format('Y-m');
         $str = $dt .'%';
@@ -123,9 +129,9 @@ class NominaCtr extends Controller
             foreach ($datos as $key => $dato) {
                 $total = $dato->base + ( 3 * $dato->salud) + $dato->aux_transporte;
                 $rtJson['dat'][$key] = [
-                    'id'=> Hashids::encode($dato->id),
+                    'id'=> $dato->id,
                     'id3' => $this->numhash($dato->id),
-                    'id2' => $dato->empleado->user->id_tipo,
+                    'id2' => $dato->empleado->user->email,
                     'nom' => $dato->empleado->user->name,
                     'app' => $dato->empleado->user->apellidos,
                     'f_pre' => $dato->fecha_prenomina,
@@ -177,7 +183,7 @@ class NominaCtr extends Controller
             'ok' => false,
             'err' => '',
         ];
-        ;
+
         try{
             // try code
             $aporte = Varcontrol::where('nombre', '=', 'aporte')->get()->first();
@@ -211,8 +217,7 @@ class NominaCtr extends Controller
         $input = $request->all();
         try{
             // try code
-            $hash = Hashids::decode($input['idn']);
-            $nomina = nomina::find($hash[0]);
+            $nomina = nomina::find($input['idn']);
             $rtJson['aporte'] = $nomina->salud;
             $rtJson['base'] = $nomina->base;
             $rtJson['aux_transporte'] = $nomina->aux_transporte;
@@ -227,8 +232,6 @@ class NominaCtr extends Controller
             $rtJson['err'] = 'Algo salió mal' . $e;
         }
         return $rtJson;
-        //Hacer Seguridad
-
     }
 
     public function genNom(Request $request){
@@ -238,22 +241,7 @@ class NominaCtr extends Controller
         ];
         $input = $request->all();
         try{
-            if ($input['id'] < 0){
-                $hash = -1;
-            }
-            else{
-                $hash = Hashids::decode($input['id']);
-                if($hash){
-                    $hash = $hash[0];
-
-                }
-                else{
-                    $rtAjax['err'] = "Algo Salió mal con el identificador";
-                    return $rtAjax;
-                }
-
-            }
-            if ($hash < 0) {
+            if ($input['id'] < 0) {
                 $input['estado'] = 'PorPagar';
                 $dt = Carbon::now();
                 $dt = $dt->format('Y-m-d');
@@ -273,9 +261,9 @@ class NominaCtr extends Controller
                     $rtJson['err'] = 'Ya hay nomina generado este mes para este empleado';
                 }
             } else {
-                $nomina = nomina::find($hash);
+                $nomina = nomina::find($input['id']);
                 if($nomina->estado == 'Pagado'){
-                    $rtJson['err'] = 'No se puede editar nomina que esta por pagar';
+                    $rtJson['err'] = 'No se puede editar nomina que ya esta pagado';
                 }
                 else{
                     $nomina->update([
@@ -302,8 +290,8 @@ class NominaCtr extends Controller
             'err' => '',
         ];
         try{
-            if($hash = Hashids::decode($input['idp'])){
-                $nomina = nomina::find($hash[0]);
+
+                $nomina = nomina::find($input['idp']);
                 if(is_null($nomina)){
                     $rtJson['err'] = 'No se encontró la nomina';
                 }
@@ -313,10 +301,8 @@ class NominaCtr extends Controller
                     $nomina->update(['estado'=> 'Pagado', 'fecha_pago' => $dt]);
                     $rtJson['ok']= true;
                 }
-            }
-            else{
-                $rtJson['err'] = 'Algo salió con el identificador';
-            }
+
+
             // try code
         }
         catch(\Exception $e){

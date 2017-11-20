@@ -24,4 +24,8 @@ class Empleado extends Model
     public function contrato(){
     	return $this->belongsTo('App\Models\Usuarios\Contrato', 'id_contrato', 'id_contrato');
     }
+
+    public function permiso(){
+        return $this->hasOne('App\Models\Contabilidad\permisosContabilidad', 'id_user');
+    }
 }

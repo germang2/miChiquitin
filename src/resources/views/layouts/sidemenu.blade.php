@@ -6,7 +6,7 @@
             <li class="heading">
                 <h3 class="uppercase">Menú Principal</h3>
             </li>
-
+            @if(!is_null(Auth::user()->empleado) or Auth::user()->email == 'root@gmail.com')
             <li class="nav-item">
                 <a href="javascript:;" class="nav-link nav-toggle">
                     <i class="fa fa-usd"></i>
@@ -29,7 +29,7 @@
                     </li>
 
                     <li class="nav-item">
-                        <a href="{{route('balances.index')}}" class="nav-link ">
+                        <a href="{{route('r_balance')}}" class="nav-link ">
                             <i class="fa fa-file-text"></i>
                             <span class="title">Balance</span>
                         </a>
@@ -54,6 +54,7 @@
 
                 </ul>
             </li>
+            @endif
 
             <li class="nav-item">
                 <a href="javascript:;" class="nav-link nav-toggle">

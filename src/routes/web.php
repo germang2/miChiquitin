@@ -94,8 +94,13 @@ Route::group(['middleware' => 'auth'], function() {
     Route::post('pagar/nomina', 'Contabilidad\NominaCtr@pagarNom');
     Route::post('rechazar/pedido', 'Contabilidad\pagoProveedoresCtr@rechazarPedido');
     Route::resource('balances', 'Contabilidad\balanceCtr');
+    Route::get('reporte_balances', function () {
+        return view('Contabilidad.indexbalance');
+    })->name('r_balance');
     Route::resource('conta/varcontr', 'Contabilidad\VariablesController');
     Route::resource('cont/permisos', 'Contabilidad\permisosController');
+    Route::post('permisos/del', 'Contabilidad\permisosController@delPer');
+    Route::post('permisos/add', 'Contabilidad\permisosController@addPer');
     Route::bind('varcontr', function($varcontr){
         return App\Models\Contabilidad\Varcontrol::find($varcontr);
 

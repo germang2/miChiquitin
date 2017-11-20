@@ -27,42 +27,42 @@
                         <table class="table table-bordered table-condensed table-hover" id="tbNominasP">
                             <thead>
                             <tr>
-                                <th>Id Empleado</th>
-                                <th>Email</th>
-                                <th>Nombres</th>
-                                <th>Appellidos</th>
-                                <th>Fecha Prenomina</th>
-                                <th>Fecha Pago</th>
-                                <th>Pago Total</th>
-                                <th>Estado</th>
-                                <th>Ver</th>
+                                <th class="text-center">Id Empleado</th>
+                                <th class="text-center">Email</th>
+                                <th class="text-center">Nombres</th>
+                                <th class="text-center">Appellidos</th>
+                                <th class="text-center">Fecha Prenomina</th>
+                                <th class="text-center">Fecha Pago</th>
+                                <th class="text-center">Pago Total</th>
+                                <th class="text-center">Estado</th>
+                                <th class="text-center">Pagar</th>
                             </tr>
                             </thead>
                             <div class="loaderPed pull-right"> </div>
                             <tbody>
                             @foreach($nominasP as $nominaP)
                                 <tr>
-                                    <td>
+                                    <td class="text-center">
                                         <?php
                                         echo numHash($nominaP->empleado->user->id);
                                         ?>
                                     </td>
-                                    <td>{{ $nominaP->empleado->user->email }}</td>
-                                    <td>{{ $nominaP->empleado->user->name }} </td>
-                                    <td>{{$nominaP->empleado->user->apellidos}}</td>
-                                    <td>
+                                    <td class="text-center">{{ $nominaP->empleado->user->email }}</td>
+                                    <td class="text-center">{{ $nominaP->empleado->user->name }} </td>
+                                    <td class="text-center">{{$nominaP->empleado->user->apellidos}}</td>
+                                    <td class="text-center">
                                         {{ $nominaP->fecha_prenomina}}
                                     </td>
-                                    <td>@if(!is_null($nominaP->fecha_pago))
+                                    <td class="text-center">@if(!is_null($nominaP->fecha_pago))
                                             {{$nominaP->fecha_pago}}
-                                        @endif</td>
-                                    <td>{{$nominaP->base + ( 3 * $nominaP->salud) + $nominaP->aux_transporte}}</td>
-                                    <td>
+                                        </td>@endif
+                                    <td class="text-center">{{$nominaP->base + ( 3 * $nominaP->salud) + $nominaP->aux_transporte}}</td>
+                                    <td class="text-center">
                                         {{ $nominaP->estado}}
                                     </td>
-                                    <td>
+                                    <td class="text-center">
                                         <a href="#" class="pagarN btn btn-success"
-                                           miVlr="{{Hashids::encode($nominaP->id)}}" >
+                                           miVlr="{{$nominaP->id}}" >
                                             <span class="fa fa-money"></span> Pagar
                                         </a>
                                     </td>

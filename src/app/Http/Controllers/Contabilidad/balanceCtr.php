@@ -17,10 +17,29 @@ class balanceCtr extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
         //
-        return pedido::all();
+        $tipo = $request->input('tipo');
+        switch ($tipo) {
+            case 'dia':
+                $dt = Carbon::now();
+                $dt = $dt->format('Y-m-d');
+                $format = 'yyyy-mm-dd';
+                $min = 0;
+
+                break;
+            default:
+                abort('404');
+                break;
+        }
+        return view('Contabilidad.balances')->with(
+            [
+                'date'=> $dt,
+                'format' => $format,
+                'min'=> $min
+            ]
+        );
     }
 
     /**

@@ -19,12 +19,10 @@ class CreatePagoProveedoresTable extends Migration
             $table->date('fecha_orden');
             $table->decimal('valor_pagar', 15, 2);
             $table->integer('id_pedido')->unsigned();
-            $table->integer('id_plan_pago')->unsigned();
             $table->string('estado')->nullable();
             $table->timestamps();
 
             $table->foreign('id_pedido')->references('id')->on('pedidos');
-            $table->foreign('id_plan_pago')->references('id_plan_de_pago')->on('plan_de_pagos');
         });
     }
 
