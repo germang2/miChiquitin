@@ -30,12 +30,16 @@ class ConsultasController extends Controller
     }
 
     public function mayor(){
-        $fecha=DB::table('pagos')
-        ->select('id_deuda',DB::raw('SUM(valor) as sumatotal'),'created_at')
-        ->groupBy('created_at')
-        ->orderBy('sumatotal','desc')
-        ->paginate(5);
-        return view('cartera.consultas.mayor',['fecha' => $fecha]);
+        $fecha=Pago::all();
+        $fecha->groupBy('id_deuda');  
+        //$group->toArray();
+        //->sum(\DB::raw('SUM(valor) as sumatotal'))->sortByDesc('sumatotal');
+        //$fecha=DB::table('pagos')
+        //->select('id_deuda',DB::raw('SUM(valor) as sumatotal'),'created_at')
+        //->groupBy('created_at')
+        //->orderBy('sumatotal','desc')
+        //->paginate(5);
+        return view('cartera.consultas.mayor',['fecha' => $fecha,]);
     } 
 
     public function mdeudas(){
