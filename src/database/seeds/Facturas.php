@@ -12,7 +12,7 @@ class Facturas extends Seeder
      */
     public function run()
     {
-        factory(Factura::class, 5)->create();
+        factory(Factura::class, 100)->create();
     }
 
 }

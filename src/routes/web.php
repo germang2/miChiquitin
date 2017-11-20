@@ -170,10 +170,17 @@ Route::group(['middleware' => 'auth'], function() {
     Route::resource('pagoproveedores', 'Contabilidad\pagoProveedoresCtr');
     Route::post('pagos/ajax', 'Contabilidad\pagoProveedoresCtr@getPagos');
     Route::post('pagar/pedido', 'Contabilidad\pagoProveedoresCtr@pagarPedido');
+    Route::post('pagar/nomina', 'Contabilidad\NominaCtr@pagarNom');
     Route::post('rechazar/pedido', 'Contabilidad\pagoProveedoresCtr@rechazarPedido');
     Route::resource('balances', 'Contabilidad\balanceCtr');
+    Route::post('balances/ajax', 'Contabilidad\balanceCtr@getBalance');
+    Route::get('reporte_balances', function () {
+        return view('Contabilidad.indexbalance');
+    })->name('r_balance');
     Route::resource('conta/varcontr', 'Contabilidad\VariablesController');
-
+    Route::resource('cont/permisos', 'Contabilidad\permisosController');
+    Route::post('permisos/del', 'Contabilidad\permisosController@delPer');
+    Route::post('permisos/add', 'Contabilidad\permisosController@addPer');
     Route::bind('varcontr', function($varcontr){
         return App\Models\Contabilidad\Varcontrol::find($varcontr);
 

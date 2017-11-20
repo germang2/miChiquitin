@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Cartera;
 
 use App\Models\Cartera\Deuda;
+use App\Models\Contabilidad\Varcontrol;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Input;
@@ -161,6 +162,9 @@ class DeudaController extends Controller
             $hora = date("Y-m-d H:i:s"); 
         $deudas=Deuda::findOrFail($id);
         $deudas->valor_pagado+=$request->get('abono');
+        $efectivo = Varcontrol::where('nombre', '=', 'efectivo')->get()->first();
+        $resta = $efectivo->valor + $request->get('abono');
+        $efectivo->update(['valor' => $resta]);
         $deudas->estado="Pendiente";
 
         $fecha=$deudas->plazo_credito;

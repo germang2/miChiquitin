@@ -1,6 +1,7 @@
 <?php
 
 use App\Models\Contabilidad\Varcontrol;
+
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder

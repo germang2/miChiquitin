@@ -52,13 +52,13 @@
 
                                             <td class="text-center">
                                                 <a href="#" class="RechazarP btn btn-danger"
-                                                   miVlr="{{Hashids::encode($pedido->id)}}" >
+                                                   miVlr="{{$pedido->id}}" >
                                                     <span class="fa fa-ban"></span> Rechazar
                                                 </a>
                                             </td>
                                             <td class="text-center">
                                                 <a href="#" class="pagarP btn btn-success"
-                                                   miVlr="{{Hashids::encode($pedido->id)}}" >
+                                                   miVlr="{{$pedido->id}}" >
                                                     <span class="fa fa-money"></span> Pagar
                                                 </a>
                                             </td>

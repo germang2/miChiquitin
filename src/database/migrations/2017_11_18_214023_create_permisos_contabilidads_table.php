@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateVarcontrolsTable extends Migration
+class CreatePermisosContabilidadsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,12 +13,10 @@ class CreateVarcontrolsTable extends Migration
      */
     public function up()
     {
-        Schema::create('varcontrols', function (Blueprint $table) {
-            $table->increments('id');
-            $table->string('nombre');
-            $table->string('descripcion');
-            $table->decimal('valor',15,2);
-
+        Schema::create('permisos', function (Blueprint $table) {
+            $table->integer('id_user')->unsigned();
+            $table->string('estado')->nullable();
+            $table->timestamps();
         });
     }
 
@@ -29,6 +27,6 @@ class CreateVarcontrolsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('varcontrols');
+        Schema::dropIfExists('permisos_contabilidads');
     }
 }
