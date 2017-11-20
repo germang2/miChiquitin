@@ -1,9 +1,8 @@
 <?php
 
 use Illuminate\Database\Seeder;
-use App\Models\Facturacion\Factura;
 
-class Facturas extends Seeder
+class password_resets extends Seeder
 {
     /**
      * Run the database seeds.
@@ -12,8 +11,6 @@ class Facturas extends Seeder
      */
     public function run()
     {
-        factory(Factura::class, 5)->create();
+        //
     }
-
 }
-

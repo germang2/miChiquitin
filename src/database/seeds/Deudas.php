@@ -1,6 +1,8 @@
 <?php
+
 use Illuminate\Database\Seeder;
 use App\Models\Cartera\Deuda;
+
 class Deudas extends Seeder
 {
     /**
@@ -12,4 +14,6 @@ class Deudas extends Seeder
     {
         factory(Deuda::class, 5)->create();
     }
+
 }
+

@@ -14,18 +14,20 @@
 /** @var \Illuminate\Database\Eloquent\Factory $factory */
 $factory->define(App\Models\Inventario\Proveedor::class, function (Faker\Generator $faker) {
 
+
     $tipos_persona_juridica = ['Derecho publico', 'Derecho privado'];
 
     return [
         'id_tipo' => $faker->unique()->numberBetween($min = 100, $max = 1000),
         'fecha' => $faker->date($format = 'Y-m-d', $max = 'now'),
         'representante_legal' => $faker->firstName,
-        'id_representante' => $faker->unique()->numberBetween($min = 100, $max = 1000),
-        'telefono' => $faker->numberBetween($min = 10000, $max = 100000),
+        'id_representante' => $faker->unique()->numberBetween($min = 11, $max = 1000),
+        'telefono' => $faker->phoneNumber,
         'razon_social' => 'S.A.',
         'per_jur' => $faker->randomElement($tipos_persona_juridica),
         'departamento' => 'Risaralda',
-        'direccion' => 'Pereira',
+        'direccion' => $faker->address,
         'ciudad' => 'Pereira'
+
     ];
 });

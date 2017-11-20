@@ -13,6 +13,7 @@
 
 use App\Models\Inventario\Proveedor;
 
+
 /** @var \Illuminate\Database\Eloquent\Factory $factory */
 $factory->define(App\Models\Inventario\Articulo::class, function (Faker\Generator $faker) {
 

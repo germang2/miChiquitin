@@ -20,7 +20,7 @@ $factory->define(App\Models\Usuarios\User::class, function (Faker\Generator $fak
         'email' => $faker->unique()->safeEmail,
         'password' => bcrypt($faker->password),
         'remember_token' => str_random(10),
-        'id_tipo' => $faker->unique()->numberBetween($min = 100, $max = 1000),
+        'id_tipo' => $faker->unique()->numberBetween($min = 11, $max = 1000),
         'tipo_rol' => '',
         'apellidos' => $faker->lastName,
         'direccion' => $faker->address,

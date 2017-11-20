@@ -21,6 +21,7 @@ $factory->define(Deuda::class, function (Faker\Generator $faker) {
     $planpagosIds = Plan_de_pago::all()->pluck('id_plan_de_pago')->toArray();
     $facturasIds = Factura::all()->pluck('id')->toArray();
     return [
+
         'id_usuario' => $faker->randomElement($usersIds),
         'id_plan' => $faker->randomElement($planpagosIds),
         'id_factura' => $faker->randomElement($facturasIds),

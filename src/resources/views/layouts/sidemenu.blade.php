@@ -56,12 +56,29 @@
                 </a>
                 <ul class="sub-menu" style="display: none;">
                     <li class="nav-item">
-                        <a href="#" class="nav-link ">
+                        <a href="{{ route('factura.validacion.index') }}" class="nav-link ">
                             <i class="fa fa-cogs"></i>
-                            <span class="title">Opcion 1</span>
+                            <span class="title">Generar Factura</span>
                         </a>
                     </li>
-
+                    <li class="nav-item">
+                        <a href="{{ route('factura.reporte') }}" class="nav-link ">
+                            <i class="fa fa-cogs"></i>
+                            <span class="title">Reportes</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="{{ route('factura.cuota') }}" class="nav-link ">
+                            <i class="fa fa-cogs"></i>
+                            <span class="title">Pagar Credito</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="{{ route('EntregasPendiente') }}" class="nav-link ">
+                            <i class="fa fa-cogs"></i>
+                            <span class="title">Entregar pendiente</span>
+                        </a>
+                    </li>
                 </ul>
             </li>
 

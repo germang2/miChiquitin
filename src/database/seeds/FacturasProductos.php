@@ -1,9 +1,9 @@
 <?php
 
 use Illuminate\Database\Seeder;
-use App\Models\Facturacion\Factura;
+use App\Models\Facturacion\FacturaProducto;
 
-class Facturas extends Seeder
+class FacturasProductos extends Seeder
 {
     /**
      * Run the database seeds.
@@ -12,8 +12,6 @@ class Facturas extends Seeder
      */
     public function run()
     {
-        factory(Factura::class, 5)->create();
+        factory(FacturaProducto::class, 5)->create();
     }
-
 }
-
