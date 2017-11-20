@@ -76,6 +76,9 @@ class balanceCtr extends Controller
                 $cobrado += $factura->deuda->valor_pagado;
                 $cobrar += $factura->valor_total - $factura->deuda->valor_pagado;
             }
+            else{
+                $cobrado += $factura->valor_total;
+            }
         }
         $pagos = nomina::where('fecha_prenomina', 'like', $str)->get();
         foreach ($pagos as $pago){
@@ -243,6 +246,9 @@ class balanceCtr extends Controller
                 if(!is_null($factura->deuda)){
                     $cobrado += $factura->deuda->valor_pagado;
                     $cobrar += $factura->valor_total - $factura->deuda->valor_pagado;
+                }
+                else{
+                    $cobrado += $factura->valor_total;
                 }
             }
             $pagos = nomina::where('fecha_prenomina', 'like', $str)->get();
