@@ -12,7 +12,7 @@
           <th>Nombre</th>
           <th>Apellidos</th>
           <th>Correo</th>
-          <th>Telefono</th>
+          <th>DNI</th>
           <th>Ciudad</th>
           <th>Genero</th>
         </tr>
@@ -20,17 +20,16 @@
     @foreach($clientes as $cliente)
     <tbody>
       <tr>
-
       @php
       $user = App\Models\Usuarios\User::findOrFail($cliente->id_cliente);
       @endphp
-        @if ($user->tipo_rol!='root' and $user->tipo_rol!='admin')@php
-        $Telefono = App\Models\Usuarios\Telefono::findOrFail($user->id);
-      @endphp
+
+      @if ($user->tipo_rol!='root' and $user->tipo_rol!='admin')
+      
             <td><a href="{{route('Usuario.show',['usuario' => $user->id])}}">{{$user->name}}</a></td>
             <td>{{$user->apellidos}}</td>
             <td>{{$user->email}}</td>
-            <td>{{$Telefono->telefono}}</td>
+            <td>{{$user->id_tipo}}</td>
             <td>{{$cliente->ciudad}}</td>
             <td>{{$cliente->genero}}
               <small class="pull-right">

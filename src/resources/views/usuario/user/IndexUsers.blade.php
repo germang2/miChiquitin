@@ -33,7 +33,7 @@
           <th>Nombre</th>
           <th>Apellidos</th>
           <th>Correo</th>
-          <th>Telefono</th>
+          <th>DNI</th>
           <th>Tipo Rol</th>
           <th>Credito Actual</th>
           <th>Credito Maximo</th>
@@ -48,7 +48,7 @@
             <td><a href="{{route('Usuario.show',['usuario' => $user->id])}}">{{$user->name}}</a></td>
             <td>{{$user->apellidos}}</td>
             <td>{{$user->email}}</td>
-            <td>22</td>
+            <td>{{$user->id_tipo}}</td>
             <td>{{$user->tipo_rol}}</td>
             <td>{{$user->credito_actual}}</td>
             <td>{{$user->credito_maximo}}</td>

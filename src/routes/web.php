@@ -130,7 +130,7 @@ Route::middleware(['auth', 'adminMiddleware'])->group(function () {
 //rutas de los reportes
     Route::get('/Ciudades', function(){return view('usuario.filtros.IndexFiltros');})->name('filtros');
     Route::get('/Ciudad{Ciudad}', 'Usuarios\ClienteController@ciudad')->name('ciudad');
-    Route::get('/Genero{Ciudad}', 'Usuarios\ClienteController@genero')->name('genero');
+    Route::get('/Genero{genero}', 'Usuarios\ClienteController@genero')->name('genero');
     Route::get('/Acceso', 'Usuarios\UsuarioController@acceso')->name('acceso');
     Route::get('/Correo', 'Usuarios\UsuarioController@correo')->name('correo');
     Route::get('/CreditoRango', 'Usuarios\UsuarioController@credito')->name('rangocredito');
