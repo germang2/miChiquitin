@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Contabilidad;
 
 use App\Models\Contabilidad\nomina;
 use App\Models\Contabilidad\Varcontrol;
+use App\Models\Facturacion\Factura;
 use App\Models\Usuarios\Empleado;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
@@ -296,10 +297,21 @@ class NominaCtr extends Controller
                     $rtJson['err'] = 'No se encontró la nomina';
                 }
                 else{
-                    $dt = Carbon::now();
-                    $dt = $dt->format('Y-m-d');
-                    $nomina->update(['estado'=> 'Pagado', 'fecha_pago' => $dt]);
-                    $rtJson['ok']= true;
+                    $efectivo = Varcontrol::where('nombre', '=', 'efectivo')->get()->first();
+                    $total = ($nomina->base + (3 * $nomina->salud) + $nomina->aux_transporte);
+                    if($efectivo->valor < $total){
+                        $nomina->update(['estado'=> 'RechazadoCapital']);
+                        $rtJson['err'] = 'Se rechazo el pago de nomina por que no hay suficiente capital';
+                    }
+                    else{
+                        $dt = Carbon::now();
+                        $dt = $dt->format('Y-m-d');
+                        $nomina->update(['estado'=> 'Pagado', 'fecha_pago' => $dt]);
+                        $resta = $efectivo->valor - $total;
+                        $efectivo->update(['valor' => $resta]);
+                        $rtJson['ok']= true;
+                    }
+
                 }
 
 

@@ -33,127 +33,179 @@
     <div class="row">
         <div class="col-md-12">
             <div class="loaderIn"> </div>
-            <div class="row">
-                <div class="col-sm-14">
-                    <label for="fGrDir" class="col-sm-2 control-label">EMPLEADO</label>
-                    <div class="col-sm-10 selectEm">
-                        {!! Form::select('id_municipio', [], null, [
-                                    'class' => 'form-control',
-                                    'style' => 'width:100%;',
-                                    'placeholder'=>'Municipio',
-                                    'required',
-                                    'id' => 'sEm'
-                                ]
-                            ) !!}
-                    </div>
-                </div>
-            </div>
-            <br>
 
-            <div class="loaderEm"> </div>
-            <br>
+            <h4>Esta Fecha</h4>
+            <hr/>
             <div class="row">
                 <div class="col-sm-14">
 
-                    <label for="fGrGrado" class="col-sm-1 control-label">PAGO</label>
-                    <div class="col-sm-3">
+                    <label for="fGrGrado" class="col-sm-2 control-label">Vendido</label>
+                    <div class="col-sm-2">
 
-                        {!! Form::hidden('nId', null, ['id' => 'nId'])!!}
-                        {!! Form::input('number', 'base', 0, [
+                        {!! Form::hidden('tipo', $tipo, ['id' => 'tipo'])!!}
+                        {!! Form::input('number', 'base', $vendido, [
                             'class' => 'form-control',
-                            'min' => '0',
                             'placeholder' => 'Base',
                             'required',
-                            'id' => 'base'
+                            'id' => 'vendido',
+                            'disabled' => true
                 ]) !!}
                     </div>
-                    <label for="fGrIn" class="col-sm-2 control-label">EPS/PENSION</label>
-                    <div class="col-sm-3">
-                        {!! Form::input('number', 'eps', 0, [
+                    <label for="fGrIn" class="col-sm-2 control-label">Cobrado</label>
+                    <div class="col-sm-2">
+                        {!! Form::input('number', 'eps', $cobrado, [
                             'class' => 'form-control',
-                            'min' => '0',
+
                             'placeholder' => 'EPS',
                             'required',
-                            'id' => 'salud',
+                            'id' => 'cobrado',
                             'disabled' => true
                 ]) !!}
 
                     </div>
-
-                    <div class="col-sm-3">
-                        {!! Form::input('number', 'pension', 0, [
+                    <label for="fGrIn" class="col-sm-2 control-label">Por Cobrar</label>
+                    <div class="col-sm-2">
+                        {!! Form::input('number', 'pension', $cobrar, [
                             'class' => 'form-control',
-                            'min' => '0',
+
                             'placeholder' => 'PENSION',
                             'required',
-                            'id' => 'pension',
+                            'id' => 'cobrar',
                             'disabled' => true
                     ]) !!}
                     </div>
                 </div>
             </div>
             <br>
+            <br>
             <div class="row">
                 <div class="col-sm-14">
-                    <label for="fGrGrado" class="col-sm-4 control-label">AUX TRANSPORTE</label>
-                    <div class="col-sm-4">
 
+                    <label for="fGrGrado" class="col-sm-2 control-label">Total Pagar</label>
+                    <div class="col-sm-2">
 
-                        {!! Form::input('number', 'aux', 0, [
+                        {!! Form::hidden('tipo', $tipo, ['id' => 'tipo'])!!}
+                        {!! Form::input('number', 'base', $totalpagar, [
+                            'class' => 'form-control',
+
+                            'placeholder' => 'Base',
+                            'required',
+                            'id' => 'totalpagar',
+                            'disabled' => true
+                ]) !!}
+                    </div>
+                    <label for="fGrIn" class="col-sm-2 control-label">Pagado</label>
+                    <div class="col-sm-2">
+                        {!! Form::input('number', 'eps', $pagado, [
+                            'class' => 'form-control',
+                            'min' => '0',
+                            'placeholder' => 'EPS',
+                            'required',
+                            'id' => 'pagado',
+                            'disabled' => true
+                ]) !!}
+
+                    </div>
+                    <label for="fGrIn" class="col-sm-2 control-label">Por Pagar</label>
+                    <div class="col-sm-2">
+                        {!! Form::input('number', 'pension', $pagar, [
+                            'class' => 'form-control',
+                            'min' => '0',
+                            'placeholder' => 'PENSION',
+                            'required',
+                            'id' => 'pagar',
+                            'disabled' => true
+                    ]) !!}
+                    </div>
+                </div>
+            </div>
+            <br>
+            <br>
+            <div class="row">
+                <div class="col-sm-14">
+
+                    <label for="fGrGrado" class="col-sm-2 control-label">Total</label>
+                    <div class="col-sm-2">
+
+                        {!! Form::hidden('tipo', $tipo, ['id' => 'tipo'])!!}
+                        {!! Form::input('number', 'base', $total1, [
+                            'class' => 'form-control',
+
+                            'placeholder' => 'Base',
+                            'required',
+                            'id' => 'total1',
+                            'disabled' => true
+                ]) !!}
+                    </div>
+                    <label for="fGrIn" class="col-sm-2 control-label">Total</label>
+                    <div class="col-sm-2">
+                        {!! Form::input('number', 'eps', $total2, [
+                            'class' => 'form-control',
+
+                            'placeholder' => 'EPS',
+                            'required',
+                            'id' => 'total2',
+                            'disabled' => true
+                ]) !!}
+
+                    </div>
+                    <label for="fGrIn" class="col-sm-2 control-label">Total</label>
+                    <div class="col-sm-2">
+                        {!! Form::input('number', 'pension', $total3, [
+                            'class' => 'form-control',
+
+                            'placeholder' => 'PENSION',
+                            'required',
+                            'id' => 'total3',
+                            'disabled' => true
+                    ]) !!}
+                    </div>
+                </div>
+            </div>
+
+            <br>
+            <hr />
+            <h4>Total En Este Momento</h4>
+            <hr/>
+            <div class="row">
+                <div class="col-sm-14">
+
+                    <label for="fGrGrado" class="col-sm-2 control-label">Total Por Cobrar</label>
+                    <div class="col-sm-2">
+
+                        {!! Form::hidden('tipo', $tipo, ['id' => 'tipo'])!!}
+                        {!! Form::input('number', 'base', $tcobrar, [
                             'class' => 'form-control',
                             'min' => '0',
                             'placeholder' => 'Base',
                             'required',
-                            'id' => 'aux_transporte'
+                            'id' => 'tcobrar',
+                            'disabled' => true
                 ]) !!}
                     </div>
-                    <label for="fGrIn" class="col-sm-1 control-label">ARL</label>
-                    <div class="col-sm-3">
-                        {!! Form::input('number', 'eps', 0, [
+                    <label for="fGrIn" class="col-sm-2 control-label">Total Por Pagar</label>
+                    <div class="col-sm-2">
+                        {!! Form::input('number', 'eps', $tpagar, [
                             'class' => 'form-control',
                             'min' => '0',
-                            'placeholder' => 'ARL',
+                            'placeholder' => 'EPS',
                             'required',
-                            'id' => 'arl',
+                            'id' => 'tpagar',
                             'disabled' => true
                 ]) !!}
 
                     </div>
-
-                </div>
-            </div>
-            <br>
-            <hr />
-            <br>
-
-            <div class="row">
-                <div class="col-sm-14">
-                    <label for="fGrGrado" class="col-sm-4 control-label">NETO EMPLEADO</label>
-                    <div class="col-sm-3">
-
-
-                        {!! Form::input('number', 'neto', 0, [
+                    <label for="fGrIn" class="col-sm-2 control-label">Efetivo</label>
+                    <div class="col-sm-2">
+                        {!! Form::input('number', 'pension', $efectivo, [
                             'class' => 'form-control',
                             'min' => '0',
-                            'placeholder' => 'NETO',
+                            'placeholder' => 'PENSION',
                             'required',
-                            'id' => 'neto',
+                            'id' => 'efectivo',
                             'disabled' => true
-                ]) !!}
+                    ]) !!}
                     </div>
-                    <label for="fGrIn" class="col-sm-2 control-label">TOTAL EMPRESA</label>
-                    <div class="col-sm-3">
-                        {!! Form::input('number', 'tot', 0, [
-                            'class' => 'form-control',
-                            'min' => '0',
-                            'placeholder' => 'TOTAL',
-                            'required',
-                            'id' => 'total',
-                            'disabled' => true
-                ]) !!}
-
-                    </div>
-
                 </div>
             </div>
         </div>
@@ -182,58 +234,43 @@
 
         $('.data').datepicker()
             .on('changeDate', function(e) {
-                return false;
                 // `e` here contains the extra attributes
                 e.preventDefault();
                 var date = $('.data').val();
                 $.ajax({
-                    url: $('#urlAct').html() + '/nominas/ajax',
+                    url: $('#urlAct').html() + '/balances/ajax',
                     type: 'post',
                     data: {
                         dt : date,
+                        tipo : $('#tipo').val(),
                         _token : $('input[name="_token"]').val()
                     },
                     beforeSend: function() {
-                        $('#tbNominas tbody').empty();
                         $('.loaderIn').append('<img id="#imgld" height="70" width="200" src="/assets/img/loader.gif">');
                     },
                     success:function(respuesta) {
-                        console.log(respuesta);
-                        var html = '';
-                        if (respuesta.ok) {
-                            for (i = 0; i < respuesta.dat.length; i++) {
+                        if(respuesta.ok){
+                            $('.data').val(respuesta.date);
+                            $('#vendido').val(respuesta.vendido);
+                            $('#cobrado').val(respuesta.cobrado);
+                            $('#cobrar').val(respuesta.cobrar);
+                            $('#totalpagar').val(respuesta.totalpagar);
+                            $('#pagado').val(respuesta.pagado);
+                            $('#pagar').val(respuesta.pagar);
+                            $('#total1').val(respuesta.total1);
+                            $('#total2').val(respuesta.total2);
+                            $('#total3').val(respuesta.total3);
+                            $('#tpagar').val(respuesta.tpagar);
+                            $('#tcobrar').val(respuesta.tcobrar);
+                            $('#efectivo').val(respuesta.efectivo);
 
-                                html +=
-                                    '<tr class="text-center" id="es' + respuesta.dat[i].id +'">'+
-                                    '<td class="text-center" >' +
-                                    respuesta.dat[i].id3 +
-                                    '</td>' +
-                                    '<td class="text-center" >' +
-                                    respuesta.dat[i].id2 +
-                                    '</td>' +
-                                    '<td class="text-center" >' + respuesta.dat[i].nom + '</td>' +
-                                    '<td class="text-center">' + respuesta.dat[i].app + '</td>' +
-                                    '<td class="text-center" >' + respuesta.dat[i].f_pre + '</td>' +
-                                    '<td class="text-center" >' + respuesta.dat[i].f_pag + '</td>' +
-                                    '<td class="text-center" >' + respuesta.dat[i].tot + '</td>' +
-                                    '<td class="text-center" >' + respuesta.dat[i].estado + '</td>' +
-                                    '<td class="text-center">' +
-                                    '<a href="#" class="verNomina btn btn-success" ' +
-                                    'miVlr="' + respuesta.dat[i].id  + '">'  +
-                                    '<span class="fa fa-search"></span> Ver' +
-                                    '</a>' +
-                                    '</td>' +
-                                    '</tr>';
-                            }
-                        } else {
-                            // mostramos el error generado de la ejecución ajax
-                            $('#tbNominas tbody').empty();
-                            html = '<tr colspan="6" class="tx16 txC">' +
-                                '<td class="danger">' + respuesta.err +'</td>' +
-                                '</tr>';
+
                         }
+                        else{
+                            bootbox.alert(respuesta.err);
+                        }
+                        console.log(respuesta);
                         $('.loaderIn img').remove();
-                        $('#tbNominas tbody').empty().append(html);
                     }
                 });
             });

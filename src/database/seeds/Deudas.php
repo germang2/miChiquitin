@@ -12,7 +12,7 @@ class Deudas extends Seeder
      */
     public function run()
     {
-        factory(Deuda::class, 5)->create();
+        factory(Deuda::class, 15)->create();
     }
 
 }

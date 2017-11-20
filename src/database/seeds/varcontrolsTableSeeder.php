@@ -48,6 +48,11 @@ class varcontrolsTableSeeder extends Seeder{
                 'descripcion' => 'valor para transporte',
                 'valor' => 83140
             ],
+            [
+                'nombre' => 'efectivo',
+                'descripcion' => 'en caja',
+                'valor' => 10000000
+            ],
         );
 
         Varcontrol::insert($data);

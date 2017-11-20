@@ -43,12 +43,12 @@
     @if ($user->tipo_rol!='admin'and $user->tipo_rol!='root')
     <tbody>
         @php
-        $Telefono = App\Models\Usuarios\Telefono::findOrFail($user->id);
+        //$Telefono = App\Models\Usuarios\Telefono::findOrFail($user->id);
       @endphp <tr>
             <td><a href="{{route('Usuario.show',['usuario' => $user->id])}}">{{$user->name}}</a></td>
             <td>{{$user->apellidos}}</td>
             <td>{{$user->email}}</td>
-            <td>{{$Telefono->telefono}}</td>
+            <td>22</td>
             <td>{{$user->tipo_rol}}</td>
             <td>{{$user->credito_actual}}</td>
             <td>{{$user->credito_maximo}}</td>

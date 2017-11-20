@@ -173,6 +173,7 @@ Route::group(['middleware' => 'auth'], function() {
     Route::post('pagar/nomina', 'Contabilidad\NominaCtr@pagarNom');
     Route::post('rechazar/pedido', 'Contabilidad\pagoProveedoresCtr@rechazarPedido');
     Route::resource('balances', 'Contabilidad\balanceCtr');
+    Route::post('balances/ajax', 'Contabilidad\balanceCtr@getBalance');
     Route::get('reporte_balances', function () {
         return view('Contabilidad.indexbalance');
     })->name('r_balance');

@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Contabilidad;
 
 use App\Models\Contabilidad\nomina;
 use App\Models\Contabilidad\pagoProveedores;
+use App\Models\Contabilidad\Varcontrol;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -155,18 +156,28 @@ class pagoProveedoresCtr extends Controller
                     $rtJson['err'] = 'No se encontró el pedido';
                 }
                 else{
-                    $dt = Carbon::now();
-                    $dt = $dt->format('Y-m-d');
-                    $pedido->update(['estado'=> 'Aprobado']);
-                    pagoProveedores::create([
-                            'fecha_pago' => $dt,
-                            'fecha_orden' => $pedido->fecha,
-                            'valor_pagar' => $pedido->costo_total,
-                            'id_pedido' => $pedido->id,
-                            'estado' => 'Pagado'
-                        ]
-                    );
-                    $rtJson['ok']= true;
+                    $efectivo = Varcontrol::where('nombre', '=', 'efectivo')->get()->first();
+                    if($efectivo->valor < $pedido->costo_total) {
+                        $pedido->update(['estado' => 'RechazadoCapital']);
+                        $rtJson['err'] = 'El pedido fue rechazado por falta de capital';
+                    }
+                    else{
+                        $dt = Carbon::now();
+                        $dt = $dt->format('Y-m-d');
+                        $pedido->update(['estado'=> 'Aprobado']);
+                        pagoProveedores::create([
+                                'fecha_pago' => $dt,
+                                'fecha_orden' => $pedido->fecha,
+                                'valor_pagar' => $pedido->costo_total,
+                                'id_pedido' => $pedido->id,
+                                'estado' => 'Pagado'
+                            ]
+                        );
+                        $resta = $efectivo->valor - $pedido->costo_total;
+                        $efectivo->update(['valor' => $resta]);
+                        $rtJson['ok']= true;
+                    }
+
                 }
 
 

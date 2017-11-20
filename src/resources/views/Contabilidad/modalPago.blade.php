@@ -58,7 +58,7 @@
                                             </td>
                                             <td class="text-center">
                                                 <a href="#" class="pagarP btn btn-success"
-                                                   miVlr="{{Hashids::encode($pedido->id)}}" >
+                                                   miVlr="{{$pedido->id}}" >
                                                     <span class="fa fa-money"></span> Pagar
                                                 </a>
                                             </td>

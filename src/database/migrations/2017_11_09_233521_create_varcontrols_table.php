@@ -17,7 +17,7 @@ class CreateVarcontrolsTable extends Migration
             $table->increments('id');
             $table->string('nombre');
             $table->string('descripcion');
-            $table->decimal('valor',8,2);
+            $table->decimal('valor',15,2);
 
         });
     }
