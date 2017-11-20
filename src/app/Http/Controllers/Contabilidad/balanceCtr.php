@@ -10,6 +10,7 @@ use App\Models\Inventario\Pedido;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
 use Vinkla\Hashids\Facades\Hashids;
 
 class balanceCtr extends Controller
@@ -22,6 +23,11 @@ class balanceCtr extends Controller
     public function index(Request $request)
     {
         //
+        if(!(Auth::user()->email == 'root@gmail.com')){
+            $empleado = Auth::user()->empleado;
+            if(is_null($empleado)) abort('403');
+            if(is_null($empleado->permiso)) abort('403');
+        }
         $tipo = $request->input('tipo');
         switch ($tipo) {
             case 'dia':
