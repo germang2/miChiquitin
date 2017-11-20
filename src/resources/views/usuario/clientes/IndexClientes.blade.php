@@ -9,7 +9,7 @@
           </script>
         @endif
         @if (Session::has('deleted'))
-     <div class="alert alert-warning" role="alert"> Contacto borrado, si desea deshacer el cambio <a href="{{ route('restore', [Session::get('deleted')]) }}">Click aqui</a> </div>
+     <div class="alert alert-warning" role="alert"> Usuario borrado,</div>
    @endif
 @endsection
 
@@ -18,8 +18,16 @@
     <a href="{{route('Cliente.index')}}" class="btn btn-info">Todos los Clientes</a>
      <a href="{{route('Empleado.index')}}" class="btn btn-info">Todos los Empleados</a>
      <a href="{{route('Contrato.index')}}" class="btn btn-info">Todos los  Contratos</a>
-    <table class="table">
+     <small class="pull-right">
+     <form class="form-row align-items-center"  action="{{route('name',['name' => "name"])}}" method="get">
+         <input type="text" class="col-md-8 col-lx-8 col-lg-8 col-sm-8" name="name" placeholder="Buscar Nombre" autofocus required/>
+        <button type="submit" class="btn btn-primary text center">Buscar</button>
+     </form></small>
+     
+    <div class="container">
+    <table class="table table-bordered table-condensed">
         <thead>
+        <tr>
           <th>Nombre</th>
           <th>Apellido</th>
           <th>Email</th>
@@ -27,13 +35,14 @@
           <th>Telefono</th>
           <th>Credito Maximo</th>
           <th>Credito Actual</th>
+        </tr>
         </thead>
 	@foreach($clientes as $cliente)
         <tbody>
             @php
               $user = App\Models\Usuarios\User::findOrFail($cliente->id_usuario);
               $Telefono = App\Models\Usuarios\Telefono::findOrFail($cliente->id_usuario);
-            @endphp
+            @endphp<tr>
             <td><a href="{{route('Cliente.show',['cliente' => $cliente->id_cliente])}}">{{ $user->name}}</a>
             </td>
             <td>{{$user->apellidos}}</td>
@@ -41,7 +50,7 @@
             <td>{{$cliente->ciudad}}</td>
               <td>{{$Telefono->telefono}}</td>
               <td>{{$user->credito_maximo}}</td>
-              <td>{{$user->credito_actual}}
+              <td>{{$user->credito_actual}}</td><td>
             <small class="pull-right">
               <form action="{{route('Cliente.destroy',['cliente' => $cliente->id_cliente])}}" method="post">
                 {{csrf_field()}}
@@ -50,8 +59,10 @@
               </form>
             </small><small class="pull-right">
               <a href="{{route ('Cliente.edit', $cliente->id_cliente)}}" class="btn btn-info">Edit</a>
-            </small></td>
+            </small></td></tr>
           </tbody>
     @endforeach
+    </table>
+    </div>
     {{$clientes->render()}}
 @endsection

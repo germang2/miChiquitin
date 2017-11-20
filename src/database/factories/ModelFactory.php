@@ -20,8 +20,8 @@ $factory->define(App\Models\Usuarios\User::class, function (Faker\Generator $fak
         'password' => $password ?: $password = bcrypt('secret'),
         'apellidos' => $faker->lastname,
         'direccion'=> $faker->address,
-        'credito_maximo' => $faker->numberBetween($min = 1000, $max = 6000),
-        'credito_actual' => $faker->numberBetween($min = 1000, $max = 4000),
+        'credito_maximo' => $faker->numberBetween($min = 500000, $max = 10000000),
+        'credito_actual' => $faker->numberBetween($min = 500000, $max = 10000000),
         'edad'=> $faker->randomNumber(2),
         'remember_token' => str_random(10),
     ];
@@ -29,7 +29,7 @@ $factory->define(App\Models\Usuarios\User::class, function (Faker\Generator $fak
 
 $factory->define(App\Models\Usuarios\Cliente::class, function (Faker\Generator $faker){
     return [
-        'genero' => 'masculino',
+        'genero' => function(){ $generos=array("Masculino","Femenino");return $generos[rand(0,1)];},
         'ciudad' => $faker->city,
         'id_usuario'=> function () {
             return factory(App\Models\Usuarios\User::class)->create(['tipo_rol' => 'cliente'])->id;
@@ -38,21 +38,19 @@ $factory->define(App\Models\Usuarios\Cliente::class, function (Faker\Generator $
     ];
 });
 
-//el factory de telefono no sirve
 $factory->define(App\Models\Usuarios\Telefono::class, function (Faker\Generator $faker) {
   return [
         'telefono' => $faker->phoneNumber,
-        'id_usuario'=>random_int(DB::table('users')->min('id'),DB::table('users')->max('id')),
     ];
 });
 
+//arreglando errores
 $factory->define(App\Models\Usuarios\Empleado::class, function (Faker\Generator $faker) {
 
     return [
-
         'estado' => 'activo',
-        'cargo' => $faker->jobtitle,
-        'area'=> $faker->word,
+        'cargo' => function(){ $cargos=array("Vendedor","Auxiliar","Cajero");return $cargos[rand(0,2)];},
+        'area'=> $faker->jobtitle,
         'id_empresa'=> '1',
         'id_contrato' =>function () {
           return factory(App\Models\Usuarios\Contrato::class)->create()->id_contrato;
@@ -60,13 +58,13 @@ $factory->define(App\Models\Usuarios\Empleado::class, function (Faker\Generator 
         'id_usuario'=>  function () {
           return factory(App\Models\Usuarios\User::class)->create(['tipo_rol' => 'empleado'])->id;
         },
-        'numberphone' => function(array $cliente){return factory(App\Models\Usuarios\Telefono::class)->create(['id_usuario'=>$cliente['id_usuario']])->Id_Telefono;}
+        'numberphone' => function(array $empleado){return factory(App\Models\Usuarios\Telefono::class)->create(['id_usuario'=>$empleado['id_usuario']])->Id_Telefono;}
     ];
 });
 
 $factory->define(App\Models\Usuarios\Contrato::class, function (Faker\Generator $faker) {
     return [
-      'tipo' => $faker->word,
+      'tipo' => function(){ $cargos=array("Mensual","Anual","Prestaciones");return $cargos[rand(0,2)];},
       'salario'=> $faker->randomNumber(6),//->numberBetween(6,10),
       'fecha_inicial'=> $faker->date,
       'fecha_fin'=> $faker->date,

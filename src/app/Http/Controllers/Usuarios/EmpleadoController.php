@@ -33,6 +33,7 @@ class EmpleadoController extends Controller
           'apellidos' => 'required',
           'email'    => 'required|email|unique:users',
           'telefono' => 'required|numeric|min:7',
+          'salario' => 'required|numeric',
       ]);
       if ($v->fails())
       {
@@ -40,7 +41,8 @@ class EmpleadoController extends Controller
       }else{
           $data = $request->all();
           $data['tipo_rol'] = 'empleado';
-          $data['password'] = Hash::make(rand(0,8));
+          $data['estado'] = 'activo';
+          $data['password'] = Hash::make('secret');
           $data['confirmation_password'] = Hash::make($data['password']);
           $Usuario= User::create($data);
           $contrato = Contrato::create($data);

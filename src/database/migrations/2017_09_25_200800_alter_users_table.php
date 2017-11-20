@@ -18,8 +18,8 @@ class AlterUsersTable extends Migration
             $table->string('apellidos');
             $table->string('direccion');
             $table->integer('edad')->unsigned();
-            $table->decimal('credito_maximo', 8, 2);
-            $table->decimal('credito_actual', 8, 2);
+            $table->decimal('credito_maximo', 15, 2);
+            $table->decimal('credito_actual', 15, 2);
             $table->dateTime('last_login')->nullable();
             $table->softDeletes();
         });

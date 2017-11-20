@@ -16,4 +16,16 @@ class Cliente extends Model
     public function user(){
     	return $this->belongsTo('App\Models\Usuarios\User');
     }
+
+    public function scopeCiudad($query, $ciudad){  //query para el reporte por ciudad,
+      if(trim($ciudad)!=""){
+          $query->where("ciudad","LIKE","%$ciudad%")->get();
+        }
+    }
+
+    public function scopeGenero($query, $genero){ //query para el reporte por genero
+      if(trim($genero)!=""){
+          $query->where("genero","LIKE","%$genero%")->get();
+        }
+    }
 }

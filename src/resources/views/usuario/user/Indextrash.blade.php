@@ -10,17 +10,20 @@
     @endsection
 
 @section('content')
-    <table class="table">
+  <div class="container">
+  <table class="table table-bordered table-condensed ">
         <thead>
+          <tr>
           <th>Nombre</th>
           <th>Apellidos</th>
           <th>Correo</th>
           <th>Tipo Rol</th>
           <th>Hora eliminado</th>
-      <!--    <th>Eliminado By</th>-->
+    </tr>
         </thead>
     @foreach($users as $user)
-    <tbody>
+    <tbody><tr>
+
             <td>{{$user->name}}</td>
             <td>{{$user->apellidos}}</td>
             <td>{{$user->email}}</td>
@@ -30,7 +33,10 @@
               <small class="pull-right">
                 <td> <a href="{{ route('restore', ['usuario'=>$user->id]) }}" class="btn btn-danger btn-xs">Restore</a>
                 </small></td>
+              </tr>
           </tbody>
     @endforeach
+  </table>
+</div>
     {{$users->render()}}
 @endsection
