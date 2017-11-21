@@ -29,6 +29,6 @@ $factory->define(App\Models\Inventario\Articulo::class, function (Faker\Generato
         'precio_basico'=> $faker->randomFloat($nbMaxDecimals = 2, $min = 10000, $max = 50000),
         'cantidad' => $faker->numberBetween($min = 10, $max = 50),
         'id_proveedor' => $faker->randomElement($proveedoresIds),
-        'fecha' => $faker->date($format = 'Y-m-d', $max = 'now')
+        'fecha' => $faker->dateTimeThisYear($max = 'now', $timezone = date_default_timezone_get())
     ];
 });

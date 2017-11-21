@@ -19,7 +19,7 @@ $factory->define(App\Models\Inventario\Proveedor::class, function (Faker\Generat
 
     return [
         'id_tipo' => $faker->unique()->numberBetween($min = 100, $max = 1000),
-        'fecha' => $faker->date($format = 'Y-m-d', $max = 'now'),
+        'fecha' => $faker->dateTimeThisYear($max = 'now', $timezone = null),
         'representante_legal' => $faker->firstName,
         'id_representante' => $faker->unique()->numberBetween($min = 11, $max = 1000),
         'telefono' => $faker->phoneNumber,

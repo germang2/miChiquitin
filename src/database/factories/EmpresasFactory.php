@@ -18,7 +18,7 @@ $factory->define(App\Models\Usuarios\User::class, function (Faker\Generator $fak
     return [
         'name' => $faker->name,
         'email' => $faker->unique()->safeEmail,
-        'password' => $password ?: $password = bcrypt('secret'),
+        'password' => bcrypt('321654'),
         'id_tipo' => $faker->unique()->rand(100, 1000),
         'apellidos' => $faker->lastname,
         'direccion'=> $faker->address,
@@ -79,7 +79,7 @@ $factory->define(App\Models\Usuarios\Contrato::class, function (Faker\Generator 
     return [
       'tipo' => function(){ $cargos=array("Mensual","Anual","Prestaciones");return $cargos[rand(0,2)];},
       'salario'=> $faker->randomNumber(6),//->numberBetween(6,10),
-      'fecha_inicial'=> $faker->date,
-      'fecha_fin'=> $faker->date,
+      'fecha_inicial'=> $faker->dateTimeThisYear($max = 'now', $timezone = null),
+      'fecha_fin'=> $faker->dateTimeThisMonth($max = 'now', $timezone = null),
     ];
 });

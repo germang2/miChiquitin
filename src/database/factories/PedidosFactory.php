@@ -32,7 +32,7 @@ $factory->define(App\Models\Inventario\Pedido::class, function (Faker\Generator 
         'id_proveedor' => $faker->randomElement($array_proveedores),
         'cantidad' => $cantidad,
         'costo_total' => $costo_total,
-        'fecha' => $faker->dateTimeThisYear($max = 'now', $timezone = date_default_timezone_get()) ,
+        'fecha' => $faker->dateTimeThisMonth($max = 'now', $timezone = date_default_timezone_get()) ,
         'estado' => 'EnEspera'
     ];
 });

@@ -23,7 +23,7 @@ $factory->define(Factura::class, function (Faker\Generator $faker) {
       $vendedor = $faker->randomElement($usersIds);
     }
     return [
-        'fecha' => $faker->dateTimeThisYear($max = 'now', $timezone = date_default_timezone_get()),
+        'fecha' => $faker->dateTimeThisMonth($max = 'now', $timezone = date_default_timezone_get()),
         'id_cliente' => $cliente,
         'id_plan_pago' => $faker->randomDigitNotNull,
         'cuotas' => 0,//$faker->randomElement($array = array (1, 2, 3)),

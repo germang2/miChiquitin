@@ -14,7 +14,7 @@ class rootProveedor extends Seeder
     {
         DB::table('proveedores')->insert([
         	'id_tipo' 		=> 	'CC',
-        	'fecha'		=>_	'2017/11/18',
+        	'fecha'		=>_	$faker->dateTimeThisYear($max = 'now', $timezone = null),
         	'representante_legal'	=> 'Sambel',
         	'id_representante'	=>   1088452750,
         	'telefono'	=>	3126439621,

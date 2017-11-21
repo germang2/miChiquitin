@@ -19,7 +19,7 @@ class CreateTablePedido extends Migration
     	    $table->string('id_articulo');
     	    $table->integer('id_proveedor')->unsigned();
     	    $table->integer('cantidad');
-    	    $table->decimal('costo_total', 8, 2);
+    	    $table->decimal('costo_total', 15, 2);
     	    $table->date('fecha');
     	    $table->string('estado');
             $table->tinyinteger('borrado')->default('2');

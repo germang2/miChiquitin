@@ -17,7 +17,7 @@ class CreateTableArticulo extends Migration
             $table->string('id', 100);
 			$table->string('nombre');
 			$table->string('descripcion');
-			$table->decimal('precio_basico', 8,2);
+			$table->decimal('precio_basico', 15,2);
 			$table->integer('cantidad');
 			$table->integer('id_proveedor')->unsigned();
 			$table->date('fecha');
